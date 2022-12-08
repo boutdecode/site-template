@@ -1,0 +1,38 @@
+{
+  "name": "site-template",
+  "version": "1.0.0",
+  "description": "Basic NodeJs Website template",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boutdecode/site-template.git"
+  },
+  "author": "Kevin Balicot <kevinbalicot@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/boutdecode/site-template/issues"
+  },
+  "homepage": "https://github.com/boutdecode/site-template#readme",
+  "devDependencies": {
+    "lucide": "^0.99.0",
+    "sass": "^1.49.11",
+    "vite": "^3.2.3"
+  },
+  "dependencies": {
+    "@beelab/toolbox": "^1.1.0",
+    "bootstrap": "^5.2.2",
+    "dotenv": "^16.0.3",
+    "i18next": "^22.1.4",
+    "nedb": "^1.8.0",
+    "pug": "^3.0.2",
+    "yion": "^1.3.5",
+    "yion-body-parser": "^0.5.0"
+  }
+}

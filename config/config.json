@@ -1,0 +1,8 @@
+{
+  "pug": {
+    "globals": {
+      "websiteName": "Mon site",
+      "contact": "kevinbalicot[alt]gmail.com"
+    }
+  }
+}

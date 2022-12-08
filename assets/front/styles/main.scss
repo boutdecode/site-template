@@ -1,0 +1,46 @@
+@import "variables";
+@import "bootstrap";
+@import "animations";
+
+@font-face {
+    font-family: "Rubik";
+    src: url("/fonts/Rubik.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background: $bg-light-color;
+
+    font-family: "Rubik", "sans-serif";
+}
+
+h1, h2, h3, h4, h5 {
+    color: $title-color;
+    font-weight: 700;
+}
+
+.btn-primary, .btn-primary:hover {
+    color: $light;
+}
+
+.main-nav {
+    background: $bg-dark-color;
+
+    .navbar-collapse {
+        flex-grow: 0;
+    }
+
+    a:hover {
+        color: $nav-item-color !important;
+    }
+
+    svg {
+        color: $nav-item-color;
+    }
+}
+
+.main-footer {
+    background: $bg-dark-color;
+    color: $light;
+}

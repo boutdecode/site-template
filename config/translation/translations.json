@@ -1,0 +1,23 @@
+{
+  "en": {
+    "translation": {
+      "home": "Home",
+      "about": "About",
+      "contact": "Contact",
+      "contact_me": "Contact me",
+      "all_right_reserved": "all right reserved",
+      "hello_world": "Hello world"
+    }
+  },
+
+  "fr": {
+    "translation": {
+      "home": "Accueil",
+      "about": "A propos",
+      "contact": "Contact",
+      "contact_me": "Contactez moi",
+      "all_right_reserved": "tous droits réservés",
+      "hello_world": "Bonjour"
+    }
+  }
+}

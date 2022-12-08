@@ -1,0 +1,36 @@
+doctype html
+html(lang=locale)
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+
+        block description
+            meta(name="description", content="Mon super site")
+
+        meta(name="author", content="Kevin Balicot")
+
+        block metadata
+            meta(property="og:title", content="Mon super site")
+            meta(property="og:description", content="Mon super site")
+            meta(property="og:url", content="https://example.fr")
+            meta(property="og:image", content="https://example.fr/images/logo.png")
+
+        meta(property="og:type", content="website")
+
+        block title
+            title Mon super site
+
+        link(rel="icon", type="image/png", href="/images/favicon.ico")
+        link(rel="canonical" href=canonical)
+
+        block style
+            link(href=manifest('assets/front/front.css'), rel="stylesheet", type="text/css")
+
+        block script
+            script(src=manifest('assets/front/front.js'))
+    body
+        include includes/nav
+
+        block content
+
+        include includes/footer
