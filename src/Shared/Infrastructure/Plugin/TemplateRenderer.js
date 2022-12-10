@@ -8,7 +8,7 @@ const config = require('../../../../config/config.json');
 module.exports = {
     type: 'renderer',
     handle: (req, res, app, next) => {
-        res.render = (filepath, data = {}, status = 200, headers = { 'Content-Type': 'text/html' }) => {
+        res.render = (templateName, data = {}, status = 200, headers = { 'Content-Type': 'text/html' }) => {
             for (let name in headers) {
                 res.set(name, headers[name]);
             }
@@ -24,6 +24,14 @@ module.exports = {
 
                 path(name, params = {}, method = 'get') {
                     return Router.generatePath(name, { locale: req.attributes.locale, ...params }, method);
+                },
+
+                get(name, params = {}) {
+                    return Router.generatePath(name, { locale: req.attributes.locale, ...params }, 'get');
+                },
+
+                post(name, params = {}) {
+                    return Router.generatePath(name, { locale: req.attributes.locale, ...params }, 'post');
                 },
 
                 manifest: (key) => {
@@ -44,7 +52,7 @@ module.exports = {
 
             res
                 .status(status)
-                .send(pug.renderFile( filepath,  { ...templateFunctions, ...data, ...config.pug.globals }));
+                .send(pug.renderFile(`${__dirname}/../../../../templates/${templateName}.pug`,  { ...templateFunctions, ...data, ...config.pug.globals }));
         };
 
         next();

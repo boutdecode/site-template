@@ -6,7 +6,30 @@
       "contact": "Contact",
       "contact_me": "Contact me",
       "all_right_reserved": "all right reserved",
-      "hello_world": "Hello world"
+      "hello_world": "Hello world",
+      "admin": "Administration",
+
+      "actions": {
+        "sign_in": "Sign in"
+      },
+
+      "form": {
+        "label": {
+          "username": "Username",
+          "password": "Password"
+        },
+
+        "placeholder": {
+          "username": "Type your username",
+          "password": "Type your password"
+        }
+      },
+
+      "messages": {
+        "error": {
+          "bad_credential": "Bad credential"
+        }
+      }
     }
   },
 
@@ -17,7 +40,30 @@
       "contact": "Contact",
       "contact_me": "Contactez moi",
       "all_right_reserved": "tous droits réservés",
-      "hello_world": "Bonjour"
+      "hello_world": "Bonjour",
+      "admin": "Administration",
+
+      "actions": {
+        "sign_in": "Se connecter"
+      },
+
+      "form": {
+        "label": {
+          "username": "Identifiant",
+          "password": "Mot de passe"
+        },
+
+        "placeholder": {
+          "username": "Entrez votre identifiant",
+          "password": "Entrez votre mot de passe"
+        }
+      },
+
+      "messages": {
+        "error": {
+          "bad_credential": "Identifiants invalides"
+        }
+      }
     }
   }
 }

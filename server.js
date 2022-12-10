@@ -2,14 +2,33 @@ require('dotenv').config();
 
 const { createApp, createServer } = require("yion");
 const bodyParser = require("yion-body-parser");
+const boxstore = require('boxstore');
+
 const TemplateRendererPlugin = require('./src/Shared/Infrastructure/Plugin/TemplateRenderer');
 const I18NPlugin = require('./src/Shared/Infrastructure/Plugin/I18N');
+const SessionPlugin = require('./src/Shared/Infrastructure/Plugin/Session');
+const RouterPlugin = require('./src/Shared/Infrastructure/Plugin/Router');
 const Router = require('./src/Shared/Infrastructure/HTTP/Router');
 const FrontRouter = require('./src/UI/Front/Routes');
+const AdminRouter = require('./src/UI/Admin/Routes');
+
+boxstore.set({}, { immutable: true });
+
+const Requester = require('./src/Shared/Infrastructure/Persistence/Requester');
+boxstore.add('db', new Requester({
+    users: `${__dirname}/data/user.db`,
+}));
 
 const { NODE_PORT = 8080 } = process.env;
 const app = createApp();
-const httpServer = createServer(app, [bodyParser, TemplateRendererPlugin, I18NPlugin]);
+const httpServer = createServer(app, [
+    SessionPlugin,
+    TemplateRendererPlugin,
+    I18NPlugin,
+    RouterPlugin,
+    bodyParser
+]);
+
 const cache = {
     'Cache-Control': 'public, max-age=' + (86400 * 30),
     'ETag': Date.now()
@@ -32,7 +51,9 @@ app.link('/images', `${__dirname}/dist/images`, cache);
 app.link('/fonts', `${__dirname}/dist/fonts`, cache);
 app.link('/assets', `${__dirname}/dist/assets`, cache);
 
-FrontRouter();
+FrontRouter(app);
+AdminRouter(app);
+
 Router.handleApp(app);
 
 httpServer.listen(NODE_PORT);

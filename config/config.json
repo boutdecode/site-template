@@ -2,7 +2,12 @@
   "pug": {
     "globals": {
       "websiteName": "Mon site",
-      "contact": "kevinbalicot[alt]gmail.com"
+      "contact": "kevinbalicot[alt]gmail.com",
+      "meta": {
+        "author": "Kevin Balicot <kevinbalicot[alt]gmail.com>",
+        "title": "Mon site",
+        "description": "Mon site super cool, venez apprendre pleins de truc sur moi."
+      }
     }
   }
 }

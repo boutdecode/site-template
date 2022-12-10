@@ -8,7 +8,9 @@ export default defineConfig(({ mode }) => {
             manifest: true,
             rollupOptions: {
                 input: {
+                    common: 'assets/common/common.js',
                     front: 'assets/front/front.js',
+                    admin: 'assets/admin/admin.js',
                 }
             }
         },

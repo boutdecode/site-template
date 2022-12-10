@@ -59,7 +59,7 @@ module.exports = {
         }
 
         for (const name in this._post) {
-            const { path, handler } = this._get[name];
+            const { path, handler } = this._post[name];
             app.post(path, handler);
         }
     },

@@ -27,7 +27,11 @@
   },
   "dependencies": {
     "@beelab/toolbox": "^1.1.0",
+    "accept-language-parser": "^1.5.0",
+    "ajv": "^8.11.2",
+    "ajv-i18n": "^4.2.0",
     "bootstrap": "^5.2.2",
+    "boxstore": "^1.1.1",
     "dotenv": "^16.0.3",
     "i18next": "^22.1.4",
     "nedb": "^1.8.0",

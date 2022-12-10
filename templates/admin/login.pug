@@ -1,0 +1,35 @@
+extends layout
+
+block content
+    style
+        | body {
+        |   background-color: #353353;
+        |   background-image: url("/images/wallpaper.jpg");
+        |   background-size: cover;
+        | }
+    div.container
+        form(action=post('admin_sign_in'), method="post")
+            div.row.my-5.text-center
+                h1.text-dark= trans('admin')
+
+            div.row
+                div.col-xxl-4.col-xl-3
+                div.col-xxl-4.col-xl-6
+                    div.rounded.bg-white.shadow.shadow-dark.p-5
+                        if error
+                            p.alert.alert-danger= trans(error)
+
+                        div.form-floating.mb-3
+                            input#username.form-control(type="text", name="username", placeholder=trans('form.placeholder.username'), class=(form.errors.username ? "is-invalid" : ""), required)
+                            label(for="username")= trans('form.label.username')
+                            if form.errors.username
+                                span.invalid-feedback=form.errors.username
+
+                        div.form-floating.mb-3
+                            input#password.form-control(type="password", name="password", placeholder=trans('form.placeholder.password'), class=(form.errors.password ? "is-invalid" : ""), required)
+                            label(for="password")= trans('form.label.password')
+                            if form.errors.password
+                                span.invalid-feedback=form.errors.password
+
+                        button.w-100.btn.btn-primary= trans('actions.sign_in')
+                div.col-xxl-4.col-xl-3

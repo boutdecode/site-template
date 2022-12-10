@@ -1,0 +1,24 @@
+doctype html
+html(lang=locale)
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(name="robots", content="noindex")
+
+        block title
+            title=meta.title + ' - Admin'
+
+        link(rel="icon", type="image/png", href="/images/favicon.ico")
+
+        block style
+            link(href=manifest('assets/admin/admin.css'), rel="stylesheet", type="text/css")
+
+        script(src=manifest('assets/common/common.js'))
+        script(src=manifest('assets/admin/admin.js'))
+
+        block script
+
+    body
+        block content
+
+        include includes/footer

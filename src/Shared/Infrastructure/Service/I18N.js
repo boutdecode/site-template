@@ -1,4 +1,5 @@
 const i18next = require('i18next');
+
 i18next.init({
     lng: process.env.LOCALE || 'en',
     fallbackLng: 'en',
@@ -6,7 +7,7 @@ i18next.init({
 });
 
 module.exports = {
-    trans: (code, options = {}) => {
+    trans(code, options = {}) {
         return i18next.t(code, options);
-    },
+    }
 }
