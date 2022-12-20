@@ -1,10 +1,12 @@
-const UserRepository = require('../../../Infrastructure/Persistence/Repository/User');
+const Gateway = require('../../../../../Shared/Application/Gateway/Gateway');
 
-module.exports = async ({ username, password }) => {
-    const result = await UserRepository.findOneByPassword(username, password);
-    if (!result) {
-        throw new Error('messages.error.bad_credential');
+module.exports = class SignIn extends Gateway {
+    constructor(repository) {
+        super('admin.security.sign_in');
+        this.repository = repository;
     }
 
-    return result;
-};
+    async process({ username, password }) {
+        return await this.repository.findOneByPassword(username, password);
+    }
+}

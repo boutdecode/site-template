@@ -1,20 +1,20 @@
 const Schema = require('../../../../Shared/Infrastructure/Schema/Schema');
 
-module.exports = {
-    ...Schema,
-
+module.exports = class SignIn extends Schema {
     get schema() {
         return {
-            type: 'object',
-            properties: {
-                username: {
-                    type: 'string'
-                },
-                password: {
-                    type: 'string'
-                }
+            username: {
+                _type: 'string',
+                _required: true,
             },
-            required: ['username', 'password']
+            password: {
+                _type: 'string',
+                _required: true,
+            },
+            'remember-me': {
+                _type: 'string',
+                _default: false,
+            }
         }
     }
-};
+}

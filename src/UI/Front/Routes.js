@@ -1,12 +1,11 @@
-const Router = require('../../Shared/Infrastructure/HTTP/Router');
-const IndexAction = require('./Index/Action');
+module.exports = (app) => {
+    const router = app.container.get('router');
 
-module.exports = () => {
-    Router.get('home_redirect', '/', (req, res) => {
+    router.get('home_redirect', '/', (req, res) => {
         res.set('Location', `/${req.attributes.locale}/`);
         res.status(301);
         res.send();
     });
 
-    Router.get('home', '/:locale/', IndexAction);
+    router.get('home', '/:locale/', 'front_action_index');
 };

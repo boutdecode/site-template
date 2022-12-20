@@ -2,22 +2,15 @@ require('dotenv').config();
 
 const { createApp, createServer } = require("yion");
 const bodyParser = require("yion-body-parser");
-const boxstore = require('boxstore');
+
+const services = require('./config/services');
 
 const TemplateRendererPlugin = require('./src/Shared/Infrastructure/Plugin/TemplateRenderer');
 const I18NPlugin = require('./src/Shared/Infrastructure/Plugin/I18N');
 const SessionPlugin = require('./src/Shared/Infrastructure/Plugin/Session');
 const RouterPlugin = require('./src/Shared/Infrastructure/Plugin/Router');
-const Router = require('./src/Shared/Infrastructure/HTTP/Router');
 const FrontRouter = require('./src/UI/Front/Routes');
 const AdminRouter = require('./src/UI/Admin/Routes');
-
-boxstore.set({}, { immutable: true });
-
-const Requester = require('./src/Shared/Infrastructure/Persistence/Requester');
-boxstore.add('db', new Requester({
-    users: `${__dirname}/data/user.db`,
-}));
 
 const { NODE_PORT = 8080 } = process.env;
 const app = createApp();
@@ -33,6 +26,8 @@ const cache = {
     'Cache-Control': 'public, max-age=' + (86400 * 30),
     'ETag': Date.now()
 };
+
+app.container = services();
 
 app.use((req, res, next) => {
     if (req.headers['if-none-match'] && req.headers['if-none-match'] === cache['ETag']) {
@@ -54,7 +49,7 @@ app.link('/assets', `${__dirname}/dist/assets`, cache);
 FrontRouter(app);
 AdminRouter(app);
 
-Router.handleApp(app);
+app.container.get('router').handleApp(app);
 
 httpServer.listen(NODE_PORT);
 httpServer.on('listening', () => console.log(`🌏  Server start on port ${NODE_PORT}`));

@@ -1,22 +1,34 @@
-const form = require('./Schema/SignIn');
-const Gateway = require('../../../Admin/Security/Application/Gateway/SignIn/Gateway');
-const Router = require('../../../Shared/Infrastructure/HTTP/Router');
+const SignIn = require('./Schema/SignIn');
+const Action = require("../../../Shared/UI/Action");
 
-const repository = require('../../../Admin/Security/Infrastructure/Persistence/Repository/User');
+module.exports = class Login extends Action {
 
-module.exports = async (req, res) => {
-    form.handleRequest(req);
-
-    let error = null;
-    if (form.isSubmit() && form.isValid()) {
-        try {
-            req.session.user = await Gateway(form.data);
-
-            return res.redirect(req.path('admin_dashboard'));
-        } catch ({ message }) {
-            error = message;
-        }
+    constructor(session, gateway) {
+        super();
+        this.gateway = gateway;
+        this.session = session;
     }
 
-    res.render('admin/login', { form: form.createView(), error });
-};
+    async process(req, res) {
+        const form = new SignIn();
+        form.handleRequest(req);
+
+        let error = null;
+        if (form.isSubmit() && form.isValid()) {
+            try {
+                const { data } = await this.gateway.run(form.data);
+                if (!data) {
+                    error = 'messages.error.bad_credential';
+                } else {
+                    this.session.startSession(req, res, { user: data }, form.data['remember-me']);
+
+                    return res.redirect(req.path('admin_dashboard'), 301);
+                }
+            } catch ({ message }) {
+                error = message;
+            }
+        }
+
+        res.render('admin/login', { form: form.createView(), error });
+    }
+}

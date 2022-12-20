@@ -1,0 +1,14 @@
+body content
+
+    h1.h2= trans('create_user')
+
+    form
+        div.form-group
+            label(for="username")= trans('username')
+            input#username.form-control(name="username", type="text")
+
+        div.form-group
+            label(for="password")= trans('password')
+            input#password.form-control(name="password", type="text")
+
+        button.btn.btn-success= trans('actions.create')

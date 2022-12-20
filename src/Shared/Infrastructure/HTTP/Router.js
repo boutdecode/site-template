@@ -1,26 +1,40 @@
-module.exports = {
-    _get: {},
-    _post: {},
+const Action = require("../../UI/Action");
+
+module.exports = class Router {
+    constructor(container) {
+        this.container = container;
+
+        this._get = {};
+        this._post = {};
+    }
 
     /**
      * Add get route
      * @param {string} name
      * @param {string} path
-     * @param {function} handler
+     * @param {function|string} handler
      */
     get(name, path, handler) {
+        if (typeof handler === 'string') {
+            handler = this.container.get(handler);
+        }
+
         this._get[name] = { path, handler };
-    },
+    }
 
     /**
      * Add post route
      * @param {string} name
      * @param {string} path
-     * @param {function} handler
+     * @param {function|string} handler
      */
     post(name, path, handler) {
+        if (typeof handler === 'string') {
+            handler = this.container.get(handler);
+        }
+
         this._post[name] = { path, handler };
-    },
+    }
 
     /**
      * Generate path for route by name
@@ -46,7 +60,7 @@ module.exports = {
         }
 
         return null;
-    },
+    }
 
     /**
      * Handle route for application
@@ -55,12 +69,24 @@ module.exports = {
     handleApp(app) {
         for (const name in this._get) {
             const { path, handler } = this._get[name];
-            app.get(path, handler);
+            app.get(path, function(req, res, next) {
+                if (handler instanceof Action) {
+                    handler.run(req, res, next);
+                } else {
+                    handler(req, res, next);
+                }
+            });
         }
 
         for (const name in this._post) {
             const { path, handler } = this._post[name];
-            app.post(path, handler);
+            app.post(path, function(req, res, next) {
+                if (handler instanceof Action) {
+                    handler.run(req, res, next);
+                } else {
+                    handler(req, res, next);
+                }
+            });
         }
-    },
-};
+    }
+}

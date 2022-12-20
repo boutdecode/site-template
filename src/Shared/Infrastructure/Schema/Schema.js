@@ -1,44 +1,49 @@
-const Validator = require('./Validator/JSON');
+const Validator = require('./Validator');
 
-module.exports = {
-    validation: null,
-    req: null,
-    data: {},
+module.exports = class Schema {
+    constructor() {
+        this.validator = new Validator();
+        this.validation = { errors: {} };
+        this.req = null;
+    }
 
     get schema() {
         return {};
-    },
+    }
+
+    get data() {
+        if (!this.validation) {
+            return {};
+        }
+
+        return this.validation.result;
+    }
 
     handleRequest(req) {
         this.req = req;
-        this.data = { ...req.body, ...req.query };
-    },
 
-    isValid() {
-        this.validation = Validator.validate(this.data, this.schema, this.req.attributes.locale.split('-'));
-
-        return this.isSubmit() && !this.validation.errors;
-    },
+        this.validator.locale = req.attributes.locale || process.env.LOCALE || 'en';
+    }
 
     isSubmit() {
-        return this.req && this.req.method === 'POST';
-    },
+        if (!this.req) {
+            return false;
+        }
+
+        return this.req.method === 'POST' || Object.entries(this.req.query).length > 0;
+    }
+
+    isValid() {
+        if (!this.isSubmit()) {
+            return false;
+        }
+
+        this.validation = this.validator.validate({ ...this.req.body, ...this.req.query }, this.schema);
+
+        return this.validation.valid;
+    }
 
     createView() {
-        const errors = {};
-        if (!this.isSubmit()) {
-            return { errors };
-        }
-
-        for (const error of this.validation.errors || []) {
-            const { message } = error;
-            if (error.params.missingProperty) {
-                errors[error.params.missingProperty] = message;
-            } else if (error.instancePath) {
-                errors[error.instancePath.replace('/', '')] = message;
-            }
-        }
-
-        return { errors };
-    },
-};
+        return this.validation;
+    }
+}

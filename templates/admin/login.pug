@@ -1,11 +1,18 @@
 extends layout
 
-block content
+block body
     style
+        | html {
+        |   min-height: 100%;
+        | }
+        |
         | body {
+        |   min-height: 100%;
         |   background-color: #353353;
         |   background-image: url("/images/wallpaper.jpg");
         |   background-size: cover;
+        |   background-repeat: no-repeat;
+        |   background-position: center center;
         | }
     div.container
         form(action=post('admin_sign_in'), method="post")
@@ -30,6 +37,10 @@ block content
                             label(for="password")= trans('form.label.password')
                             if form.errors.password
                                 span.invalid-feedback=form.errors.password
+
+                        div.form-check.mb-3
+                            label.form-check-label(for="remember-me")= trans('form.label.remember_me')
+                            input#remember-me.form-check-input(type="checkbox", name="remember-me")
 
                         button.w-100.btn.btn-primary= trans('actions.sign_in')
                 div.col-xxl-4.col-xl-3

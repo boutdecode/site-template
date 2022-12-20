@@ -1,7 +1,7 @@
-module.exports = (req, res) => {
-    if (!req.session.user) {
-        res.redirect(req.path('admin_login'), 302);
-    }
+const AdminAction = require("../../../Shared/UI/AdminAction");
 
-    res.render('admin/dashboard');
-};
+module.exports = class Dashboard extends AdminAction {
+    process(req, res) {
+        res.render('admin/dashboard');
+    }
+}

@@ -26,6 +26,7 @@
     "vite": "^3.2.3"
   },
   "dependencies": {
+    "@beelab/json-validator": "^0.6.0",
     "@beelab/toolbox": "^1.1.0",
     "accept-language-parser": "^1.5.0",
     "ajv": "^8.11.2",

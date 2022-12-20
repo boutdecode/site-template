@@ -1,20 +1,21 @@
-nav.main-nav.navbar.navbar-expand-lg
-    div.container.justify-content-between
-        div.collapse.navbar-collapse
-            div.navbar-nav
-                a(href=path('home')).nav-link.text-light
-                    i(icon-name="home").me-2
-                    span.pt-1.fw-bold= trans('home')
+nav.mb-auto
+    ul.nav.nav-pills.flex-column
+        li.nav-item.mb-2
+            a.d-flex.align-items-center.nav-link(href=get('admin_dashboard'), class=(is('admin_dashboard') ? 'active' : 'text-white'))
+                i.me-3(icon-name="home")
+                span= trans('dashboard')
 
-                a(href="/").nav-link.text-light
-                    i(icon-name="user").me-2
-                    span.fw-bold= trans('about')
+        li.nav-item.mb-2
+            a.d-flex.align-items-center.nav-link(href=get('admin_users'), class=(is('admin_users') ? 'active' : 'text-white'))
+                i.me-3(icon-name="users")
+                span= trans('users')
 
-                a(href="/").nav-link.text-light
-                    i(icon-name="message-circle").me-2
-                    span.fw-bold= trans('contact')
+        li.nav-item.mb-2
+            a.d-flex.align-items-center.nav-link(href=get('admin_pages'), class=(is('admin_pages') ? 'active' : 'text-white'))
+                i.me-3(icon-name="files")
+                span= trans('pages')
 
-        a(href="/").navbar-brand
-            i(icon-name="hexagon").text-light
-
-        button.btn.btn-primary= trans('contact_me')
+        li.nav-item.mb-2
+            a.d-flex.align-items-center.nav-link(href=get('admin_settings'), class=(is('admin_settings') ? 'active' : 'text-white'))
+                i.me-3(icon-name="settings")
+                span= trans('settings')

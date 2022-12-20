@@ -9,5 +9,13 @@
         "description": "Mon site super cool, venez apprendre pleins de truc sur moi."
       }
     }
+  },
+
+  "db": {
+    "user": "data/user.db"
+  },
+
+  "translation": {
+    "resources": "config/translation/translations.json"
   }
 }

@@ -8,15 +8,25 @@
       "all_right_reserved": "all right reserved",
       "hello_world": "Hello world",
       "admin": "Administration",
+      "manage_users": "Manage administrator",
+      "username": "Username",
+      "activated": "Activated",
+      "button_actions": "Actions",
+      "dashboard": "Dashboard",
+      "users": "Administrator",
+      "pages": "Pages",
+      "settings": "Settings",
 
       "actions": {
-        "sign_in": "Sign in"
+        "sign_in": "Sign in",
+        "logout": "Logout"
       },
 
       "form": {
         "label": {
           "username": "Username",
-          "password": "Password"
+          "password": "Password",
+          "remember_me": "Remember me"
         },
 
         "placeholder": {
@@ -29,6 +39,11 @@
         "error": {
           "bad_credential": "Bad credential"
         }
+      },
+
+      "validator": {
+        "required": "Parameter is required.",
+        "be_string": "Parameter has to be a string, \"{{type}}\" instead."
       }
     }
   },
@@ -42,15 +57,25 @@
       "all_right_reserved": "tous droits réservés",
       "hello_world": "Bonjour",
       "admin": "Administration",
+      "manage_users": "Gestion des administrateurs",
+      "username": "Pseudo",
+      "activated": "Activé",
+      "button_actions": "Actions",
+      "dashboard": "Tableau de bord",
+      "users": "Administrateurs",
+      "pages": "Pages",
+      "settings": "Paramètres",
 
       "actions": {
-        "sign_in": "Se connecter"
+        "sign_in": "Se connecter",
+        "logout": "Se déconnecter"
       },
 
       "form": {
         "label": {
           "username": "Identifiant",
-          "password": "Mot de passe"
+          "password": "Mot de passe",
+          "remember_me": "Se souvenir de moi"
         },
 
         "placeholder": {
@@ -63,6 +88,11 @@
         "error": {
           "bad_credential": "Identifiants invalides"
         }
+      },
+
+      "validator": {
+        "required": "Le paramètre est requis.",
+        "be_string": "Le paramètre doit être une chaîne, \"{{type}}\" à la place."
       }
     }
   }
