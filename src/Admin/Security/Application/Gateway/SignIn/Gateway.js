@@ -7,6 +7,11 @@ module.exports = class SignIn extends Gateway {
     }
 
     async process({ username, password }) {
-        return await this.repository.findOneByPassword(username, password);
+        const result = await this.repository.findOneByPassword(username, password);
+        if (result) {
+            this.repository.edit(result._id, { lastLoggedAt: new Date() })
+        }
+
+        return result;
     }
 }

@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('intl');
 
 const { createApp, createServer } = require("yion");
 const bodyParser = require("yion-body-parser");

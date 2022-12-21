@@ -16,17 +16,28 @@
       "users": "Administrator",
       "pages": "Pages",
       "settings": "Settings",
+      "edit_user": "Edit user",
+      "create_user": "Create user",
+      "no": "No",
+      "yes": "Yes",
+      "searching": "Searching...",
+      "do_you_really_perform": "Do you really perform this action ?",
 
       "actions": {
         "sign_in": "Sign in",
-        "logout": "Logout"
+        "logout": "Logout",
+        "create": "Create",
+        "save": "Save",
+        "create_new_user": "Create new user",
+        "search": "Search"
       },
 
       "form": {
         "label": {
           "username": "Username",
           "password": "Password",
-          "remember_me": "Remember me"
+          "remember_me": "Remember me",
+          "activated": "Activated"
         },
 
         "placeholder": {
@@ -36,8 +47,17 @@
       },
 
       "messages": {
+        "success": {
+          "user_created": "User created",
+          "user_deleted": "User deleted",
+          "user_updated": "User updated"
+        },
         "error": {
-          "bad_credential": "Bad credential"
+          "bad_credential": "Bad credential",
+          "user_not_found": "User not found"
+        },
+        "danger": {
+          "user_not_found": "User not found"
         }
       },
 
@@ -65,17 +85,28 @@
       "users": "Administrateurs",
       "pages": "Pages",
       "settings": "Paramètres",
+      "edit_user": "Edition d'un administrateur",
+      "create_user": "Création d'un administrateur",
+      "no": "Non",
+      "yes": "Oui",
+      "searching": "Recherche...",
+      "do_you_really_perform": "Voulez vous vraiment faire cette action ?",
 
       "actions": {
         "sign_in": "Se connecter",
-        "logout": "Se déconnecter"
+        "logout": "Se déconnecter",
+        "create": "Créer",
+        "save": "Sauvegarder",
+        "create_new_user": "Créer nouvel administrateur",
+        "search": "Rechercher"
       },
 
       "form": {
         "label": {
           "username": "Identifiant",
           "password": "Mot de passe",
-          "remember_me": "Se souvenir de moi"
+          "remember_me": "Se souvenir de moi",
+          "activated": "Compte activé"
         },
 
         "placeholder": {
@@ -85,8 +116,17 @@
       },
 
       "messages": {
+        "success": {
+          "user_created": "Administrateur créé",
+          "user_deleted": "Administrateur supprimé",
+          "user_updated": "Administrateur mise à jour"
+        },
         "error": {
-          "bad_credential": "Identifiants invalides"
+          "bad_credential": "Identifiants invalides",
+          "user_not_found": "Administrateur non trouvé"
+        },
+        "danger": {
+          "user_not_found": "Administrateur non trouvé"
         }
       },
 

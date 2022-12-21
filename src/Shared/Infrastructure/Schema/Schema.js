@@ -1,9 +1,9 @@
 const Validator = require('./Validator');
 
 module.exports = class Schema {
-    constructor() {
+    constructor(data = {}) {
         this.validator = new Validator();
-        this.validation = { errors: {} };
+        this.validation = { errors: {}, result: data, valid: false };
         this.req = null;
     }
 

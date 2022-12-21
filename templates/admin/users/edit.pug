@@ -9,19 +9,19 @@ block content
                     a(href=get('admin_dashboard'))= trans('home')
                 li.breadcrumb-item
                     a(href=get('admin_users'))= trans('users')
-                li.breadcrumb-item.active= trans('create_user')
+                li.breadcrumb-item.active= trans('edit_user')
 
     section.container-fluid
 
         div.m-4.p-4.bg-white.rounded.border.shadow-sm
             h1.d-flex.align-items-center.h2.mb-4
-                i.me-2(icon-name="user-plus", width=26, height=26, stroke-width=3)
-                span= trans('create_user')
+                i.me-2(icon-name="user-check", width=26, height=26, stroke-width=3)
+                span= trans('edit_user')
 
             if error
                 p.alert.alert-danger= trans(error)
 
-            form(action=post('admin_create_user'), method="post")
+            form(action=post('admin_edit_user', { id: form.result._id }), method="post")
                 div.form-group.mb-4
                     label(for="username")= trans('form.label.username')
                     input#username.form-control(name="username", type="text", value=form.result.username, class=(form.errors.username ? "is-invalid" : ""), required)
@@ -30,14 +30,14 @@ block content
 
                 div.form-group.mb-4
                     label(for="password")= trans('form.label.password')
-                    input#password.form-control(name="password", type="text", value=form.result.password, class=(form.errors.password ? "is-invalid" : ""), required)
+                    input#password.form-control(name="password", type="text", class=(form.errors.password ? "is-invalid" : ""))
                     if form.errors.password
                         span.invalid-feedback=form.errors.password
 
                 div.form-check.form-switch.mb-4
                     label.form-check-label(for="activated")= trans('form.label.activated')
-                    input#activated.form-check-input(type="checkbox", name="activated", class=(form.errors.activated ? "is-invalid" : ""))
+                    input#activated.form-check-input(type="checkbox", name="activated", checked=form.result.activated, class=(form.errors.activated ? "is-invalid" : ""))
                     if form.errors.activated
                         span.invalid-feedback=form.errors.activated
 
-                button.btn.btn-success= trans('actions.create')
+                button.btn.btn-success= trans('actions.save')

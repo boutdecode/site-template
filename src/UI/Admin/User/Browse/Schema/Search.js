@@ -1,25 +1,21 @@
 const Schema = require('../../../../../Shared/Infrastructure/Schema/Schema');
 
-module.exports = {
-    ...Schema,
-
+module.exports = class Search extends Schema {
     get schema() {
         return {
-            type: 'object',
-            properties: {
-                search: {
-                    type: 'string'
-                },
-                page: {
-                    type: 'number',
-                    default: 1,
-                },
-                limit: {
-                    type: 'number',
-                    default: 25,
-                }
+            search: {
+                _type: 'string',
             },
-            required: ['page', 'limit']
+            page: {
+                _type: 'number',
+                _default: 1,
+                _parseInt: true,
+            },
+            limit: {
+                _type: 'number',
+                _default: 1,
+                _parseInt: true,
+            }
         }
     }
-};
+}

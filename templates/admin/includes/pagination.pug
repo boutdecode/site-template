@@ -1,0 +1,13 @@
+//- Définissez les variables nécessaires, telles que la page courante et le nombre total de pages
+- var currentPage = 5;
+- var totalPages = 10;
+
+//- Utilisez une boucle pour afficher chaque page de la pagination
+ul.pagination
+    each page in [currentPage - 4, currentPage - 3, currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2, currentPage + 3, currentPage + 4]
+        li
+            //- Si la page est inférieure au premier numéro de page ou supérieure au dernier numéro de page, ignorez-la
+            if page < 1 || page > totalPages
+                continue
+            //- Sinon, affichez le lien vers la page
+            a(href='?page=' + page)= page

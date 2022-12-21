@@ -1,29 +1,28 @@
 const AdminAction = require("../../../../Shared/UI/AdminAction");
-const CreateForm = require('./Schema/Create');
+const EditForm = require("./Schema/Edit");
 
-module.exports = class Create extends AdminAction {
-    gateway;
+module.exports = class Edit extends AdminAction {
     constructor(session, gateway) {
         super(session);
         this.gateway = gateway;
     }
 
     async process(req, res) {
-        const form = new CreateForm();
+        const form = new EditForm();
         form.handleRequest(req);
 
         let error = null;
         if (form.isSubmit() && form.isValid()) {
             try {
-                await this.gateway.run(form.data);
+                await this.gateway.run({ ...form.data, id: req.params.id });
 
-                this.session.flash('messages.success.user_created', 'success');
+                this.session.flash('messages.success.user_updated', 'success');
                 return res.redirect(req.path('admin_users'), 303);
             } catch ({ message }) {
                 error = message;
             }
         }
 
-        res.render('admin/users/create', { form: form.createView(), error });
+        res.render('admin/users/edit', { form: form.createView(), error });
     }
 }

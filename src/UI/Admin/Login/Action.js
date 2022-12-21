@@ -22,7 +22,7 @@ module.exports = class Login extends Action {
                 } else {
                     this.session.startSession(req, res, { user: data }, form.data['remember-me']);
 
-                    return res.redirect(req.path('admin_dashboard'), 301);
+                    return res.redirect(req.path('admin_dashboard'), 303);
                 }
             } catch ({ message }) {
                 error = message;

@@ -246,12 +246,12 @@ module.exports = class Validator {
             return undefined !== schema._default ? schema._default : (schema._optional ? undefined : true);
         }
 
-        if (typeof value !== 'boolean' && !['true', 'false', '0', '1'].includes(value)) {
+        if (typeof value !== 'boolean' && !['true', 'false', '0', '1', 'on', 'off'].includes(value)) {
             throw new Error(`Parameter has to be a boolean, "${typeof value}" instead.`);
         }
 
         if (typeof value !== 'boolean') {
-            return value === 'true' || value === '1';
+            return value === 'true' || value === '1' || value === 'on';
         }
 
         return !!value;

@@ -1,0 +1,7 @@
+- var messages = flash()
+if messages
+    each m, level in messages
+        div.m-4.alert.alert-dismissible.fade.show(class='alert-' + level, role="alert")
+            each message in m
+                span= trans(message)
+            button.btn-close(type="button", data-bs-dismiss="alert")

@@ -11,43 +11,69 @@ block content
 
     section.container-fluid
 
-        div.m-4.p-4.bg-white.rounded.border.shadow-sm
-            h1.d-flex.align-items-center.h2.mb-4
-                i.me-2(icon-name="users", width=26, height=26, stroke-width=3)
-                span= trans('manage_users')
+        include ../includes/alert
 
-            form.w-50.d-flex.justify-content-start(action=get('admin_users'))
-                input#search.form-control.me-2(type="text", name="search", placeholder=trans('searching'))
+        div.m-4.bg-white.rounded.border.shadow-sm
+            header.p-4
+                h1.d-flex.align-items-center.h2.m-0
+                    i.me-2(icon-name="users", width=26, height=26, stroke-width=3)
+                    span= trans('manage_users')
 
-                select#limit.form-select.me-2(name="limit")
-                    option(value=25) 25
-                    option(value=50) 50
-                    option(value=100) 100
+            div.row.g-0.border-top.border-bottom.bg-light.p-4
+                div.col
+                    form.d-flex.justify-content-start(action=get('admin_users'))
+                        input#search.form-control.me-2(type="text", name="search", placeholder=trans('searching'), value=form.result.search)
 
-                button.d-flex.align-items-center.btn.btn-outline-secondary
-                    i.me-2(icon-name="search")
-                    span= trans('search')
+                        select#limit.form-select.me-2(name="limit")
+                            option(value=25, selected=form.result.limit === 25) 25
+                            option(value=50, selected=form.result.limit === 50) 50
+                            option(value=100, selected=form.result.limit === 100) 100
 
-            table.table
-                thead
-                    tr
-                        th #
-                        th= trans('username')
-                        th= trans('activated')
-                        th.text-end= trans('button_actions')
+                        button.d-flex.align-items-center.btn.btn-outline-secondary
+                            i.me-2(icon-name="search")
+                            span= trans('actions.search')
 
-                tbody
-                    each user in users
+                div.col.text-end
+                    a.d-flex-inline.align-items-center.btn.btn-primary(href=path('admin_create_user'))
+                        i.me-2(icon-name="user-plus")
+                        span= trans('actions.create_new_user')
+
+            div.p-4
+                table.table.align-middle
+                    thead
                         tr
-                            td= user._id
-                            td= user.username
-                            td True
-                            td.text-end
-                                div.btn-group.btn-group-sm
-                                    button.d-flex.align-items-center.btn.btn-primary
-                                        i.me-1(icon-name="pencil", width=18, height=18)
-                                        span= trans('edit')
+                            th #
+                            th= trans('username')
+                            th= trans('activated')
+                            th= trans('created_at')
+                            th= trans('last_logged_at')
+                            th.text-end= trans('button_actions')
 
-                                    button.d-flex.align-items-center.btn.btn-danger
-                                        i.me-1(icon-name="trash", width=18, height=18)
-                                        span= trans('delete')
+                    tbody
+                        each user in users
+                            tr
+                                td= user._id
+                                td= user.username
+                                td
+                                    if user.activated
+                                        span.d-flex-inline.align-items-center.badge.rounded-pill.text-bg-success
+                                            i.me-1(icon-name="check", width=14, height=14)
+                                            span= trans('yes')
+                                    else
+                                        span.d-flex-inline.align-items-center.badge.rounded-pill.text-bg-danger
+                                            i.me-1(icon-name="x", width=14, height=14)
+                                            span= trans('no')
+
+                                td= date(user.createdAt)
+                                td= user.lastLoggedAt ? time(user.lastLoggedAt) : null
+                                td.text-end
+                                    div.btn-group.btn-group-sm
+                                        a.d-flex.align-items-center.btn.btn-primary(href=path('admin_read_user', { id: user._id }))
+                                            i.me-1(icon-name="pencil", width=18, height=18)
+                                            span= trans('edit')
+
+                                        button.d-flex.align-items-center.btn.btn-danger(form="delete-user-" + user._id)
+                                            i.me-1(icon-name="trash", width=18, height=18)
+                                            span= trans('delete')
+
+                                    form(id="delete-user-" + user._id, action=post('admin_delete_user', { id: user._id }), method='post', onsubmit="return confirm('" + trans('do_you_really_perform') + "')")

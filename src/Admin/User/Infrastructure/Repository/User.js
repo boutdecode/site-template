@@ -1,6 +1,19 @@
 const CRUDRepository = require("../../../../Shared/Infrastructure/Persistence/Repository/CRUD");
+const {createHash} = require("crypto");
 
 module.exports = class UserRepository extends CRUDRepository {
+    constructor(requester) {
+        super(requester, 'user');
+    }
+
+    hashPassword(password) {
+        return createHash('sha256').update(password).digest('hex');
+    }
+
+    async findByIdentifier(username) {
+        return await super.findOne({ username });
+    }
+
     async list(search = null, skip = 0, limit = 25) {
         const params = {};
         if (search) {
@@ -8,5 +21,22 @@ module.exports = class UserRepository extends CRUDRepository {
         }
 
         return await super.find(params, limit, skip);
+    }
+
+    async create({ username, password, activated }) {
+        return await super.create({
+            username,
+            password: this.hashPassword(password),
+            activated
+        });
+    }
+
+    async edit(id, { username, password, activated }) {
+        const params = { username, activated };
+        if (password) {
+            params.password = this.hashPassword(password);
+        }
+
+        return await super.edit(id, params);
     }
 };

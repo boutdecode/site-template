@@ -3,6 +3,7 @@ const { randomUUID } = require("crypto");
 module.exports = class Session {
     constructor() {
         this.sessions = {};
+        this.flashMessages = {};
     }
 
     /**
@@ -48,5 +49,25 @@ module.exports = class Session {
         delete this.sessions[req.sessionId];
 
         res.set('Set-Cookie', `session=${req.sessionId}; Max-Age=-1`);
+    }
+
+    /**
+     * Store messages into session
+     * @param {string} message
+     * @param {string} level
+     */
+    flash(message, level = 'info') {
+        if (!this.flashMessages[level]) {
+            this.flashMessages[level] = [];
+        }
+
+        this.flashMessages[level].push(message);
+    }
+
+    /**
+     * Clear all flash messages
+     */
+    clearFlash() {
+        this.flashMessages = {};
     }
 }

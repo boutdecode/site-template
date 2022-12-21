@@ -1,25 +1,23 @@
-const boxstore = require("boxstore");
-const form = require('./Schema/Search');
-const Gateway = require('../../../../Admin/User/Application/Gateway/List/Gateway');
+const Search = require('./Schema/Search');
+const AdminAction = require("../../../../Shared/UI/AdminAction");
 
-module.exports = async (req, res) => {
-    const session = boxstore.get('session');
-    const userSession = session.getSession(req);
-
-    if (!userSession.user) {
-        return res.redirect(req.path('admin_login'), 302);
+module.exports = class Browse extends AdminAction {
+    constructor(session, gateway) {
+        super(session);
+        this.gateway = gateway;
     }
 
-    form.handleRequest(req);
+    async process(req, res) {
+        const form = new Search();
+        form.handleRequest(req);
 
-    let parameters = {};
-    if (form.isSubmit() && form.isValid()) {
-        parameters = form.data;
+        let parameters = {};
+        if (form.isSubmit() && form.isValid()) {
+            parameters = form.data;
+        }
+
+        const { data } = await this.gateway.run(parameters);
+
+        return res.render('admin/users/list', { users: data, form: form.createView() });
     }
-
-    console.log(form.data);
-
-    const { data } = await Gateway.run(parameters);
-
-    return res.render('admin/users/list', { users: data });
-};
+}
