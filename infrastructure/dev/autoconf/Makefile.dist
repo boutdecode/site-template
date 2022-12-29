@@ -23,10 +23,10 @@ clear: stop ## clear project
 .PHONY: assets watch
 
 assets: node_modules ## Build the development version of the assets
-$(EXECJS) npm run dev
+	$(EXECJS) npm run dev
 
 watch: node_modules ## Watch the assets and build their development version on change
-$(EXECJS) npm run dev --watch
+	$(EXECJS) npm run watch
 
 ##
 ## Dependencies

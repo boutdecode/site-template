@@ -1,19 +1,19 @@
 {
+  "application": {
+    "websiteName": "Mon site",
+    "websiteContact": "kevinbalicot[alt]gmail.com",
+    "metaAuthor": "Kevin Balicot <kevinbalicot[alt]gmail.com>",
+    "metaTitle": "Mon site",
+    "metaDescription": "Mon site super cool, venez apprendre pleins de truc sur moi."
+  },
   "pug": {
-    "globals": {
-      "websiteName": "Mon site",
-      "contact": "kevinbalicot[alt]gmail.com",
-      "meta": {
-        "author": "Kevin Balicot <kevinbalicot[alt]gmail.com>",
-        "title": "Mon site",
-        "description": "Mon site super cool, venez apprendre pleins de truc sur moi."
-      }
-    }
+    "globals": {}
   },
 
   "db": {
     "user": "data/user.db",
-    "page": "data/page.db"
+    "page": "data/page.db",
+    "settings": "data/settings.db"
   },
 
   "translation": {

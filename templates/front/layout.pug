@@ -7,19 +7,19 @@ html(lang=locale)
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
 
         block description
-            meta(name="description", content=meta.description)
+            meta(name="description", content=settings('metaDescription', true))
 
-        meta(name="author", content=meta.author)
+        meta(name="author", content=settings('metaAuthor'))
 
         block metadata
-            meta(property="og:title", content=meta.title)
-            meta(property="og:description", content=meta.description)
+            meta(property="og:title", content=settings('metaTitle', true))
+            meta(property="og:description", content=settings('metaDescription', true))
             meta(property="og:url", content=url)
 
         meta(property="og:type", content="website")
 
         block title
-            title=meta.title
+            title= settings('metaTitle', true)
 
         link(rel="icon", type="image/png", href="/images/favicon.ico")
         link(rel="canonical" href=canonical)

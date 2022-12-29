@@ -8,7 +8,7 @@ html(lang=locale)
         meta(name="robots", content="noindex")
 
         block title
-            title=meta.title + ' - Admin'
+            title=settings('metaTitle', true) + ' - Admin'
 
         link(rel="icon", type="image/png", href="/images/favicon.ico")
 

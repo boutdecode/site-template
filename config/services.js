@@ -8,6 +8,7 @@ const I18N = require('../src/Shared/Infrastructure/Translation/I18N');
 const SecurityRepository = require('../src/Admin/Security/Infrastructure/Persistence/Repository/Security');
 const UserRepository = require('../src/Admin/User/Infrastructure/Repository/User');
 const PageRepository = require('../src/Core/Page/Infrastructure/Repository/Page');
+const SettingsRepository = require("../src/Admin/Settings/Infrastructure/Repository/Settings");
 
 const FrontReadPageGateway = require('../src/Front/Page/Application/Read/Gateway');
 
@@ -23,6 +24,9 @@ const CreatePageGateway = require('../src/Admin/Page/Application/Gateway/Create/
 const DeletePageGateway = require('../src/Admin/Page/Application/Gateway/Delete/Gateway');
 const EditPageGateway = require('../src/Admin/Page/Application/Gateway/Edit/Gateway');
 const ReadPageGateway = require('../src/Admin/Page/Application/Gateway/Read/Gateway');
+
+const EditSettingsGateway = require('../src/Admin/Settings/Application/Gateway/Edit/Gateway');
+const ReadSettingsGateway = require('../src/Admin/Settings/Application/Gateway/Read/Gateway');
 
 const FrontReadPageAction = require('../src/UI/Front/Page/Read/Action');
 
@@ -42,6 +46,9 @@ const CreatePageAction = require('../src/UI/Admin/Page/Create/Action');
 const DeletePageAction = require('../src/UI/Admin/Page/Delete/Action');
 const EditPageAction = require('../src/UI/Admin/Page/Edit/Action');
 const ReadPageAction = require('../src/UI/Admin/Page/Read/Action');
+
+const EditSettingsAction = require('../src/UI/Admin/Settings/Edit/Action');
+const ReadSettingsAction = require('../src/UI/Admin/Settings/Read/Action');
 
 module.exports = () => {
     const container = new Container(config);
@@ -71,6 +78,10 @@ module.exports = () => {
 
     container.set('page_repository', () => {
         return new PageRepository(container.get('db'));
+    });
+
+    container.set('settings_repository', () => {
+        return new SettingsRepository(container.get('db'));
     });
 
     container.set('front_gateway_page_read', (container) => {
@@ -119,6 +130,14 @@ module.exports = () => {
 
     container.set('admin_gateway_page_read', (container) => {
         return new ReadPageGateway(container.get('page_repository'));
+    });
+
+    container.set('admin_gateway_settings_edit', (container) => {
+        return new EditSettingsGateway(container.get('settings_repository'));
+    });
+
+    container.set('admin_gateway_settings_read', (container) => {
+        return new ReadSettingsGateway(container.get('settings_repository'));
     });
 
     container.set('front_action_index', () => {
@@ -213,6 +232,20 @@ module.exports = () => {
         return new ReadPageAction(
             container.get('session'),
             container.get('admin_gateway_page_read')
+        );
+    });
+
+    container.set('admin_action_settings_edit', (container) => {
+        return new EditSettingsAction(
+            container.get('session'),
+            container.get('admin_gateway_settings_edit')
+        );
+    });
+
+    container.set('admin_action_settings_read', (container) => {
+        return new ReadSettingsAction(
+            container.get('session'),
+            container.get('admin_gateway_settings_read')
         );
     });
 

@@ -287,14 +287,18 @@ module.exports = class Requester {
      * @return {Promise}
      */
     query({
-              collection,
-              params,
-              type,
-              limit,
-              skip,
-              sort,
-              selector
-          }) {
+        collection,
+        params,
+        type,
+        limit,
+        skip,
+        sort,
+        selector
+    }) {
+        if (!this.db[collection]) {
+            throw new Error(`Collection "${collection}" doesn\'t exists.`);
+        }
+
         if (type === 'find') {
             return this.find(collection, params, skip, limit, sort);
         } else if (type === 'findOne') {

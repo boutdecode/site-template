@@ -23,4 +23,7 @@ module.exports = (app) => {
     router.post('admin_page_create', '/admin/page/create', 'admin_action_page_create');
     router.post('admin_page_delete', '/admin/page/:id/delete', 'admin_action_page_delete');
     router.post('admin_page_edit', '/admin/page/:id/edit', 'admin_action_page_edit');
+
+    router.get('admin_settings_read', '/admin/:locale/settings', 'admin_action_settings_read');
+    router.post('admin_settings_edit', '/admin/:locale/settings', 'admin_action_settings_edit');
 };

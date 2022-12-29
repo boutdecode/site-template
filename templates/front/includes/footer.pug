@@ -1,3 +1,4 @@
 footer.main-footer.fixed-bottom
     div.container.p-4.text-center
-        p.m-0.copyright © #{(new Date()).getFullYear()} #{websiteName}, #{trans('all_right_reserved')} - #{contact}
+        p.m-0.copyright © #{(new Date()).getFullYear()} #{settings('websiteName')}, #{trans('all_right_reserved')} - #{settings('websiteContact')} -
+            a(href=get('admin_dashboard'))= trans('admin')

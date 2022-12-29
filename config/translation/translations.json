@@ -31,6 +31,9 @@
       "locale_fr": "French",
       "locale_en": "English",
       "edit_page": "Edit page",
+      "manage_settings": "Manage settings",
+      "application": "Application",
+      "meta_data": "Meta data",
 
       "actions": {
         "sign_in": "Sign in",
@@ -56,7 +59,12 @@
           "published": "Published",
           "title": "Title",
           "short_description": "Short description",
-          "content": "content"
+          "content": "content",
+          "website_name": "Website name",
+          "website_contact": "Website contact",
+          "meta_author": "Meta author",
+          "meta_title": "Meta title",
+          "meta_description": "Meta description"
         },
 
         "placeholder": {
@@ -72,7 +80,8 @@
           "user_updated": "User updated",
           "page_created": "Page created",
           "page_deleted": "Page deleted",
-          "page_updated": "Page updated"
+          "page_updated": "Page updated",
+          "settings_updated": "Settings updated"
         },
         "error": {
           "bad_credential": "Bad credential",
@@ -123,6 +132,9 @@
       "locale_fr": "Français",
       "locale_en": "Anglais",
       "edit_page": "Edition d'une page",
+      "manage_settings": "Gestion des paramètres",
+      "application": "Application",
+      "meta_data": "Meta-données",
 
       "actions": {
         "sign_in": "Se connecter",
@@ -148,7 +160,12 @@
           "published": "Publié",
           "title": "Titre",
           "short_description": "Description courte",
-          "content": "Contenu"
+          "content": "Contenu",
+          "website_name": "Nom du site web",
+          "website_contact": "Contact du site web",
+          "meta_author": "Auteur du site",
+          "meta_title": "Titre du site",
+          "meta_description": "Description du site"
         },
 
         "placeholder": {
@@ -164,7 +181,8 @@
           "user_updated": "Administrateur mise à jour",
           "page_created": "Page créée",
           "page_deleted": "Page supprimée",
-          "page_updated": "Page mise à jour"
+          "page_updated": "Page mise à jour",
+          "settings_updated": "Paramètres mise à jour"
         },
         "error": {
           "bad_credential": "Identifiants invalides",

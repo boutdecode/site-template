@@ -7,13 +7,19 @@ const config = require('../../../../config/config.json');
 module.exports = {
     type: 'renderer',
     handle: (req, res, app, next) => {
-        res.render = (templateName, data = {}, status = 200, headers = { 'Content-Type': 'text/html' }) => {
+        res.render = async (templateName, data = {}, status = 200, headers = { 'Content-Type': 'text/html' }) => {
             for (let name in headers) {
                 res.set(name, headers[name]);
             }
 
             const router = boxstore.get('router');
             const i18n = boxstore.get('i18n');
+
+            const settingsRepository = boxstore.get('settings_repository');
+            const settingsResult = {};
+            for (const { code, value } of await settingsRepository.find({}, 1000)) {
+                settingsResult[code] = value;
+            }
 
             const templateFunctions = {
                 get canonical() {
@@ -94,7 +100,15 @@ module.exports = {
                     session.clearFlash();
 
                     return messages;
-                }
+                },
+
+                settings(key, translatable = false) {
+                    if (translatable && settingsResult[key]) {
+                        return settingsResult[key][req.attributes.locale];
+                    }
+
+                    return settingsResult[key] || config.application[key] || null;
+                },
             }
 
             res
