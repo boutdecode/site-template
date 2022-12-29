@@ -8,4 +8,6 @@ module.exports = (app) => {
     });
 
     router.get('home', '/:locale/', 'front_action_index');
+
+    router.get('front_page_read', '/:locale/page/:slug', 'front_action_page_read');
 };

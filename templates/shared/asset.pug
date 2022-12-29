@@ -1,0 +1,14 @@
+- var jsFiles = []
+- var cssFiles = []
+
+mixin asset_js(entrypoint, manifest, defer)
+    each file in asset(entrypoint, manifest, 'js')
+        if !(jsFiles.includes(file))
+            script(src=file, defer=defer)
+            - jsFiles.push(file)
+
+mixin asset_css(entrypoint, manifest)
+    each file in asset(entrypoint, manifest, 'css')
+        if !(cssFiles.includes(file))
+            link(href=file, rel="stylesheet", type="text/css")
+            - cssFiles.push(file)

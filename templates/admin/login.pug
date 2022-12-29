@@ -1,4 +1,5 @@
 extends layout
+include ../shared/form
 
 block body
     style
@@ -26,21 +27,9 @@ block body
                         if error
                             p.alert.alert-danger= trans(error)
 
-                        div.form-floating.mb-3
-                            input#username.form-control(type="text", name="username", placeholder=trans('form.placeholder.username'), class=(form.errors.username ? "is-invalid" : ""), required)
-                            label(for="username")= trans('form.label.username')
-                            if form.errors.username
-                                span.invalid-feedback=form.errors.username
+                        +input('username', form)
+                        +input('password', form)
+                        +input('remember-me', form)
 
-                        div.form-floating.mb-3
-                            input#password.form-control(type="password", name="password", placeholder=trans('form.placeholder.password'), class=(form.errors.password ? "is-invalid" : ""), required)
-                            label(for="password")= trans('form.label.password')
-                            if form.errors.password
-                                span.invalid-feedback=form.errors.password
-
-                        div.form-check.mb-3
-                            label.form-check-label(for="remember-me")= trans('form.label.remember_me')
-                            input#remember-me.form-check-input(type="checkbox", name="remember-me")
-
-                        button.w-100.btn.btn-primary= trans('actions.sign_in')
+                        button.w-100.btn.btn-primary(type="submit")= trans('actions.sign_in')
                 div.col-xxl-4.col-xl-3

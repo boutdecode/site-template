@@ -106,6 +106,9 @@ module.exports = class Validator {
                     case 'string':
                         result[key] = this.validateString(node, schemaNode);
                         break;
+                    case 'textarea':
+                        result[key] = this.validateString(node, schemaNode);
+                        break;
                     case 'number':
                         result[key] = this.validateNumber(node, schemaNode);
                         break;
@@ -124,7 +127,6 @@ module.exports = class Validator {
                             result[key] = typeValidator.callback.call(this, node, schemaNode);
                             break;
                         }
-
                         throw new Error('Schema node needs "type" parameter.');
                 }
             } catch (e) {

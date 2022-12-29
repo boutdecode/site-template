@@ -31,7 +31,7 @@ const cache = {
 app.container = services();
 
 app.use((req, res, next) => {
-    if (req.headers['if-none-match'] && req.headers['if-none-match'] === cache['ETag']) {
+    if (req.headers['if-none-match'] && req.headers['if-none-match'] == cache['ETag']) {
         return res.status(304).send();
     }
 
@@ -39,13 +39,15 @@ app.use((req, res, next) => {
 });
 
 app.link('/modules', `${__dirname}/node_modules`, cache);
-app.link('/dist', `${__dirname}/dist`, cache);
+/*app.link('/dist', `${__dirname}/dist`, cache);
 app.link('/styles', `${__dirname}/dist/styles`, cache);
 app.link('/static', `${__dirname}/dist/static`, cache);
 app.link('/scripts', `${__dirname}/dist/scripts`, cache);
 app.link('/images', `${__dirname}/dist/images`, cache);
 app.link('/fonts', `${__dirname}/dist/fonts`, cache);
-app.link('/assets', `${__dirname}/dist/assets`, cache);
+app.link('/assets', `${__dirname}/dist/assets`, cache);*/
+app.link('/images', `${__dirname}/public/images`, cache);
+app.link('/assets', `${__dirname}/dist`, cache);
 
 FrontRouter(app);
 AdminRouter(app);

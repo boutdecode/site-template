@@ -1,5 +1,5 @@
 const AdminAction = require("../../../../Shared/UI/AdminAction");
-const CreateForm = require('./Schema/Create');
+const CreateForm = require('./../Schema/Create');
 
 module.exports = class Create extends AdminAction {
     gateway;
@@ -19,8 +19,8 @@ module.exports = class Create extends AdminAction {
 
                 this.session.flash('messages.success.user_created', 'success');
                 return res.redirect(req.path('admin_users'), 303);
-            } catch ({ message }) {
-                error = message;
+            } catch (e) {
+                error = e.message;
             }
         }
 

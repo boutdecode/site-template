@@ -2,7 +2,6 @@ const pug = require('pug');
 const Intl = require('intl');
 const boxstore = require('boxstore');
 
-const manifest = require('../../../../dist/manifest.json');
 const config = require('../../../../config/config.json');
 
 module.exports = {
@@ -25,6 +24,10 @@ module.exports = {
                     return req.attributes.locale;
                 },
 
+                get url() {
+                    return req.url;
+                },
+
                 is(name, params = {}, method = 'get') {
                     return req.uri === router.generatePath(name, { locale: req.attributes.locale, ...params }, method);
                 },
@@ -41,13 +44,13 @@ module.exports = {
                     return router.generatePath(name, { locale: req.attributes.locale, ...params }, 'post');
                 },
 
-                manifest: (key) => {
-                    const asset = manifest[key];
-                    if (asset) {
-                        return `/${asset.file}`;
+                asset: (entrypoint, manifest, type) => {
+                    const manifests = boxstore.get('manifest');
+                    if (!manifests[entrypoint] || !manifests[entrypoint][manifest]) {
+                        return {};
                     }
 
-                    return '';
+                    return manifests[entrypoint][manifest][type];
                 },
 
                 trans: (key, options) => {
@@ -96,7 +99,16 @@ module.exports = {
 
             res
                 .status(status)
-                .send(pug.renderFile(`${__dirname}/../../../../templates/${templateName}.pug`,  { ...templateFunctions, ...data, ...config.pug.globals }));
+                .send(
+                    pug.renderFile(
+                        `${__dirname}/../../../../templates/${templateName}.pug`,
+                        {
+                            ...templateFunctions,
+                            ...data,
+                            ...config.pug.globals
+                        }
+                    )
+                );
         };
 
         next();

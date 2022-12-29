@@ -1,4 +1,4 @@
-const Search = require('./Schema/Search');
+const Search = require('./../Schema/Search');
 const AdminAction = require("../../../../Shared/UI/AdminAction");
 
 module.exports = class Browse extends AdminAction {
@@ -18,6 +18,6 @@ module.exports = class Browse extends AdminAction {
 
         const { data } = await this.gateway.run(parameters);
 
-        return res.render('admin/users/list', { users: data, form: form.createView() });
+        return res.render('admin/users/index', { users: data, form: form.createView() });
     }
 }

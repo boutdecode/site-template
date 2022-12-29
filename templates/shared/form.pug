@@ -1,0 +1,77 @@
+mixin input_widget(name, type, label, required, value, error, options)
+    if options.attr && options.attr.placeholder
+        - options.attr.placeholder = trans(options.attr.placeholder)
+
+    - var inputClassName = ''
+    if options.className && options.className.input
+        - inputClassName = options.className.input
+
+    - var widgetClassName = 'mb-4'
+    if options.className && options.className.widget
+        - widgetClassName = options.className.widget
+
+    if (type === 'string')
+        div.form-group(class=widgetClassName)
+            if label
+                label(for=name)= trans(label)
+            input.form-control(id=name, name=name, type='text', value=value, class=(error ? "is-invalid " + inputClassName : inputClassName || '').trim(), required=required)&attributes(options.attr)
+            if error
+                span.invalid-feedback= trans(error)
+    else if (type === 'textarea')
+        div.form-group(class=widgetClassName)
+            if label
+                label(for=name)= trans(label)
+            textarea.form-control(id=name, name=name, class=(error ? "is-invalid " + inputClassName : inputClassName || '').trim(), required=required)&attributes(options.attr)=value
+            if error
+                span.invalid-feedback= trans(error)
+    else if (type === 'boolean')
+        div.form-group.form-check.form-switch(class=widgetClassName)
+            input.form-check-input(id=name, name=name, type='checkbox', checked=value, class=(error ? "is-invalid " + inputClassName : inputClassName || '').trim(), required=required)&attributes(options.attr)
+            if label
+                label.form-check-label(for=name)= trans(label)
+            if error
+                span.invalid-feedback= trans(error)
+    else if (type === 'select_number')
+        div.form-group(class=widgetClassName)
+            if label
+                label(for=name)= trans(label)
+            select.form-select(id=name, name=name, class=(error ? "is-invalid " + inputClassName : inputClassName || '').trim(), required=required)&attributes(options.attr)
+                for val, key in options.choices
+                    option(value=val, selected=val === value)= trans(key)
+
+mixin input(name, form)
+    if (form.inputs[name]._type === 'object')
+        div.form-group.p-4.border.mb-4
+            h5.mb-4= trans(form.inputs[name]._label)
+
+            div.accordion
+                each value, key in form.inputs[name]._parameters
+                    - var id = `${name}-${key}`;
+                    - var inputName = `${name}[${key}]`;
+                    - var value = form.data[name] ? form.data[name][key] : null;
+                    - var error = form.errors[name] ? form.errors[name][key] : null;
+
+                    div.accordion-item
+                        div.accordion-header
+                            button.accordion-button(type="button", data-bs-toggle="collapse" data-bs-target="#collapse-" + id)= trans(form.inputs[name]._parameters[key]._label)
+                        div.accordion-collapse.collapse(id="collapse-" + id)
+                            div.accordion-body
+                                +input_widget(
+                                    inputName,
+                                    form.inputs[name]._parameters[key]._type,
+                                    null,
+                                    form.inputs[name]._parameters[key]._required,
+                                    value,
+                                    error,
+                                    form.inputs[name]._parameters[key]._options || {}
+                                )
+    else
+        +input_widget(
+            name,
+            form.inputs[name]._type,
+            form.inputs[name]._label,
+            form.inputs[name]._required,
+            form.data[name],
+            form.errors[name],
+            form.inputs[name]._options || {}
+        )

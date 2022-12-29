@@ -1,4 +1,5 @@
 extends ../base
+include ../../shared/form
 
 block content
 
@@ -21,12 +22,8 @@ block content
             if error
                 p.alert.alert-danger= trans(error)
 
-            form(action=post('admin_edit_user', { id: form.result._id }), method="post")
-                div.form-group.mb-4
-                    label(for="username")= trans('form.label.username')
-                    input#username.form-control(name="username", type="text", value=form.result.username, class=(form.errors.username ? "is-invalid" : ""), required)
-                    if form.errors.username
-                        span.invalid-feedback=form.errors.username
+            form(action=post('admin_edit_user', { id: form.data._id }), method="post")
+                +input('username', form)
 
                 div.form-group.mb-4
                     label(for="password")= trans('form.label.password')
@@ -34,10 +31,6 @@ block content
                     if form.errors.password
                         span.invalid-feedback=form.errors.password
 
-                div.form-check.form-switch.mb-4
-                    label.form-check-label(for="activated")= trans('form.label.activated')
-                    input#activated.form-check-input(type="checkbox", name="activated", checked=form.result.activated, class=(form.errors.activated ? "is-invalid" : ""))
-                    if form.errors.activated
-                        span.invalid-feedback=form.errors.activated
+                +input('activated', form)
 
-                button.btn.btn-success= trans('actions.save')
+                button.btn.btn-success(type="submit")= trans('actions.save')

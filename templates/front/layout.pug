@@ -1,3 +1,5 @@
+include ../shared/asset
+
 doctype html
 html(lang=locale)
     head
@@ -12,8 +14,7 @@ html(lang=locale)
         block metadata
             meta(property="og:title", content=meta.title)
             meta(property="og:description", content=meta.description)
-            meta(property="og:url", content="https://example.fr")
-            meta(property="og:image", content="https://example.fr/images/logo.png")
+            meta(property="og:url", content=url)
 
         meta(property="og:type", content="website")
 
@@ -24,10 +25,10 @@ html(lang=locale)
         link(rel="canonical" href=canonical)
 
         block style
-            link(href=manifest('assets/front/front.css'), rel="stylesheet", type="text/css")
+            +asset_css('front', 'front')
 
-        script(src=manifest('assets/common/common.js'))
-        script(src=manifest('assets/front/front.js'))
+        +asset_js('front', 'common')
+        +asset_js('front', 'front', true)
 
         block script
 

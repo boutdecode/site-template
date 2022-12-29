@@ -1,5 +1,5 @@
 const AdminAction = require("../../../../Shared/UI/AdminAction");
-const EditForm = require("./Schema/Edit");
+const EditForm = require("./../Schema/Edit");
 
 module.exports = class Edit extends AdminAction {
     constructor(session, gateway) {
@@ -18,7 +18,7 @@ module.exports = class Edit extends AdminAction {
 
                 this.session.flash('messages.success.user_updated', 'success');
                 return res.redirect(req.path('admin_users'), 303);
-            } catch ({ message }) {
+            } catch (e) {
                 error = message;
             }
         }

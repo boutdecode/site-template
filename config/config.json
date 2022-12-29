@@ -12,10 +12,17 @@
   },
 
   "db": {
-    "user": "data/user.db"
+    "user": "data/user.db",
+    "page": "data/page.db"
   },
 
   "translation": {
+    "locales": ["fr", "en"],
     "resources": "config/translation/translations.json"
+  },
+
+  "assets": {
+    "front": "dist/front/entrypoints.json",
+    "admin": "dist/admin/entrypoints.json"
   }
 }

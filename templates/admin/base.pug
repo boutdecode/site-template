@@ -2,7 +2,7 @@ extends layout
 
 block body
     section.main.d-flex.flex-nowrap
-        div.d-flex.flex-column.p-4.bg-dark.shadow
+        div.main-nav.d-flex.flex-column.p-4.bg-dark.shadow
             a.d-flex.align-items-center.fs-4.text-white.text-decoration-none(href=get('admin_dashboard'))
                 i.me-2(icon-name="layout-template")
                 span= trans('admin')
@@ -13,7 +13,8 @@ block body
 
             hr.text-white
 
+            a.btn.btn-outline-secondary.mb-2(href=get('home'))= trans('actions.go_website')
             a.btn.btn-outline-danger(href=get('admin_logout'))= trans('actions.logout')
 
-        div.d-flex.flex-column.flex-fill.bg-light
+        div.main-content.d-flex.flex-column.flex-fill.bg-light
             block content

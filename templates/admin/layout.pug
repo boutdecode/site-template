@@ -1,3 +1,5 @@
+include ../shared/asset
+
 doctype html
 html(lang=locale)
     head
@@ -11,10 +13,10 @@ html(lang=locale)
         link(rel="icon", type="image/png", href="/images/favicon.ico")
 
         block style
-            link(href=manifest('assets/admin/admin.css'), rel="stylesheet", type="text/css")
+            +asset_css('admin', 'admin')
 
-        script(src=manifest('assets/common/common.js'))
-        script(src=manifest('assets/admin/admin.js'))
+        +asset_js('admin', 'common')
+        +asset_js('admin', 'admin', true)
 
         block script
 

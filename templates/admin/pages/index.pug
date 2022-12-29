@@ -1,0 +1,80 @@
+extends ../base
+include ../../shared/form
+
+block content
+
+    header.bg-white.p-3.mb-3.border-bottom
+        nav
+            ol.breadcrumb.m-0
+                li.breadcrumb-item
+                    a(href=get('admin_dashboard'))= trans('home')
+                li.breadcrumb-item.active= trans('pages')
+
+    section.container-fluid
+
+        include ../includes/alert
+
+        div.m-4.bg-white.rounded.border.shadow-sm
+            header.p-4
+                h1.d-flex.align-items-center.h2.m-0
+                    i.me-2(icon-name="files", width=26, height=26, stroke-width=3)
+                    span= trans('manage_pages')
+
+            div.row.g-0.border-top.border-bottom.bg-light.p-4
+                div.col
+                    form.d-flex.justify-content-start(action=get('admin_pages'))
+                        +input('search', form)
+                        +input('limit', form)
+
+                        button.d-flex.align-items-center.btn.btn-outline-secondary
+                            i.me-2(icon-name="search")
+                            span= trans('actions.search')
+
+                div.col.text-end
+                    a.d-flex-inline.align-items-center.btn.btn-primary(href=path('admin_page_create'))
+                        i.me-2(icon-name="file-plus-2")
+                        span= trans('actions.create_new_page')
+
+            div.p-4
+                table.table.align-middle
+                    thead
+                        tr
+                            th #
+                            th= trans('slug')
+                            th= trans('title')
+                            th= trans('activated')
+                            th= trans('created_at')
+                            th.text-end= trans('button_actions')
+
+                    tbody
+                        each item in items
+                            tr
+                                td= item._id
+                                td= item.slug
+                                td= item.title[locale]
+                                td
+                                    if item.activated
+                                        span.d-flex-inline.align-items-center.badge.rounded-pill.text-bg-success
+                                            i.me-1(icon-name="check", width=14, height=14)
+                                            span= trans('yes')
+                                    else
+                                        span.d-flex-inline.align-items-center.badge.rounded-pill.text-bg-danger
+                                            i.me-1(icon-name="x", width=14, height=14)
+                                            span= trans('no')
+
+                                td= date(item.createdAt)
+                                td.text-end
+                                    div.btn-group.btn-group-sm
+                                        a.d-flex.align-items-center.btn.btn-secondary(href=path('front_page_read', { slug: item.slug }), target="_blank")
+                                            i.me-1(icon-name="eye", width=18, height=18)
+                                            span= trans('actions.show')
+
+                                        a.d-flex.align-items-center.btn.btn-primary(href=path('admin_page_read', { id: item._id }))
+                                            i.me-1(icon-name="pencil", width=18, height=18)
+                                            span= trans('actions.edit')
+
+                                        button.d-flex.align-items-center.btn.btn-danger(form="delete-item-" + item._id)
+                                            i.me-1(icon-name="trash", width=18, height=18)
+                                            span= trans('actions.delete')
+
+                                    form(id="delete-item-" + item._id, action=post('admin_page_delete', { id: item._id }), method='post', onsubmit="return confirm('" + trans('do_you_really_perform') + "')")

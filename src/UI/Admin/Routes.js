@@ -15,4 +15,12 @@ module.exports = (app) => {
     router.post('admin_create_user', '/admin/user/create', 'admin_action_user_create');
     router.post('admin_delete_user', '/admin/user/:id/delete', 'admin_action_user_delete');
     router.post('admin_edit_user', '/admin/user/:id/edit', 'admin_action_user_edit');
+
+    router.get('admin_page_browse', '/admin/:locale/pages', 'admin_action_page_browse');
+    router.get('admin_page_create', '/admin/:locale/page/create', 'admin_action_page_create');
+    router.get('admin_page_read', '/admin/:locale/page/:id/read', 'admin_action_page_read');
+
+    router.post('admin_page_create', '/admin/page/create', 'admin_action_page_create');
+    router.post('admin_page_delete', '/admin/page/:id/delete', 'admin_action_page_delete');
+    router.post('admin_page_edit', '/admin/page/:id/edit', 'admin_action_page_edit');
 };

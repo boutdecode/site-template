@@ -1,5 +1,5 @@
 const AdminAction = require("../../../../Shared/UI/AdminAction");
-const ReadForm = require('./Schema/Read');
+const ReadForm = require('./../Schema/Edit');
 
 module.exports = class Delete extends AdminAction {
     constructor(session, gateway) {
@@ -14,7 +14,7 @@ module.exports = class Delete extends AdminAction {
 
             res.render('admin/users/edit', { form: form.createView() });
         } catch (e) {
-            this.session.flash('messages.success.user_not_found', 'danger');
+            this.session.flash('messages.danger.user_not_found', 'danger');
 
             res.redirect(req.path('admin_users'), 303);
         }

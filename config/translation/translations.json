@@ -22,6 +22,15 @@
       "yes": "Yes",
       "searching": "Searching...",
       "do_you_really_perform": "Do you really perform this action ?",
+      "manage_pages": "Manage page",
+      "created_at": "Created at",
+      "last_logged_at": "Last logged at",
+      "slug": "Slug",
+      "title": "Title",
+      "create_page": "Create page",
+      "locale_fr": "French",
+      "locale_en": "English",
+      "edit_page": "Edit page",
 
       "actions": {
         "sign_in": "Sign in",
@@ -29,7 +38,12 @@
         "create": "Create",
         "save": "Save",
         "create_new_user": "Create new user",
-        "search": "Search"
+        "search": "Search",
+        "create_new_page": "Create new page",
+        "go_website": "Go website",
+        "edit": "Edit",
+        "delete": "Delete",
+        "show": "Show"
       },
 
       "form": {
@@ -37,7 +51,12 @@
           "username": "Username",
           "password": "Password",
           "remember_me": "Remember me",
-          "activated": "Activated"
+          "user_activated": "Activated",
+          "slug": "Slug",
+          "published": "Published",
+          "title": "Title",
+          "short_description": "Short description",
+          "content": "content"
         },
 
         "placeholder": {
@@ -50,14 +69,18 @@
         "success": {
           "user_created": "User created",
           "user_deleted": "User deleted",
-          "user_updated": "User updated"
+          "user_updated": "User updated",
+          "page_created": "Page created",
+          "page_deleted": "Page deleted",
+          "page_updated": "Page updated"
         },
         "error": {
           "bad_credential": "Bad credential",
           "user_not_found": "User not found"
         },
         "danger": {
-          "user_not_found": "User not found"
+          "user_not_found": "User not found",
+          "page_not_found": "Page not found"
         }
       },
 
@@ -91,6 +114,15 @@
       "yes": "Oui",
       "searching": "Recherche...",
       "do_you_really_perform": "Voulez vous vraiment faire cette action ?",
+      "manage_pages": "Gestion des pages",
+      "created_at": "Créer le",
+      "last_logged_at": "Dernière connexion le",
+      "slug": "Slug",
+      "title": "Titre",
+      "create_page": "Création d'une page",
+      "locale_fr": "Français",
+      "locale_en": "Anglais",
+      "edit_page": "Edition d'une page",
 
       "actions": {
         "sign_in": "Se connecter",
@@ -98,7 +130,12 @@
         "create": "Créer",
         "save": "Sauvegarder",
         "create_new_user": "Créer nouvel administrateur",
-        "search": "Rechercher"
+        "search": "Rechercher",
+        "create_new_page": "Créer nouvelle page",
+        "go_website": "Retourner sur le site",
+        "edit": "Editer",
+        "delete": "Supprimer",
+        "show": "Voir"
       },
 
       "form": {
@@ -106,7 +143,12 @@
           "username": "Identifiant",
           "password": "Mot de passe",
           "remember_me": "Se souvenir de moi",
-          "activated": "Compte activé"
+          "user_activated": "Compte activé",
+          "slug": "Slug",
+          "published": "Publié",
+          "title": "Titre",
+          "short_description": "Description courte",
+          "content": "Contenu"
         },
 
         "placeholder": {
@@ -119,14 +161,18 @@
         "success": {
           "user_created": "Administrateur créé",
           "user_deleted": "Administrateur supprimé",
-          "user_updated": "Administrateur mise à jour"
+          "user_updated": "Administrateur mise à jour",
+          "page_created": "Page créée",
+          "page_deleted": "Page supprimée",
+          "page_updated": "Page mise à jour"
         },
         "error": {
           "bad_credential": "Identifiants invalides",
           "user_not_found": "Administrateur non trouvé"
         },
         "danger": {
-          "user_not_found": "Administrateur non trouvé"
+          "user_not_found": "Administrateur non trouvé",
+          "page_not_found": "Page non trouvée"
         }
       },
 
