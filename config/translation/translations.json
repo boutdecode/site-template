@@ -34,6 +34,7 @@
       "manage_settings": "Manage settings",
       "application": "Application",
       "meta_data": "Meta data",
+      "view_details": "View details",
 
       "actions": {
         "sign_in": "Sign in",
@@ -135,6 +136,7 @@
       "manage_settings": "Gestion des paramètres",
       "application": "Application",
       "meta_data": "Meta-données",
+      "view_details": "Voir les détails",
 
       "actions": {
         "sign_in": "Se connecter",

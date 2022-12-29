@@ -6,13 +6,14 @@ const Session = require('../src/Shared/Infrastructure/HTTP/Session');
 const Router = require('../src/Shared/Infrastructure/HTTP/Router');
 const I18N = require('../src/Shared/Infrastructure/Translation/I18N');
 const SecurityRepository = require('../src/Admin/Security/Infrastructure/Persistence/Repository/Security');
-const UserRepository = require('../src/Admin/User/Infrastructure/Repository/User');
+const UserRepository = require('../src/Core/User/Infrastructure/Repository/User');
 const PageRepository = require('../src/Core/Page/Infrastructure/Repository/Page');
 const SettingsRepository = require("../src/Admin/Settings/Infrastructure/Repository/Settings");
 
 const FrontReadPageGateway = require('../src/Front/Page/Application/Read/Gateway');
 
 const SignIn = require('../src/Admin/Security/Application/Gateway/SignIn/Gateway');
+const ShowDashboardGateway = require('../src/Admin/Dashboard/Application/Gateway/Show/Gateway');
 const BrowseUserGateway = require('../src/Admin/User/Application/Gateway/Browse/Gateway');
 const CreateUserGateway = require('../src/Admin/User/Application/Gateway/Create/Gateway');
 const DeleteUserGateway = require('../src/Admin/User/Application/Gateway/Delete/Gateway');
@@ -92,6 +93,13 @@ module.exports = () => {
         return new SignIn(container.get('security_repository'));
     });
 
+    container.set('admin_gateway_dashboard_show', (container) => {
+        return new ShowDashboardGateway(
+            container.get('user_repository'),
+            container.get('page_repository')
+        );
+    });
+
     container.set('admin_gateway_user_browse', (container) => {
         return new BrowseUserGateway(container.get('user_repository'));
     });
@@ -158,7 +166,10 @@ module.exports = () => {
     });
 
     container.set('admin_action_dashboard', (container) => {
-        return new Dashboard(container.get('session'));
+        return new Dashboard(
+            container.get('session'),
+            container.get('admin_gateway_dashboard_show')
+        );
     });
 
     container.set('admin_action_logout', (container) => {
