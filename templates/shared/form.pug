@@ -10,6 +10,10 @@ mixin input_widget(name, type, label, required, value, error, options)
     if options.className && options.className.widget
         - widgetClassName = options.className.widget
 
+    - var help = null
+    if options.help
+        - help = options.help
+
     if (type === 'string')
         div.form-group(class=widgetClassName)
             if label
@@ -17,6 +21,8 @@ mixin input_widget(name, type, label, required, value, error, options)
             input.form-control(id=name, name=name, type='text', value=value, class=(error ? "is-invalid " + inputClassName : inputClassName || '').trim(), required=required)&attributes(options.attr)
             if error
                 span.invalid-feedback= trans(error)
+            if help
+                div.form-text= trans(help)
     else if (type === 'textarea')
         div.form-group(class=widgetClassName)
             if label
@@ -24,6 +30,8 @@ mixin input_widget(name, type, label, required, value, error, options)
             textarea.form-control(id=name, name=name, class=(error ? "is-invalid " + inputClassName : inputClassName || '').trim(), required=required)&attributes(options.attr)=value
             if error
                 span.invalid-feedback= trans(error)
+            if help
+                div.form-text= trans(help)
     else if (type === 'boolean')
         div.form-group.form-check.form-switch(class=widgetClassName)
             input.form-check-input(id=name, name=name, type='checkbox', checked=value, class=(error ? "is-invalid " + inputClassName : inputClassName || '').trim(), required=required)&attributes(options.attr)
@@ -31,6 +39,8 @@ mixin input_widget(name, type, label, required, value, error, options)
                 label.form-check-label(for=name)= trans(label)
             if error
                 span.invalid-feedback= trans(error)
+            if help
+                div.form-text= trans(help)
     else if (type === 'select_number')
         div.form-group(class=widgetClassName)
             if label
@@ -38,6 +48,10 @@ mixin input_widget(name, type, label, required, value, error, options)
             select.form-select(id=name, name=name, class=(error ? "is-invalid " + inputClassName : inputClassName || '').trim(), required=required)&attributes(options.attr)
                 for val, key in options.choices
                     option(value=val, selected=val === value)= trans(key)
+            if error
+                span.invalid-feedback= trans(error)
+            if help
+                div.form-text= trans(help)
 
 mixin input(name, form)
     if (form.inputs[name]._type === 'object')

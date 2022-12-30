@@ -8,12 +8,13 @@ module.exports = class CreateGateway extends Gateway {
         this.repository = repository;
     }
 
-    async process({ slug, title, shortDescription, content, activated }) {
-        const alreadyPage = await this.repository.findBySlug(slug);
+    async process({ slug, title, shortDescription, content, isFactory, activated }) {
+        const slugResult = slugify(slug);
+        const alreadyPage = await this.repository.findBySlug(slugResult);
         if (alreadyPage) {
-            throw new Error(`Page with slug ${slug} already exists.`);
+            throw new Error(`Page with slug ${slugResult} already exists.`);
         }
 
-        return await this.repository.create({ slug: slugify(slug), title, shortDescription, content, activated });
+        return await this.repository.create({ slug: slugResult, title, shortDescription, content, isFactory, activated });
     }
 }

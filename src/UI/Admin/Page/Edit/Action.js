@@ -17,6 +17,7 @@ module.exports = class EditAction extends AdminAction {
                 await this.gateway.run({ ...form.data, id: req.params.id });
 
                 this.session.flash('messages.success.page_updated', 'success');
+
                 return res.redirect(req.path('admin_page_browse'), 303);
             } catch ({ message }) {
                 error = message;

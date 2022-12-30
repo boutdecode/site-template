@@ -7,6 +7,6 @@ module.exports = class ReadGateway extends Gateway {
     }
 
     async process({ slug }) {
-        return await this.repository.findBySlug(slug);
+        return await this.repository.findActivatedBySlug(slug);
     }
 }

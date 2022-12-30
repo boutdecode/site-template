@@ -24,9 +24,11 @@ block content
 
             form(action=post('admin_page_create'), method="post")
                 +input('slug', form)
-                +input('activated', form)
                 +input('title', form)
                 +input('shortDescription', form)
                 +input('content', form)
+                hr
+                +input('activated', form)
+                +input('isFactory', form)
 
                 button.btn.btn-success(type="submit")= trans('actions.create')

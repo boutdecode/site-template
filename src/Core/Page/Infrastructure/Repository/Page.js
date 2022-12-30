@@ -1,4 +1,5 @@
 const CRUDRepository = require("../../../../Shared/Infrastructure/Persistence/Repository/CRUD");
+const HttpError = require("../../../../Shared/Infrastructure/HTTP/Error/HttpError");
 
 module.exports = class PageRepository extends CRUDRepository {
     constructor(requester) {
@@ -7,6 +8,15 @@ module.exports = class PageRepository extends CRUDRepository {
 
     async findBySlug(slug) {
         return await super.findOne({ slug });
+    }
+
+    async findActivatedBySlug(slug) {
+        const page = await super.findOne({ slug, activated: true });
+        if (!page) {
+            throw new HttpError('Page not found', 404);
+        }
+
+        return page;
     }
 
     async search(search = null, skip = 0, limit = 25) {

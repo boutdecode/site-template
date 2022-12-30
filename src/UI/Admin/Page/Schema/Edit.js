@@ -5,8 +5,8 @@ module.exports = class EditSchema extends TranslatableSchema {
         return {
             slug: {
                 _type: 'string',
-                _required: true,
                 _label: 'form.label.slug',
+                _options: { attr: { readonly: 'readonly' } },
             },
             title: {
                 _type: 'object',

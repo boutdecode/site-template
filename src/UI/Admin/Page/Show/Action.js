@@ -1,6 +1,6 @@
 const AdminAction = require("../../../../Shared/UI/AdminAction");
 
-module.exports = class DeleteAction extends AdminAction {
+module.exports = class ShowAction extends AdminAction {
     constructor(session, gateway) {
         super(session);
         this.gateway = gateway;
@@ -8,12 +8,13 @@ module.exports = class DeleteAction extends AdminAction {
 
     async process(req, res) {
         try {
-            await this.gateway.run({ id: req.params.id });
-            this.session.flash('messages.success.page_deleted', 'success');
+            const { data } = await this.gateway.run({ id: req.params.id });
+
+            res.render('front/pages/show', { data });
         } catch (e) {
             this.session.flash('messages.danger.page_not_found', 'danger');
-        }
 
-        res.redirect(req.path('admin_page_browse'), 303);
+            res.redirect(req.path('admin_page_browse'), 303);
+        }
     }
 }

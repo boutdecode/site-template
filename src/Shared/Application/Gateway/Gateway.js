@@ -9,7 +9,7 @@ module.exports = class Gateway {
         try {
             console.log(`${this.name}`, request);
             const data = await this.process(request);
-            console.log(`${this.name}.success`, request);
+            console.log(`${this.name}.success`);
 
             return { data };
         } catch (error) {

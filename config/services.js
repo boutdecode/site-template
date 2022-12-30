@@ -30,8 +30,11 @@ const EditSettingsGateway = require('../src/Admin/Settings/Application/Gateway/E
 const ReadSettingsGateway = require('../src/Admin/Settings/Application/Gateway/Read/Gateway');
 
 const FrontReadPageAction = require('../src/UI/Front/Page/Read/Action');
+const FrontError404Action = require('../src/UI/Front/Error/NotFound/Action');
+const HomePageAction = require('../src/UI/Front/Page/Home/Action');
+const AboutPageAction = require('../src/UI/Front/Page/About/Action');
+const ContactPageAction = require('../src/UI/Front/Page/Contact/Action');
 
-const IndexAction = require('../src/UI/Front/Index/Action');
 const Login = require("../src/UI/Admin/Login/Action");
 const Dashboard = require("../src/UI/Admin/Dashboard/Action");
 const Logout = require("../src/UI/Admin/Logout/Action");
@@ -47,6 +50,7 @@ const CreatePageAction = require('../src/UI/Admin/Page/Create/Action');
 const DeletePageAction = require('../src/UI/Admin/Page/Delete/Action');
 const EditPageAction = require('../src/UI/Admin/Page/Edit/Action');
 const ReadPageAction = require('../src/UI/Admin/Page/Read/Action');
+const ShowPageAction = require('../src/UI/Admin/Page/Show/Action');
 
 const EditSettingsAction = require('../src/UI/Admin/Settings/Edit/Action');
 const ReadSettingsAction = require('../src/UI/Admin/Settings/Read/Action');
@@ -148,12 +152,30 @@ module.exports = () => {
         return new ReadSettingsGateway(container.get('settings_repository'));
     });
 
-    container.set('front_action_index', () => {
-        return new IndexAction();
-    });
-
     container.set('front_action_page_read', (container) => {
         return new FrontReadPageAction(
+            container.get('front_gateway_page_read')
+        );
+    });
+
+    container.set('front_action_error_404', () => {
+        return new FrontError404Action();
+    });
+
+    container.set('front_action_page_home', () => {
+        return new HomePageAction(
+            container.get('front_gateway_page_read')
+        );
+    });
+
+    container.set('front_action_page_about', () => {
+        return new AboutPageAction(
+            container.get('front_gateway_page_read')
+        );
+    });
+
+    container.set('front_action_page_contact', () => {
+        return new ContactPageAction(
             container.get('front_gateway_page_read')
         );
     });
@@ -241,6 +263,13 @@ module.exports = () => {
 
     container.set('admin_action_page_read', (container) => {
         return new ReadPageAction(
+            container.get('session'),
+            container.get('admin_gateway_page_read')
+        );
+    });
+
+    container.set('admin_action_page_show', (container) => {
+        return new ShowPageAction(
             container.get('session'),
             container.get('admin_gateway_page_read')
         );

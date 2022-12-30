@@ -35,6 +35,9 @@
       "application": "Application",
       "meta_data": "Meta data",
       "view_details": "View details",
+      "is_factory_resource": "Factory resource cannot be deleted and this option cannot be edited.",
+      "is_published_resource": "The resource is available on the website.",
+      "slug_explanation": "Slug is an unique identifier with URL format.",
 
       "actions": {
         "sign_in": "Sign in",
@@ -65,7 +68,8 @@
           "website_contact": "Website contact",
           "meta_author": "Meta author",
           "meta_title": "Meta title",
-          "meta_description": "Meta description"
+          "meta_description": "Meta description",
+          "is_factory": "Is factory"
         },
 
         "placeholder": {
@@ -137,6 +141,9 @@
       "application": "Application",
       "meta_data": "Meta-données",
       "view_details": "Voir les détails",
+      "is_factory_resource": "Une resource usine ne peut pas être supprimée, cette option est irreversible.",
+      "is_published_resource": "La ressource est disponible sur le site.",
+      "slug_explanation": "Le slug est un identifiant unique au format URL, ex: \"en-savoir-plus\".",
 
       "actions": {
         "sign_in": "Se connecter",
@@ -167,7 +174,8 @@
           "website_contact": "Contact du site web",
           "meta_author": "Auteur du site",
           "meta_title": "Titre du site",
-          "meta_description": "Description du site"
+          "meta_description": "Description du site",
+          "is_factory": "Est une resource usine"
         },
 
         "placeholder": {

@@ -2,15 +2,15 @@ nav.main-nav.navbar.navbar-expand-lg
     div.container.justify-content-between
         div.collapse.navbar-collapse
             div.navbar-nav
-                a(href=path('home')).nav-link.text-light
+                a(href=get('home')).nav-link.text-light
                     i(icon-name="home").me-2
                     span.pt-1.fw-bold= trans('home')
 
-                a(href="/").nav-link.text-light
+                a(href=get('about')).nav-link.text-light
                     i(icon-name="user").me-2
                     span.fw-bold= trans('about')
 
-                a(href="/").nav-link.text-light
+                a(href=get('contact')).nav-link.text-light
                     i(icon-name="message-circle").me-2
                     span.fw-bold= trans('contact')
 

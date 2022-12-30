@@ -7,6 +7,7 @@ module.exports = class CreateSchema extends TranslatableSchema {
                 _type: 'string',
                 _required: true,
                 _label: 'form.label.slug',
+                _options: { help: 'slug_explanation' }
             },
             title: {
                 _type: 'object',
@@ -29,7 +30,18 @@ module.exports = class CreateSchema extends TranslatableSchema {
             activated: {
                 _type: 'boolean',
                 _default: false,
-                _label: 'form.label.published'
+                _label: 'form.label.published',
+                _options: {
+                    help: 'is_published_resource'
+                }
+            },
+            isFactory: {
+                _type: 'boolean',
+                _default: false,
+                _label: 'form.label.is_factory',
+                _options: {
+                    help: 'is_factory_resource'
+                }
             }
         }
     }
