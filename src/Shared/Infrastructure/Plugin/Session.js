@@ -1,9 +1,7 @@
-const { randomUUID } = require('crypto');
-
 const parseSessionCookie = (cookies) => {
     const matches = cookies.match(/session=([a-z0-9-]+)/);
 
-    return matches[1];
+    return matches ? matches[1] : null;
 };
 
 module.exports = {
