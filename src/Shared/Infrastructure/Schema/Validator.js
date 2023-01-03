@@ -104,9 +104,8 @@ module.exports = class Validator {
             try {
                 switch (schemaNode._type) {
                     case 'string':
-                        result[key] = this.validateString(node, schemaNode);
-                        break;
                     case 'textarea':
+                    case 'password':
                         result[key] = this.validateString(node, schemaNode);
                         break;
                     case 'number':

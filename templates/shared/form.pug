@@ -23,6 +23,15 @@ mixin input_widget(name, type, label, required, value, error, options)
                 span.invalid-feedback= trans(error)
             if help
                 div.form-text= trans(help)
+    else if (type === 'password')
+        div.form-group(class=widgetClassName)
+            if label
+                label(for=name)= trans(label)
+            input.form-control(id=name, name=name, type='password', class=(error ? "is-invalid " + inputClassName : inputClassName || '').trim(), required=required)&attributes(options.attr)
+            if error
+                span.invalid-feedback= trans(error)
+            if help
+                div.form-text= trans(help)
     else if (type === 'textarea')
         div.form-group(class=widgetClassName)
             if label

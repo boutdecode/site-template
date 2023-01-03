@@ -9,7 +9,7 @@ module.exports = class SignIn extends Schema {
                 _label: 'form.label.username',
             },
             password: {
-                _type: 'string',
+                _type: 'password',
                 _required: true,
                 _label: 'form.label.password',
             },
