@@ -32,7 +32,6 @@
   },
   "dependencies": {
     "@beelab/json-validator": "^0.6.0",
-    "@beelab/toolbox": "^1.1.0",
     "accept-language-parser": "^1.5.0",
     "bootstrap": "^5.2.2",
     "boxstore": "^1.1.1",
