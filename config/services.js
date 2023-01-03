@@ -1,4 +1,4 @@
-const config = require('./config.json');
+const config = require('./config');
 
 const Container = require('../src/Shared/Infrastructure/DI/Container');
 const Requester = require('../src/Shared/Infrastructure/Persistence/Requester');
@@ -12,7 +12,10 @@ module.exports = () => {
     container.set('db', (container, { db }) => new Requester(container.resolvePaths(db)));
     container.set('session', () => new Session());
     container.set('router', (container) => new Router(container));
-    container.set('i18n', (container, { translation }) => new I18N(container.resolvePath(translation.resources)));
+    container.set('i18n', (container, { translation }) => new I18N(
+        translation.defaultLocale,
+        container.resolvePath(translation.resources)
+    ));
     container.set('manifest', (container, { assets }) => {
         const result = {};
         const assetFiles = container.resolvePaths(assets);

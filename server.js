@@ -1,4 +1,3 @@
-require('dotenv').config();
 require('intl');
 
 const { createApp, createServer } = require("yion");
@@ -6,6 +5,7 @@ const bodyParser = require("yion-body-parser");
 
 const services = require('./config/services');
 
+const EncodingPlugin = require('./src/Shared/Infrastructure/Plugin/Encoding');
 const TemplateRendererPlugin = require('./src/Shared/Infrastructure/Plugin/TemplateRenderer');
 const I18NPlugin = require('./src/Shared/Infrastructure/Plugin/I18N');
 const SessionPlugin = require('./src/Shared/Infrastructure/Plugin/Session');
@@ -16,6 +16,7 @@ const AdminRouter = require('./src/UI/Admin/Routes');
 const { NODE_PORT = 8080 } = process.env;
 const app = createApp();
 const httpServer = createServer(app, [
+    EncodingPlugin,
     SessionPlugin,
     TemplateRendererPlugin,
     I18NPlugin,
@@ -25,7 +26,9 @@ const httpServer = createServer(app, [
 
 const cache = {
     'Cache-Control': 'public, max-age=' + (86400 * 30),
-    'ETag': Date.now()
+    'Content-Encoding': 'gzip',
+    'ETag': Date.now(),
+    'Vary': 'Accept-Encoding',
 };
 
 app.container = services();

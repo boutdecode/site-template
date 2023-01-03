@@ -19,15 +19,15 @@ html(lang=locale)
         meta(property="og:type", content="website")
 
         block title
-            title= settings('metaTitle', true)
+            title=settings('metaTitle', true)
 
         link(rel="icon", type="image/png", href="/images/favicon.ico")
         link(rel="canonical" href=canonical)
 
         block style
-            +asset_css('front', 'front')
+            +asset_css('front', 'front', true)
 
-        +asset_js('front', 'common')
+        +asset_js('front', 'common', true)
         +asset_js('front', 'front', true)
 
         block script

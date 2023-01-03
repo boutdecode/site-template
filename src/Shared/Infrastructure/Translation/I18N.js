@@ -1,9 +1,9 @@
 const i18next = require('i18next');
 
 module.exports = class I18N {
-    constructor(resources) {
+    constructor(defaultLocale, resources) {
         i18next.init({
-            fallbackLng: process.env.LOCALE || 'en',
+            fallbackLng: defaultLocale,
             resources: require(resources),
         });
     }

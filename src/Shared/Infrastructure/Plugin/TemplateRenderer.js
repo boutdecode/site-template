@@ -2,8 +2,6 @@ const pug = require('pug');
 const Intl = require('intl');
 const boxstore = require('boxstore');
 
-const config = require('../../../../config/config.json');
-
 module.exports = {
     type: 'renderer',
     handle: (req, res, app, next) => {
@@ -12,6 +10,7 @@ module.exports = {
                 res.set(name, headers[name]);
             }
 
+            const config = boxstore.get('config');
             const router = boxstore.get('router');
             const i18n = boxstore.get('i18n');
 
@@ -23,7 +22,7 @@ module.exports = {
 
             const templateFunctions = {
                 get canonical() {
-                    return res.routeMatched.replace(':locale', req.attributes.localeFallback);
+                    return config.application.hostname + res.routeMatched.replace(':locale', req.attributes.localeFallback);
                 },
 
                 get locale() {
@@ -31,7 +30,7 @@ module.exports = {
                 },
 
                 get url() {
-                    return req.url;
+                    return config.application.hostname + req.uri;
                 },
 
                 is(name, params = {}, method = 'get') {
