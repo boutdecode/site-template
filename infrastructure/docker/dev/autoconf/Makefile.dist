@@ -6,6 +6,7 @@ GID := $(shell id -g)
 DOCKER?=docker
 DOCKER_COMPOSE?=docker-compose
 EXECJS?=$(DOCKER) run -it --rm -u $(UID):$(GID) -v "$(shell pwd)/":/home/app -w /home/app node:latest
+EXECJS_ROOT=$(DOCKER) run -it --rm -v "$(shell pwd)/":/home/app -w /home/app node:latest
 
 ##
 ## Project setup
@@ -35,10 +36,10 @@ clear: stop ## clear project
 .PHONY: assets watch
 
 assets: node_modules ## Build the development version of the assets
-	$(EXECJS) npm run build
+	@$(EXECJS) npm run build
 
 watch: node_modules ## Watch the assets and build their development version on change
-	$(EXECJS) npm run watch
+	@$(EXECJS) npm run watch
 
 ##
 ## Dependencies
@@ -56,7 +57,7 @@ rm-docker-dev.lock:
 	rm -f docker-dev.lock
 
 node_modules: package-lock.json
-	$(EXECJS) npm install
+	@$(EXECJS) npm install
 
 package-lock.json: package.json
 	@echo JS vendors are not up to date.
@@ -69,7 +70,10 @@ public/build: assets
 ##
 ## Utilities
 ##---------------------------------------------------------------------------
-.PHONY: help
+.PHONY: help console
+
+console:
+	@$(EXECJS_ROOT) bin/console
 
 help:
 	@grep -E '(^[a-zA-Z_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'

@@ -1,0 +1,55 @@
+#!/usr/bin/env node
+
+const container = require('../config/services')();
+const readline = require('readline');
+
+const services = [
+    container.get('admin_command_user_create')
+];
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+const commands = {
+    help: () => {
+        const help = services.reduce((helpMessage, cmd) => {
+            let args = '';
+            let argsDescription = '';
+            for (const argName in cmd.configuration.args) {
+                const { type, description } = cmd.configuration.args[argName];
+
+                args += `[${argName}] `;
+                argsDescription += `    [${argName}] - <${type}> ${description}\n`
+            }
+
+            return helpMessage + `${cmd.name} ${args.trim()} - ${cmd.description}\n${argsDescription}\n`;
+        }, '\nHelp :\n');
+
+        console.log(help);
+    },
+
+    exit: () => {
+        console.log('Exiting...');
+        process.exit(0);
+    },
+
+    ...(services.reduce((cmds, cmd) => {
+        cmds[cmd.name] = async (args) => await cmd.run(args);
+
+        return cmds;
+    }, {})),
+};
+
+console.log('Enter a command (help, exist)');
+
+rl.on('line', async (input) => {
+    const [command, ...args] = input.split(' ');
+    if (commands[command]) {
+        await commands[command](args);
+    } else {
+        console.log(`Invalid command: ${command}`);
+        commands['help']();
+    }
+});
