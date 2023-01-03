@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/boutdecode/site-template/compare/v1.0.0...v1.0.1) (2023-01-03)
+
+
+### Bug Fixes
+
+* Delete useless dependancies ([0e3a30c](https://github.com/boutdecode/site-template/commit/0e3a30c24a97330024cf23aa9cab43a4bf0193ef))
+
 # 1.0.0 (2023-01-03)
 
 
