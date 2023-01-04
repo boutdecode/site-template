@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/boutdecode/site-template/compare/v1.0.1...v1.0.2) (2023-01-04)
+
+
+### Bug Fixes
+
+* Password hashing with salt ([4b6b091](https://github.com/boutdecode/site-template/commit/4b6b0918b583aa3075f707223afb8046d4344832))
+
 ## [1.0.1](https://github.com/boutdecode/site-template/compare/v1.0.0...v1.0.1) (2023-01-03)
 
 
