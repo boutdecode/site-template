@@ -9,6 +9,8 @@ module.exports = {
         "metaTitle": "Mon site",
         "metaDescription": "Mon site super cool, venez apprendre pleins de truc sur moi.",
         "hostname": process.env.APP_HOSTNAME,
+        "securitySalt": process.env.SECURITY_SALT,
+        "securityCookie": process.env.SECURITY_COOKIE,
     },
     "pug": {
         "globals": {}

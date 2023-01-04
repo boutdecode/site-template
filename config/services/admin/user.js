@@ -11,8 +11,8 @@ const ReadUserGateway = require("../../../src/Admin/User/Application/Gateway/Rea
 const UserRepository = require("../../../src/Core/User/Infrastructure/Repository/User");
 
 module.exports = (container) => {
-    container.set('user_repository', () => {
-        return new UserRepository(container.get('db'));
+    container.set('user_repository', (container, { application }) => {
+        return new UserRepository(container.get('db'), application.securitySalt);
     });
 
     container.set('admin_gateway_user_browse', (container) => {

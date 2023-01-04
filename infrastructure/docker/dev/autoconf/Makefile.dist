@@ -18,7 +18,7 @@ install: build ## Install the project with vendors update
 up: ## Start the project without vendors update
 	$(DOCKER_COMPOSE) up --remove-orphans
 
-start: up public/build ## Start the project with vendors update
+start: public/build up ## Start the project with vendors update
 
 stop: ## Do nothing
 	$(DOCKER_COMPOSE) kill
@@ -36,7 +36,7 @@ clear: stop ## clear project
 .PHONY: assets watch
 
 assets: node_modules ## Build the development version of the assets
-	@$(EXECJS) npm run build
+	@$(EXECJS) npm run dev
 
 watch: node_modules ## Watch the assets and build their development version on change
 	@$(EXECJS) npm run watch

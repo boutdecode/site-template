@@ -7,8 +7,8 @@ const Logout = require("../../../src/UI/Admin/Logout/Action");
 const CreateAdminUserCommand = require("../../../src/UI/Command/Admin/User/Create/Command");
 
 module.exports = (container) => {
-    container.set('security_repository', (container) => {
-        return new SecurityRepository(container.get('db'));
+    container.set('security_repository', (container, { application }) => {
+        return new SecurityRepository(container.get('db'), application.securitySalt);
     });
 
     container.set('admin_gateway_sign_in', (container) => {
