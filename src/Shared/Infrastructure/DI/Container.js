@@ -8,20 +8,28 @@ module.exports = class Container {
 
     /**
      * Set service into container
-     * @param {string} name
+     * @param {string|function} name
      * @param {function} callback
      */
     set(name, callback) {
+        if (typeof name === 'function') {
+            name = name.name;
+        }
+
         boxstore.add(name, callback(this, boxstore.search('config')));
     }
 
     /**
      * Get service by name
-     * @param {string} name
+     * @param {string|function} name
      * @returns {*|null}
      */
-    get(name) {
-        return boxstore.get(name);
+    get(name, def = null) {
+        if (typeof name === 'function') {
+            name = name.name;
+        }
+
+        return boxstore.get(name, def);
     }
 
     /**

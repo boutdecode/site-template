@@ -8,32 +8,139 @@ block content
                 li.breadcrumb-item.active= trans('home')
 
     section.container-fluid
-        div.row.px-4
+        div.row.px-4.mt-4
             div.col
-                div.card.text-bg-danger.my-4
+                div.card.text-bg-danger
                     div.card-body.d-flex.justify-content-between.align-items-center
                         div
                             i(icon-name="users", width=64, height=64)
                         div.text-end
-                            span.fs-1.fw-bold= users
-                            p= trans('users')
+                            span.fs-1.fw-bold=users
+                            p=trans('users')
                     div.card-footer
                         a.d-flex.justify-content-between.align-items-center.text-decoration-none(href=get('admin_users'))
-                            span.text-white= trans('view_details')
+                            span.text-white=trans('view_details')
                             i.text-white(icon-name="arrow-right-circle")
 
             div.col
-                div.card.text-bg-primary.my-4
+                div.card.text-bg-primary
                     div.card-body.d-flex.justify-content-between.align-items-center
                         div
                             i(icon-name="files", width=64, height=64)
                         div.text-end
-                            span.fs-1.fw-bold= pages
-                            p= trans('pages')
+                            span.fs-1.fw-bold=pages
+                            p=trans('pages')
                     div.card-footer
                         a.d-flex.justify-content-between.align-items-center.text-decoration-none(href=get('admin_page_browse'))
                             span.text-white= trans('view_details')
                             i.text-white(icon-name="arrow-right-circle")
 
             div.col
+
             div.col
+
+        if stats
+            div.row.px-4.mt-4
+                h3=trans('analytics')
+
+                div.col
+                    div.card.text-bg-light
+                        div.card-body.d-flex.justify-content-between.align-items-center
+                            div
+                                i(icon-name="line-chart", width=64, height=64)
+                                p=trans('last_24h')
+
+                            div.text-end
+                                span.fs-1.fw-bold=stats.pageviews.value
+                                if stats.pageviews.change > 0
+                                    span.text-success.ms-2='(+' + stats.pageviews.change + ')'
+                                else
+                                    span.text-danger.ms-2='(' + stats.pageviews.change + ')'
+                                p=trans('page_views')
+
+                            div.text-end
+                                span.fs-1.fw-bold=stats.uniques.value
+                                if stats.uniques.change > 0
+                                    span.text-success.ms-2='(+' + stats.uniques.change + ')'
+                                else
+                                    span.text-danger.ms-2='(' + stats.uniques.change + ')'
+                                p=trans('uniques')
+
+                            div.text-end
+                                span.fs-1.fw-bold=Math.round((stats.bounces.value * 100) / stats.uniques.value) + '%'
+                                if stats.bounces.change > 0
+                                    span.text-success.ms-2='(+' + stats.bounces.change + '%)'
+                                else
+                                    span.text-danger.ms-2='(' + stats.bounces.change + '%)'
+                                p=trans('bounces')
+
+                            div.text-end
+                                span.fs-1.fw-bold='~' + Math.round((stats.totaltime.value / stats.pageviews.value) / 60) + 'min'
+                                if stats.bounces.change > 0
+                                    span.text-success.ms-2='(+' + stats.bounces.change + '%)'
+                                else
+                                    span.text-danger.ms-2='(' + stats.bounces.change + '%)'
+                                p=trans('average_time')
+
+                        div.card-footer
+                            a.d-flex.justify-content-between.align-items-center.text-decoration-none(href=statsUrl, target="_blank")
+                                span.text-dark=trans('view_details')
+                                i.text-dark(icon-name="arrow-right-circle")
+
+            div.row.px-4.my-4
+
+                div.col-lg-6.mb-4
+                    div.card.text-bg-light
+                        div.card-body
+                            table.table
+                                thead
+                                    tr
+                                        th=trans('pages')
+                                        th=trans('views')
+                                tbody
+                                    for el in urls
+                                        tr
+                                            td=el.x
+                                            td=el.y
+
+                div.col-lg-6.mb-4
+                    div.card.text-bg-light
+                        div.card-body
+                            table.table
+                                thead
+                                    tr
+                                        th=trans('referrers')
+                                        th=trans('views')
+                                tbody
+                                    for el in referrers
+                                        tr
+                                            td=el.x
+                                            td=el.y
+
+                div.col-lg-6.mb-4
+                    div.card.text-bg-light
+                        div.card-body
+                            table.table
+                                thead
+                                    tr
+                                        th=trans('devices')
+                                        th=trans('views')
+                                tbody
+                                    for el in devices
+                                        tr
+                                            td=el.x
+                                            td=el.y
+
+                div.col-lg-6.mb-4
+                    div.card.text-bg-light
+                        div.card-body
+                            table.table
+                                thead
+                                    tr
+                                        th=trans('countries')
+                                        th=trans('views')
+                                tbody
+                                    for el in countries
+                                        tr
+                                            td=el.x
+                                            td=el.y

@@ -24,6 +24,8 @@ module.exports = class Command {
                 result[arg] = Number(args[index]);
             } else if (type === 'boolean') {
                 result[arg] = args[index] === '1' || args[index] === 'true';
+            } else if (type === 'object') {
+                result[arg] = JSON.parse(args[index]);
             }
 
             index++;

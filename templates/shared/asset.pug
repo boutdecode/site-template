@@ -12,3 +12,26 @@ mixin asset_css(entrypoint, manifest, defer)
         if !(cssFiles.includes(file))
             link(href=file, rel="stylesheet", type="text/css", defer=defer)
             - cssFiles.push(file)
+
+mixin image(filename, alt, options)
+    if !filename
+        p.alert.alert-danger [ERROR] Invalid parameter for image #{filename}
+    else
+        - var info = String(filename).split('.')
+        - var queries = {}
+
+        if !options
+            - options = {}
+
+        if options.width
+            - var width = options.width
+            - queries.width = width
+
+        if options.height
+            - var height = options.height
+            - queries.height = height
+
+        picture
+            source(srcset=get('image', { filename: info[0] + '.webp' }, queries), type="image/webp")
+            source(srcset=get('image', { filename: String(filename) }, queries), type="image/" + info[1])
+            img(src=get('image', { filename: String(filename) }, queries), alt=alt, width=width, height=height, class=options.className, loading=options.loading)

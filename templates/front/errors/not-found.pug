@@ -1,5 +1,9 @@
 extends ../layout.pug
 
 block content
-    div.container.mt-5
-        h1= trans('404')
+    div.container.my-5
+        section.text-center
+            h1.display-1= trans('404')
+            h2.display-3=trans('page_not_found')
+
+            a.btn.btn-lg.btn-outline-secondary.mt-4(href=get('home'))=trans('actions.go_homepage')

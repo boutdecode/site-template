@@ -15,11 +15,7 @@ module.exports = class Router {
      * @param {function|string} handler
      */
     get(name, path, handler) {
-        if (typeof handler === 'string') {
-            handler = this.container.get(handler);
-        }
-
-        this._get[name] = { path, handler };
+        this._get[name] = { path, handler: this.container.get(handler, handler) };
     }
 
     /**
@@ -29,21 +25,18 @@ module.exports = class Router {
      * @param {function|string} handler
      */
     post(name, path, handler) {
-        if (typeof handler === 'string') {
-            handler = this.container.get(handler);
-        }
-
-        this._post[name] = { path, handler };
+        this._post[name] = { path, handler: this.container.get(handler, handler) };
     }
 
     /**
      * Generate path for route by name
      * @param {string} name
      * @param {object} [params={}]
+     * @param {object} [queries={}]
      * @param {string} [method='get']
      * @returns {null|string}
      */
-    generatePath(name, params = {}, method = 'get') {
+    generatePath(name, params = {}, queries = {}, method = 'get') {
         if (!this[method]) {
             return null;
         }
@@ -54,6 +47,17 @@ module.exports = class Router {
 
             for (const key in params) {
                 path = path.replace(`:${key}`, params[key]);
+            }
+
+            let first = true;
+            for (const key in queries) {
+                if (first) {
+                    path += `?${key}=${queries[key]}`;
+                } else {
+                    path += `&${key}=${queries[key]}`;
+                }
+
+                first = false;
             }
 
             return path;

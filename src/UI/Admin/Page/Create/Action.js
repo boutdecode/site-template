@@ -1,7 +1,7 @@
 const AdminAction = require("../../../../Shared/UI/AdminAction");
 const CreateSchema = require('./../Schema/Create');
 
-module.exports = class CreateAction extends AdminAction {
+module.exports = class CreatePageAction extends AdminAction {
 
     constructor(session, gateway) {
         super(session);

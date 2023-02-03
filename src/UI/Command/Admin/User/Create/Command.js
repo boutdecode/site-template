@@ -1,6 +1,6 @@
 const Command = require("../../../../../Shared/UI/Command");
 
-module.exports = class CreateCommand extends Command {
+module.exports = class CreateUserCommand extends Command {
     constructor(gateway) {
         super();
         this.gateway = gateway;

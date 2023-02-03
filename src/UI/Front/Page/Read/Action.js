@@ -1,6 +1,6 @@
 const Action = require("../../../../Shared/UI/Action");
 
-module.exports = class ReadAction extends Action {
+module.exports = class FrontReadPageAction extends Action {
     constructor(gateway) {
         super();
         this.gateway = gateway;

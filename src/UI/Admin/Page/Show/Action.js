@@ -1,6 +1,6 @@
 const AdminAction = require("../../../../Shared/UI/AdminAction");
 
-module.exports = class ShowAction extends AdminAction {
+module.exports = class ShowPageAction extends AdminAction {
     constructor(session, gateway) {
         super(session);
         this.gateway = gateway;

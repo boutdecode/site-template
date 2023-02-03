@@ -5,13 +5,13 @@ GID := $(shell id -g)
 
 DOCKER?=docker
 DOCKER_COMPOSE?=docker-compose
-EXECJS?=$(DOCKER) run -it --rm -u $(UID):$(GID) -v "$(shell pwd)/":/home/app -w /home/app node:latest
-EXECJS_ROOT=$(DOCKER) run -it --rm -v "$(shell pwd)/":/home/app -w /home/app node:latest
+EXECJS?=$(DOCKER) run -it --rm -u $(UID):$(GID) -v "$(shell pwd)/":/home/app -w /home/app node:lts-alpine
+EXECJS_ROOT=$(DOCKER) run -it --rm -v "$(shell pwd)/":/home/app -w /home/app node:lts-alpine
 
 ##
 ## Project setup
 ##---------------------------------------------------------------------------
-.PHONY: up stop clear
+.PHONY: up stop clear restart
 
 install: build ## Install the project with vendors update
 
@@ -23,6 +23,9 @@ start: public/build up ## Start the project with vendors update
 stop: ## Do nothing
 	$(DOCKER_COMPOSE) kill
 	$(DOCKER_COMPOSE) rm -v --force
+
+restart:
+	$(DOCKER_COMPOSE) restart
 
 reset: clear build ## Stop clear and install
 
@@ -58,6 +61,7 @@ rm-docker-dev.lock:
 
 node_modules: package-lock.json
 	@$(EXECJS) npm install
+	@$(EXECJS) npm install --force --arch=x64 --platform=linux --libc=musl sharp
 
 package-lock.json: package.json
 	@echo JS vendors are not up to date.

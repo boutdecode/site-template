@@ -4,77 +4,77 @@ const DeletePageAction = require("../../../src/UI/Admin/Page/Delete/Action");
 const EditPageAction = require("../../../src/UI/Admin/Page/Edit/Action");
 const ReadPageAction = require("../../../src/UI/Admin/Page/Read/Action");
 const ShowPageAction = require("../../../src/UI/Admin/Page/Show/Action");
-const BrowsePageGateway = require("../../../src/Admin/Page/Application/Gateway/Browse/Gateway");
-const CreatePageGateway = require("../../../src/Admin/Page/Application/Gateway/Create/Gateway");
-const DeletePageGateway = require("../../../src/Admin/Page/Application/Gateway/Delete/Gateway");
-const EditPageGateway = require("../../../src/Admin/Page/Application/Gateway/Edit/Gateway");
-const ReadPageGateway = require("../../../src/Admin/Page/Application/Gateway/Read/Gateway");
+const BrowsePageGateway = require("../../../src/Admin/Page/Application/Browse/Gateway");
+const CreatePageGateway = require("../../../src/Admin/Page/Application/Create/Gateway");
+const DeletePageGateway = require("../../../src/Admin/Page/Application/Delete/Gateway");
+const EditPageGateway = require("../../../src/Admin/Page/Application/Edit/Gateway");
+const ReadPageGateway = require("../../../src/Admin/Page/Application/Read/Gateway");
 const PageRepository = require("../../../src/Core/Page/Infrastructure/Repository/Page");
 
 module.exports = (container) => {
-    container.set('page_repository', () => {
+    container.set(PageRepository, () => {
         return new PageRepository(container.get('db'));
     });
 
-    container.set('admin_gateway_page_browse', (container) => {
-        return new BrowsePageGateway(container.get('page_repository'));
+    container.set(BrowsePageGateway, (container) => {
+        return new BrowsePageGateway(container.get(PageRepository));
     });
 
-    container.set('admin_gateway_page_create', (container) => {
-        return new CreatePageGateway(container.get('page_repository'));
+    container.set(CreatePageGateway, (container) => {
+        return new CreatePageGateway(container.get(PageRepository));
     });
 
-    container.set('admin_gateway_page_delete', (container) => {
-        return new DeletePageGateway(container.get('page_repository'));
+    container.set(DeletePageGateway, (container) => {
+        return new DeletePageGateway(container.get(PageRepository));
     });
 
-    container.set('admin_gateway_page_edit', (container) => {
-        return new EditPageGateway(container.get('page_repository'));
+    container.set(EditPageGateway, (container) => {
+        return new EditPageGateway(container.get(PageRepository));
     });
 
-    container.set('admin_gateway_page_read', (container) => {
-        return new ReadPageGateway(container.get('page_repository'));
+    container.set(ReadPageGateway, (container) => {
+        return new ReadPageGateway(container.get(PageRepository));
     });
 
-    container.set('admin_action_page_browse', (container) => {
+    container.set(BrowsePageAction, (container) => {
         return new BrowsePageAction(
             container.get('session'),
-            container.get('admin_gateway_page_browse')
+            container.get(BrowsePageGateway)
         );
     });
 
-    container.set('admin_action_page_create', (container) => {
+    container.set(CreatePageAction, (container) => {
         return new CreatePageAction(
             container.get('session'),
-            container.get('admin_gateway_page_create')
+            container.get(CreatePageGateway)
         );
     });
 
-    container.set('admin_action_page_delete', (container) => {
+    container.set(DeletePageAction, (container) => {
         return new DeletePageAction(
             container.get('session'),
-            container.get('admin_gateway_page_delete')
+            container.get(DeletePageGateway)
         );
     });
 
-    container.set('admin_action_page_edit', (container) => {
+    container.set(EditPageAction, (container) => {
         return new EditPageAction(
             container.get('session'),
-            container.get('admin_gateway_page_edit')
+            container.get(EditPageGateway)
         );
     });
 
-    container.set('admin_action_page_read', (container) => {
+    container.set(ReadPageAction, (container) => {
         return new ReadPageAction(
             container.get('session'),
-            container.get('admin_gateway_page_read')
+            container.get(ReadPageGateway)
         );
     });
 
-    container.set('admin_action_page_show', (container) => {
+    container.set(ShowPageAction, (container) => {
         return new ShowPageAction(
             container.get('session'),
-            container.get('admin_gateway_page_read')
+            container.get(ReadPageGateway)
         );
     });
 };

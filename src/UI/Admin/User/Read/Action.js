@@ -1,7 +1,7 @@
 const AdminAction = require("../../../../Shared/UI/AdminAction");
 const ReadForm = require('./../Schema/Edit');
 
-module.exports = class Delete extends AdminAction {
+module.exports = class ReadUserAction extends AdminAction {
     constructor(session, gateway) {
         super(session);
         this.gateway = gateway;

@@ -1,33 +1,33 @@
 const EditSettingsAction = require("../../../src/UI/Admin/Settings/Edit/Action");
 const ReadSettingsAction = require("../../../src/UI/Admin/Settings/Read/Action");
-const EditSettingsGateway = require("../../../src/Admin/Settings/Application/Gateway/Edit/Gateway");
-const ReadSettingsGateway = require("../../../src/Admin/Settings/Application/Gateway/Read/Gateway");
+const EditSettingsGateway = require("../../../src/Admin/Settings/Application/Edit/Gateway");
+const ReadSettingsGateway = require("../../../src/Admin/Settings/Application/Read/Gateway");
 const SettingsRepository = require("../../../src/Admin/Settings/Infrastructure/Repository/Settings");
 
 module.exports = (container) => {
-    container.set('settings_repository', () => {
+    container.set(SettingsRepository, () => {
         return new SettingsRepository(container.get('db'));
     });
 
-    container.set('admin_gateway_settings_edit', (container) => {
-        return new EditSettingsGateway(container.get('settings_repository'));
+    container.set(EditSettingsGateway, (container) => {
+        return new EditSettingsGateway(container.get(SettingsRepository));
     });
 
-    container.set('admin_gateway_settings_read', (container) => {
-        return new ReadSettingsGateway(container.get('settings_repository'));
+    container.set(ReadSettingsGateway, (container) => {
+        return new ReadSettingsGateway(container.get(SettingsRepository));
     });
 
-    container.set('admin_action_settings_edit', (container) => {
+    container.set(EditSettingsAction, (container) => {
         return new EditSettingsAction(
             container.get('session'),
-            container.get('admin_gateway_settings_edit')
+            container.get(EditSettingsGateway)
         );
     });
 
-    container.set('admin_action_settings_read', (container) => {
+    container.set(ReadSettingsAction, (container) => {
         return new ReadSettingsAction(
             container.get('session'),
-            container.get('admin_gateway_settings_read')
+            container.get(ReadSettingsGateway)
         );
     });
 };

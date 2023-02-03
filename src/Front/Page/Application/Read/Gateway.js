@@ -1,6 +1,6 @@
 const Gateway = require("../../../../Shared/Application/Gateway/Gateway");
 
-module.exports = class ReadGateway extends Gateway {
+module.exports = class FrontReadPageGateway extends Gateway {
     constructor(repository) {
         super('front.pages.read');
         this.repository = repository;

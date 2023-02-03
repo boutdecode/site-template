@@ -3,70 +3,77 @@ const CreateUserAction = require("../../../src/UI/Admin/User/Create/Action");
 const DeleteUserAction = require("../../../src/UI/Admin/User/Delete/Action");
 const EditUserAction = require("../../../src/UI/Admin/User/Edit/Action");
 const ReadUserAction = require("../../../src/UI/Admin/User/Read/Action");
-const BrowseUserGateway = require("../../../src/Admin/User/Application/Gateway/Browse/Gateway");
-const CreateUserGateway = require("../../../src/Admin/User/Application/Gateway/Create/Gateway");
-const DeleteUserGateway = require("../../../src/Admin/User/Application/Gateway/Delete/Gateway");
-const EditUserGateway = require("../../../src/Admin/User/Application/Gateway/Edit/Gateway");
-const ReadUserGateway = require("../../../src/Admin/User/Application/Gateway/Read/Gateway");
+const BrowseUserGateway = require("../../../src/Admin/User/Application/Browse/Gateway");
+const CreateUserGateway = require("../../../src/Admin/User/Application/Create/Gateway");
+const DeleteUserGateway = require("../../../src/Admin/User/Application/Delete/Gateway");
+const EditUserGateway = require("../../../src/Admin/User/Application/Edit/Gateway");
+const ReadUserGateway = require("../../../src/Admin/User/Application/Read/Gateway");
 const UserRepository = require("../../../src/Core/User/Infrastructure/Repository/User");
+const CreateAdminUserCommand = require("../../../src/UI/Command/Admin/User/Create/Command");
 
 module.exports = (container) => {
-    container.set('user_repository', (container, { application }) => {
+    container.set(UserRepository, (container, { application }) => {
         return new UserRepository(container.get('db'), application.securitySalt);
     });
 
-    container.set('admin_gateway_user_browse', (container) => {
-        return new BrowseUserGateway(container.get('user_repository'));
+    container.set(BrowseUserGateway, (container) => {
+        return new BrowseUserGateway(container.get(UserRepository));
     });
 
-    container.set('admin_gateway_user_create', (container) => {
-        return new CreateUserGateway(container.get('user_repository'));
+    container.set(CreateUserGateway, (container) => {
+        return new CreateUserGateway(container.get(UserRepository));
     });
 
-    container.set('admin_gateway_user_delete', (container) => {
-        return new DeleteUserGateway(container.get('user_repository'));
+    container.set(DeleteUserGateway, (container) => {
+        return new DeleteUserGateway(container.get(UserRepository));
     });
 
-    container.set('admin_gateway_user_edit', (container) => {
-        return new EditUserGateway(container.get('user_repository'));
+    container.set(EditUserGateway, (container) => {
+        return new EditUserGateway(container.get(UserRepository));
     });
 
-    container.set('admin_gateway_user_read', (container) => {
-        return new ReadUserGateway(container.get('user_repository'));
+    container.set(ReadUserGateway, (container) => {
+        return new ReadUserGateway(container.get(UserRepository));
     });
 
-    container.set('admin_action_user_browse', (container) => {
+    container.set(BrowseUserAction, (container) => {
         return new BrowseUserAction(
             container.get('session'),
-            container.get('admin_gateway_user_browse')
+            container.get(BrowseUserGateway)
         );
     });
 
-    container.set('admin_action_user_create', (container) => {
+    container.set(CreateUserAction, (container) => {
         return new CreateUserAction(
             container.get('session'),
-            container.get('admin_gateway_user_create')
+            container.get(CreateUserGateway)
         );
     });
 
-    container.set('admin_action_user_delete', (container) => {
+    container.set(DeleteUserAction, (container) => {
         return new DeleteUserAction(
             container.get('session'),
-            container.get('admin_gateway_user_delete')
+            container.get(DeleteUserGateway)
         );
     });
 
-    container.set('admin_action_user_edit', (container) => {
+    container.set(EditUserAction, (container) => {
         return new EditUserAction(
             container.get('session'),
-            container.get('admin_gateway_user_edit')
+            container.get(EditUserGateway)
         );
     });
 
-    container.set('admin_action_user_read', (container) => {
+    container.set(ReadUserAction, (container) => {
         return new ReadUserAction(
             container.get('session'),
-            container.get('admin_gateway_user_read')
+            container.get(ReadUserGateway)
+        );
+    });
+
+    container.set(CreateAdminUserCommand, (container) => {
+        return new CreateAdminUserCommand(
+            container.get(CreateUserGateway)
         );
     });
 };

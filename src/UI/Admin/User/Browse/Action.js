@@ -1,7 +1,7 @@
 const Search = require('./../Schema/Search');
 const AdminAction = require("../../../../Shared/UI/AdminAction");
 
-module.exports = class Browse extends AdminAction {
+module.exports = class BrowseUserAction extends AdminAction {
     constructor(session, gateway) {
         super(session);
         this.gateway = gateway;

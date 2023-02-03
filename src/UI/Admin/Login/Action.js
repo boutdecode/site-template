@@ -1,7 +1,7 @@
 const SignIn = require('./Schema/SignIn');
 const Action = require("../../../Shared/UI/Action");
 
-module.exports = class Login extends Action {
+module.exports = class LoginAction extends Action {
 
     constructor(session, gateway) {
         super();

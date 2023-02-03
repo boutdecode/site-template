@@ -1,6 +1,7 @@
 const pug = require('pug');
 const Intl = require('intl');
 const boxstore = require('boxstore');
+const SettingsRepository = require("../../../Admin/Settings/Infrastructure/Repository/Settings");
 
 module.exports = {
     type: 'renderer',
@@ -14,7 +15,7 @@ module.exports = {
             const router = boxstore.get('router');
             const i18n = boxstore.get('i18n');
 
-            const settingsRepository = boxstore.get('settings_repository');
+            const settingsRepository = boxstore.get(SettingsRepository.name);
             const settingsResult = {};
             for (const { code, value } of await settingsRepository.find({}, 1000)) {
                 settingsResult[code] = value;
@@ -29,6 +30,17 @@ module.exports = {
                     return req.attributes.locale;
                 },
 
+                get locales() {
+                    return config.translation.locales;
+                },
+
+                get analytics() {
+                    return {
+                        url: `${config.umami.url}/umami.js`,
+                        websiteId: config.umami.websiteId,
+                    }
+                },
+
                 get url() {
                     return config.application.hostname + req.uri;
                 },
@@ -37,16 +49,16 @@ module.exports = {
                     return req.uri === router.generatePath(name, { locale: req.attributes.locale, ...params }, method);
                 },
 
-                path(name, params = {}, method = 'get') {
-                    return router.generatePath(name, { locale: req.attributes.locale, ...params }, method);
+                path(name, params = {}, queries = {}, method = 'get') {
+                    return router.generatePath(name, { locale: req.attributes.locale, ...params }, queries, method);
                 },
 
-                get(name, params = {}) {
-                    return router.generatePath(name, { locale: req.attributes.locale, ...params }, 'get');
+                get(name, params = {}, queries = {}) {
+                    return router.generatePath(name, { locale: req.attributes.locale, ...params }, queries, 'get');
                 },
 
-                post(name, params = {}) {
-                    return router.generatePath(name, { locale: req.attributes.locale, ...params }, 'post');
+                post(name, params = {}, queries = {}) {
+                    return router.generatePath(name, { locale: req.attributes.locale, ...params }, queries, 'post');
                 },
 
                 asset: (entrypoint, manifest, type) => {

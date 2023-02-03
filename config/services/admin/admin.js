@@ -1,48 +1,46 @@
-const SecurityRepository = require("../../../src/Admin/Security/Infrastructure/Persistence/Repository/Security");
-const SignIn = require("../../../src/Admin/Security/Application/Gateway/SignIn/Gateway");
-const ShowDashboardGateway = require("../../../src/Admin/Dashboard/Application/Gateway/Show/Gateway");
+const SecurityRepository = require("../../../src/Admin/Security/Infrastructure/Repository/Security");
+const SignInGateway = require("../../../src/Admin/Security/Application/SignIn/Gateway");
+const ShowDashboardGateway = require("../../../src/Admin/Dashboard/Application/Show/Gateway");
 const Login = require("../../../src/UI/Admin/Login/Action");
 const Dashboard = require("../../../src/UI/Admin/Dashboard/Action");
 const Logout = require("../../../src/UI/Admin/Logout/Action");
-const CreateAdminUserCommand = require("../../../src/UI/Command/Admin/User/Create/Command");
+const UserRepository = require("../../../src/Core/User/Infrastructure/Repository/User");
+const PageRepository = require("../../../src/Core/Page/Infrastructure/Repository/Page");
+const SettingsRepository = require("../../../src/Admin/Settings/Infrastructure/Repository/Settings");
 
 module.exports = (container) => {
-    container.set('security_repository', (container, { application }) => {
+    container.set(SecurityRepository, (container, { application }) => {
         return new SecurityRepository(container.get('db'), application.securitySalt);
     });
 
-    container.set('admin_gateway_sign_in', (container) => {
-        return new SignIn(container.get('security_repository'));
+    container.set(SignInGateway, (container) => {
+        return new SignInGateway(container.get(SecurityRepository));
     });
 
-    container.set('admin_gateway_dashboard_show', (container) => {
+    container.set(ShowDashboardGateway, (container) => {
         return new ShowDashboardGateway(
-            container.get('user_repository'),
-            container.get('page_repository')
+            container.get(UserRepository),
+            container.get(PageRepository),
+            container.get(SettingsRepository),
+            container.get('analytics')
         );
     });
 
-    container.set('admin_action_login', (container) => {
+    container.set(Login, (container) => {
         return new Login(
             container.get('session'),
-            container.get('admin_gateway_sign_in')
+            container.get(SignInGateway)
         );
     });
 
-    container.set('admin_action_dashboard', (container) => {
+    container.set(Dashboard, (container) => {
         return new Dashboard(
             container.get('session'),
-            container.get('admin_gateway_dashboard_show')
+            container.get(ShowDashboardGateway)
         );
     });
 
-    container.set('admin_action_logout', (container) => {
+    container.set(Logout, (container) => {
         return new Logout(container.get('session'));
-    });
-
-    container.set('admin_command_user_create', (container) => {
-        return new CreateAdminUserCommand(
-            container.get('admin_gateway_user_create')
-        );
     });
 };

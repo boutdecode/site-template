@@ -50,7 +50,7 @@ mixin input_widget(name, type, label, required, value, error, options)
                 span.invalid-feedback= trans(error)
             if help
                 div.form-text= trans(help)
-    else if (type === 'select_number')
+    else if (type === 'select_number' || type === 'select')
         div.form-group(class=widgetClassName)
             if label
                 label(for=name)= trans(label)
@@ -61,9 +61,38 @@ mixin input_widget(name, type, label, required, value, error, options)
                 span.invalid-feedback= trans(error)
             if help
                 div.form-text= trans(help)
+    else if (type === 'file')
+        div.form-group(class=widgetClassName)
+            if label
+                label(for=name)= trans(label)
+            input.form-control(id=name, name=name, type='file', value=value, class=(error ? "is-invalid " + inputClassName : inputClassName || '').trim(), required=required)&attributes(options.attr)
+            if error
+                span.invalid-feedback= trans(error)
+            if help
+                div.form-text= trans(help)
+    else if (type === 'image')
+        div.form-group(class=widgetClassName)
+            if label
+                label(for=name)= trans(label)
+            input.form-control(id=name, name=name, type='file', value=value, class=(error ? "is-invalid " + inputClassName : inputClassName || '').trim(), required=required)&attributes(options.attr)
+            if error
+                span.invalid-feedback= trans(error)
+            if help
+                div.form-text= trans(help)
+    else if (type === 'date_multi')
+        div.form-group(class=widgetClassName)
+            if label
+                label(for=name)= trans(label)
+            input.form-control(id=name, name=name, type='text', value=value, class=(error ? "is-invalid " + inputClassName : inputClassName || '').trim(), required=required, readonly="readonly", data-datepicker)&attributes(options.attr)
+            if error
+                span.invalid-feedback= trans(error)
+            if help
+                div.form-text= trans(help)
 
 mixin input(name, form)
-    if (form.inputs[name]._type === 'object')
+    if (!form || !form.inputs || !form.inputs[name])
+        p.alert.alert-danger [ERROR] Invalid parameters for input "#{name}"
+    else if (form.inputs[name]._type === 'object')
         div.form-group.p-4.border.mb-4
             h5.mb-4= trans(form.inputs[name]._label)
 

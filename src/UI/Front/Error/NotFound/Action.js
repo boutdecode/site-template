@@ -1,7 +1,7 @@
 const Action = require("../../../../Shared/UI/Action");
 
-module.exports = class NotFound extends Action {
+module.exports = class NotFoundAction extends Action {
     async process(req, res) {
-        res.render('front/errors/not-found');
+        res.render('front/errors/not-found', { footerFixed: true });
     }
 }

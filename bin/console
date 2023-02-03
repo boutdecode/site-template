@@ -1,10 +1,16 @@
 #!/usr/bin/env node
 
+const CreateAdminUserCommand = require('./../src/UI/Command/Admin/User/Create/Command');
+const UploadImageCommand = require('./../src/UI/Command/Image/Upload/Command');
+const FormatImageCommand = require('./../src/UI/Command/Image/Format/Command');
+
 const container = require('../config/services')();
 const readline = require('readline');
 
 const services = [
-    container.get('admin_command_user_create')
+    container.get(CreateAdminUserCommand),
+    container.get(UploadImageCommand),
+    container.get(FormatImageCommand),
 ];
 
 const rl = readline.createInterface({

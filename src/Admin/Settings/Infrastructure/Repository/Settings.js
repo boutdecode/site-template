@@ -1,7 +1,7 @@
 const CRUDRepository = require("../../../../Shared/Infrastructure/Persistence/Repository/CRUD");
 const HttpError = require("../../../../Shared/Infrastructure/HTTP/Error/HttpError");
 
-module.exports = class ConfigurationRepository extends CRUDRepository {
+module.exports = class SettingsRepository extends CRUDRepository {
     constructor(requester) {
         super(requester, 'settings');
     }
@@ -15,6 +15,20 @@ module.exports = class ConfigurationRepository extends CRUDRepository {
         });
 
         if (query.result === 0) {
+            throw new HttpError('Item not found', 404);
+        }
+
+        return query.result;
+    }
+
+    async findByCode(code) {
+        const query = await this.requester.query({
+            collection: this.collection,
+            type: 'findOne',
+            params: { code },
+        });
+
+        if (!query.result) {
             throw new HttpError('Item not found', 404);
         }
 

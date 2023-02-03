@@ -106,9 +106,11 @@ module.exports = class Validator {
                     case 'string':
                     case 'textarea':
                     case 'password':
+                    case 'select':
                         result[key] = this.validateString(node, schemaNode);
                         break;
                     case 'number':
+                    case 'select_number':
                         result[key] = this.validateNumber(node, schemaNode);
                         break;
                     case 'boolean':
@@ -119,6 +121,15 @@ module.exports = class Validator {
                         break;
                     case 'object':
                         result[key] = this.validateObject(node, schemaNode);
+                        break;
+                    case 'file':
+                        result[key] = node;
+                        break;
+                    case 'date':
+                        result[key] = new Date(node);
+                        break;
+                    case 'date_multi':
+                        result[key] = this.validateArray(node.split(','), schemaNode);
                         break;
                     default:
                         const typeValidator = this.typeValidators.find(({ type }) => type === schemaNode._type);
@@ -277,17 +288,10 @@ module.exports = class Validator {
         }
 
         if (schema._items) {
-            schema._items._required = true;
-
-            let key;
-            let arrayValue = {};
-            let arraySchema = {};
             return value.map((v, i) => {
-                key = '_array[' + i + ']';
-                arrayValue[key] = v;
-                arraySchema[key] = schema._items;
+                const { result } = this.validate({ [i]: v }, { [i]: { ...schema._items, _required: true } });
 
-                return this.validate(arrayValue, arraySchema)[key];
+                return result[i];
             });
         }
 

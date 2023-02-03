@@ -24,14 +24,9 @@ const httpServer = createServer(app, [
     bodyParser
 ]);
 
-const cache = {
-    'Cache-Control': 'public, max-age=' + (86400 * 30),
-    'Content-Encoding': 'gzip',
-    'ETag': Date.now(),
-    'Vary': 'Accept-Encoding',
-};
-
 app.container = services();
+
+const cache = app.container.search('cache');
 
 app.use((req, res, next) => {
     if (req.headers['if-none-match'] && req.headers['if-none-match'] == cache['ETag']) {

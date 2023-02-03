@@ -1,5 +1,5 @@
 module.exports = class Action {
-    process(req, res) {}
+    process(req, res, app) {}
 
     run(req, res) {
         try {

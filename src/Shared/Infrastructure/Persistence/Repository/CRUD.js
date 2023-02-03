@@ -39,7 +39,7 @@ module.exports = class CRUDRepository {
             params,
             limit,
             skip,
-            sort: { editedAt: -1, updatedAt: -1 }
+            sort: { updatedAt: -1, createdAt: -1 }
         });
 
         return query.result;

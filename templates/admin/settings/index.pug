@@ -25,15 +25,21 @@ block content
                     p.alert.alert-danger= trans(error)
 
                 form(action=post('admin_settings_edit'), method="post")
-                    h4= trans('application')
+                    h4=trans('application')
                     hr
                     +input('websiteName', form)
                     +input('websiteContact', form)
 
-                    h4= trans('meta_data')
+                    h4=trans('meta_data')
                     hr
                     +input('metaAuthor', form)
                     +input('metaTitle', form)
                     +input('metaDescription', form)
+
+                    h4=trans('analytics')
+                    hr
+                    +input('analyticsUsername', form)
+                    +input('analyticsPassword', form)
+                    +input('analyticsWebsiteId', form)
 
                     button.btn.btn-success(type="submit")= trans('actions.save')

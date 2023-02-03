@@ -30,6 +30,21 @@ module.exports = class EditSchema extends TranslatableSchema {
                 _parameters: this.translatableInputs('textarea', true, { attr: { maxlength: 200 } }),
                 _label: 'form.label.meta_description',
             },
+            "analyticsUsername": {
+                _type: 'string',
+                _required: false,
+                _label: 'form.label.analytics_username',
+            },
+            "analyticsPassword": {
+                _type: 'password',
+                _required: false,
+                _label: 'form.label.analytics_password',
+            },
+            "analyticsWebsiteId": {
+                _type: 'string',
+                _required: false,
+                _label: 'form.label.analytics_website_id',
+            }
         }
     }
 }

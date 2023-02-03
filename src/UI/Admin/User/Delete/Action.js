@@ -1,6 +1,6 @@
 const AdminAction = require("../../../../Shared/UI/AdminAction");
 
-module.exports = class Delete extends AdminAction {
+module.exports = class DeleteUserAction extends AdminAction {
     constructor(session, gateway) {
         super(session);
         this.gateway = gateway;

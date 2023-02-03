@@ -1,0 +1,41 @@
+extends ../base
+include ../../shared/form
+
+block content
+
+    header.bg-white.p-3.mb-3.border-bottom
+        nav
+            ol.breadcrumb.m-0
+                li.breadcrumb-item
+                    a(href=get('admin_dashboard'))= trans('home')
+                li.breadcrumb-item
+                    a(href=get('admin_news_browse'))= trans('news')
+                li.breadcrumb-item.active= trans('edit_news')
+
+    section.container-fluid
+
+        div.m-4.p-4.bg-white.rounded.border.shadow-sm
+            h1.d-flex.align-items-center.h2.mb-4
+                i.me-2(icon-name="file-check-2", width=26, height=26, stroke-width=3)
+                span= trans('edit_news')
+
+            if error
+                p.alert.alert-danger= trans(error)
+
+            form(action=post('admin_news_edit', { id: form.data._id }), method="post", enctype="multipart/form-data")
+                +input('slug', form)
+
+                div.row.mb-4
+                    div.col
+                        +input('image', form)
+                    div(style="max-height: 250px; overflow: scroll;").col
+                        if form.data.image
+                            +image(form.data.image.file, form.data.image.alt, { className: 'w-100 rounded border' })
+
+                +input('title', form)
+                +input('shortDescription', form)
+                +input('link', form)
+                hr
+                +input('activated', form)
+
+                button.btn.btn-success(type="submit")= trans('actions.save')
