@@ -19,4 +19,5 @@ module.exports = (app) => {
     require('./Page/Routes')(router);
     require('./User/Routes')(router);
     require('./Settings/Routes')(router);
+    require('./About/Routes')(router);
 };

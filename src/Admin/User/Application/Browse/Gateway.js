@@ -9,7 +9,9 @@ module.exports = class BrowseUserGateway extends Gateway {
 
     async process({ search, page = 1, limit }) {
         const skip = (page - 1) * limit;
+        const count = await this.repository.searchCount(search);
+        const items = await this.repository.search(search, skip, limit);
 
-        return await this.repository.search(search, skip, limit);
+        return { items, count };
     }
 }

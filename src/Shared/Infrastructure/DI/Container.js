@@ -8,7 +8,7 @@ module.exports = class Container {
 
     /**
      * Set service into container
-     * @param {string|function} name
+     * @param {string} name
      * @param {function} callback
      */
     set(name, callback) {
@@ -21,7 +21,7 @@ module.exports = class Container {
 
     /**
      * Get service by name
-     * @param {string|function} name
+     * @param {string} name
      * @returns {*|null}
      */
     get(name, def = null) {

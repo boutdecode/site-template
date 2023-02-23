@@ -83,6 +83,12 @@
       "cms": "CMS",
       "administration": "Administration",
       "events": "Events",
+      "previous": "Previous",
+      "next": "Next",
+      "about_software": "About",
+      "actual_version": "Actual version",
+      "make_issue": "Make an issue",
+      "changelog": "Changelog",
 
       "actions": {
         "sign_in": "Sign in",
@@ -258,6 +264,12 @@
       "cms": "CMS",
       "administration": "Administration",
       "events": "Événements",
+      "previous": "Précédent",
+      "next": "Suivant",
+      "about_software": "A propos",
+      "actual_version": "Version actuelle",
+      "make_issue": "Reporter un bug",
+      "changelog": "Journal des modifications",
 
       "actions": {
         "sign_in": "Se connecter",

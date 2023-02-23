@@ -1,6 +1,7 @@
 const pug = require('pug');
 const Intl = require('intl');
 const boxstore = require('boxstore');
+const showdown = require("showdown");
 const SettingsRepository = require("../../../Admin/Settings/Infrastructure/Repository/Settings");
 
 module.exports = {
@@ -45,8 +46,12 @@ module.exports = {
                     return config.application.hostname + req.uri;
                 },
 
+                query(key = null, def = null) {
+                    return req.query[key] ? req.query[key] : (def || req.query);
+                },
+
                 is(name, params = {}, method = 'get') {
-                    return req.uri === router.generatePath(name, { locale: req.attributes.locale, ...params }, method);
+                    return req.uri === router.generatePath(name, { locale: req.attributes.locale, ...params }, {}, method);
                 },
 
                 path(name, params = {}, queries = {}, method = 'get') {
@@ -120,20 +125,30 @@ module.exports = {
 
                     return settingsResult[key] || config.application[key] || null;
                 },
+
+                markdownToHtml(markdown) {
+                    return (new showdown.Converter()).makeHtml(String(markdown));
+                },
             }
 
-            res
-                .status(status)
-                .send(
-                    pug.renderFile(
-                        `${__dirname}/../../../../templates/${templateName}.pug`,
-                        {
-                            ...templateFunctions,
-                            ...data,
-                            ...config.pug.globals
-                        }
-                    )
-                );
+            try {
+                res
+                    .status(status)
+                    .send(
+                        pug.renderFile(
+                            `${__dirname}/../../../../templates/${templateName}.pug`,
+                            {
+                                ...templateFunctions,
+                                ...data,
+                                ...config.pug.globals
+                            }
+                        )
+                    );
+            } catch (e) {
+                console.error(e);
+
+                res.status(500).send(e.message);
+            }
         };
 
         next();

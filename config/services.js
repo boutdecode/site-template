@@ -35,6 +35,7 @@ module.exports = () => {
     require('./services/admin/user')(container);
     require('./services/admin/page')(container);
     require('./services/admin/settings')(container);
+    require('./services/admin/about')(container);
     require('./services/admin/admin')(container);
 
     require('./services/front/page')(container);

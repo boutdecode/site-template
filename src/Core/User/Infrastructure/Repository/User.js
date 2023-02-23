@@ -26,6 +26,15 @@ module.exports = class UserRepository extends CRUDRepository {
         return await super.find(params, limit, skip);
     }
 
+    async searchCount(search) {
+        const params = {};
+        if (search) {
+            params.username = new RegExp(search, 'i');
+        }
+
+        return await super.count(params);
+    }
+
     async create({ username, password, activated }) {
         return await super.create({
             username,

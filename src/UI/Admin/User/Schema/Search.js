@@ -21,7 +21,7 @@ module.exports = class Search extends Schema {
             },
             limit: {
                 _type: 'select_number',
-                _default: 1,
+                _default: 25,
                 _parseInt: true,
                 _options: {
                     className: {

@@ -1,4 +1,5 @@
 require('dotenv').config();
+const { version, bugs } = require('../package.json');
 
 module.exports = {
     "application": {
@@ -11,6 +12,9 @@ module.exports = {
         "hostname": process.env.APP_HOSTNAME,
         "securitySalt": process.env.SECURITY_SALT,
         "securityCookie": process.env.SECURITY_COOKIE,
+        "changelog": 'CHANGELOG.md',
+        version,
+        bugs
     },
 
     "cache": {

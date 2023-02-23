@@ -40,37 +40,40 @@ block content
                     thead
                         tr
                             th #
-                            th= trans('username')
-                            th= trans('activated')
-                            th= trans('created_at')
-                            th= trans('last_logged_at')
-                            th.text-end= trans('button_actions')
+                            th=trans('username')
+                            th=trans('activated')
+                            th=trans('created_at')
+                            th=trans('last_logged_at')
+                            th.text-end=trans('button_actions')
 
                     tbody
-                        each user in users
+                        each item in items
                             tr
-                                td= user._id
-                                td= user.username
+                                td=item._id
+                                td=item.username
                                 td
-                                    if user.activated
+                                    if item.activated
                                         span.d-flex-inline.align-items-center.badge.rounded-pill.text-bg-success
                                             i.me-1(icon-name="check", width=14, height=14)
-                                            span= trans('yes')
+                                            span=trans('yes')
                                     else
                                         span.d-flex-inline.align-items-center.badge.rounded-pill.text-bg-danger
                                             i.me-1(icon-name="x", width=14, height=14)
-                                            span= trans('no')
+                                            span=trans('no')
 
-                                td= date(user.createdAt)
-                                td= user.lastLoggedAt ? time(user.lastLoggedAt) : null
+                                td= date(item.createdAt)
+                                td= item.lastLoggedAt ? time(item.lastLoggedAt) : null
                                 td.text-end
                                     div.btn-group.btn-group-sm
-                                        a.d-flex.align-items-center.btn.btn-primary(href=path('admin_read_user', { id: user._id }))
+                                        a.d-flex.align-items-center.btn.btn-primary(href=path('admin_read_user', { id: item._id }))
                                             i.me-1(icon-name="pencil", width=18, height=18)
                                             span= trans('actions.edit')
 
-                                        button.d-flex.align-items-center.btn.btn-danger(form="delete-user-" + user._id)
+                                        button.d-flex.align-items-center.btn.btn-danger(form="delete-user-" + item._id)
                                             i.me-1(icon-name="trash", width=18, height=18)
                                             span= trans('actions.delete')
 
-                                    form(id="delete-user-" + user._id, action=post('admin_delete_user', { id: user._id }), method='post', onsubmit="return confirm('" + trans('do_you_really_perform') + "')")
+                                    form(id="delete-user-" + item._id, action=post('admin_delete_user', { id: item._id }), method='post', onsubmit="return confirm('" + trans('do_you_really_perform') + "')")
+
+            div.px-4.pb-2
+                +pagination(query('page', 1), Math.ceil(count / query('limit', form.data.limit || 25)))

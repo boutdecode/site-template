@@ -75,9 +75,9 @@ module.exports = class Router {
             const { path, handler } = this._get[name];
             app.get(path, function(req, res, next) {
                 if (handler instanceof Action) {
-                    handler.run(req, res, next);
+                    handler.run(req, res, app, next);
                 } else {
-                    handler(req, res, next);
+                    handler(req, res, app, next);
                 }
             });
         }
@@ -86,9 +86,9 @@ module.exports = class Router {
             const { path, handler } = this._post[name];
             app.post(path, function(req, res, next) {
                 if (handler instanceof Action) {
-                    handler.run(req, res, next);
+                    handler.run(req, res, app, next);
                 } else {
-                    handler(req, res, next);
+                    handler(req, res, app, next);
                 }
             });
         }

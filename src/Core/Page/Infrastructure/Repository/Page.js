@@ -27,4 +27,13 @@ module.exports = class PageRepository extends CRUDRepository {
 
         return await super.find(params, limit, skip);
     }
+
+    async searchCount(search) {
+        const params = {};
+        if (search) {
+            params.slug = new RegExp(search, 'i');
+        }
+
+        return await super.count(params);
+    }
 };

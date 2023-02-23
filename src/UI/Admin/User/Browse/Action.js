@@ -18,6 +18,6 @@ module.exports = class BrowseUserAction extends AdminAction {
 
         const { data } = await this.gateway.run(parameters);
 
-        return res.render('admin/users/index', { users: data, form: form.createView() });
+        return res.render('admin/users/index', { ...data, form: form.createView() });
     }
 }

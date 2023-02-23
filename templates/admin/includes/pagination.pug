@@ -1,13 +1,26 @@
-//- Définissez les variables nécessaires, telles que la page courante et le nombre total de pages
-- var currentPage = 5;
-- var totalPages = 10;
+mixin pagination(currentPage, totalPages)
+    - currentPage = parseInt(currentPage);
+    - totalPages = parseInt(totalPages);
 
-//- Utilisez une boucle pour afficher chaque page de la pagination
-ul.pagination
-    each page in [currentPage - 4, currentPage - 3, currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2, currentPage + 3, currentPage + 4]
-        li
-            //- Si la page est inférieure au premier numéro de page ou supérieure au dernier numéro de page, ignorez-la
-            if page < 1 || page > totalPages
-                continue
-            //- Sinon, affichez le lien vers la page
-            a(href='?page=' + page)= page
+    - var url = '';
+    each value, key in query()
+        if key !== 'page'
+            - url += `&${key}=${value}`
+
+    if totalPages > 1
+        nav
+            ul.pagination.justify-content-end
+                li.page-item(class=currentPage === 1 ? 'disabled' : '')
+                    a.page-link(href='?page=1' + url, title=trans('previous'))
+                        i(icon-name="arrow-left")
+
+                each page in [currentPage - 4, currentPage - 3, currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2, currentPage + 3, currentPage + 4]
+                    li
+                        if page < 1 || page > totalPages
+                        else
+                            li.page-item
+                                a.page-link(href='?page=' + page + url, class=page === currentPage ? 'active' : '')= page
+
+                li.page-item(class=currentPage === totalPages ? 'disabled' : '')
+                    a.page-link(href='?page=' + totalPages + url, title=trans('next'))
+                        i(icon-name="arrow-right")
