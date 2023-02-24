@@ -31,10 +31,11 @@
     "vite": "^3.2.3"
   },
   "dependencies": {
-    "@beelab/json-validator": "^0.6.0",
+    "@codemirror/lang-html": "^6.4.2",
     "accept-language-parser": "^1.5.0",
     "bootstrap": "^5.2.2",
     "boxstore": "^1.1.1",
+    "codemirror": "^6.0.1",
     "dotenv": "^16.0.3",
     "i18next": "^22.1.4",
     "intl": "^1.2.5",
