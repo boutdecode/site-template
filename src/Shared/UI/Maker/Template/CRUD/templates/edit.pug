@@ -1,0 +1,33 @@
+extends ../base
+include ../../shared/form
+
+block content
+
+    header.bg-white.p-3.mb-3.border-bottom
+        nav
+            ol.breadcrumb.m-0
+                li.breadcrumb-item
+                    a(href=get('admin_dashboard'))= trans('home')
+                li.breadcrumb-item
+                    a(href=get('admin_acme_browse'))= trans('acme')
+                li.breadcrumb-item.active= trans('edit_acme')
+
+    section.container-fluid
+
+        div.m-4.p-4.bg-white.rounded.border.shadow-sm
+            h1.d-flex.align-items-center.h2.mb-4
+                i.me-2(icon-name="file-check-2", width=26, height=26, stroke-width=3)
+                span= trans('edit_acme')
+
+            if error
+                p.alert.alert-danger= trans(error)
+
+            form(action=post('admin_acme_edit', { id: form.data._id }), method="post")
+                +input('slug', form)
+                +input('title', form)
+                +input('shortDescription', form)
+                +input('content', form)
+                hr
+                +input('activated', form)
+
+                button.btn.btn-success(type="submit")= trans('actions.save')

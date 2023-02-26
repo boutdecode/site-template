@@ -31,6 +31,8 @@ module.exports = () => {
         return new Umami(umami.url, umami.websiteId);
     });
 
+    require('./services/shared')(container);
+
     require('./services/core/image')(container);
     require('./services/admin/user')(container);
     require('./services/admin/page')(container);

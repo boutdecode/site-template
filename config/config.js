@@ -31,8 +31,7 @@ module.exports = {
     "db": {
         "user": "data/user.db",
         "page": "data/page.db",
-        "settings": "data/settings.db",
-        "news": "data/news.db",
+        "settings": "data/settings.db"
     },
 
     "translation": {

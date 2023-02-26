@@ -3,6 +3,7 @@
 const CreateAdminUserCommand = require('./../src/UI/Command/Admin/User/Create/Command');
 const UploadImageCommand = require('./../src/UI/Command/Image/Upload/Command');
 const FormatImageCommand = require('./../src/UI/Command/Image/Format/Command');
+const CRUDCommand = require('./../src/Shared/UI/Maker/Command/CRUD');
 
 const container = require('../config/services')();
 const readline = require('readline');
@@ -11,6 +12,7 @@ const services = [
     container.get(CreateAdminUserCommand),
     container.get(UploadImageCommand),
     container.get(FormatImageCommand),
+    container.get(CRUDCommand),
 ];
 
 const rl = readline.createInterface({
