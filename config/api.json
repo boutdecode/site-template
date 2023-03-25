@@ -1,0 +1,31 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "version": "1.0.0",
+    "title": "Cataas",
+    "description": "Cataas API",
+    "termsOfService": "http://api_url/terms/",
+    "contact": {
+      "name": "Kevin Balicot",
+      "email": "kevinbalicot@gmail.com",
+      "url": "https://cataas.com/"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "API",
+      "description": "Cat metadata"
+    }
+  ],
+  "paths": {
+  }
+}

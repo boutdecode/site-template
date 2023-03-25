@@ -48,7 +48,18 @@ app.link('/images', `${__dirname}/public/images`, cache);
 app.link('/assets', `${__dirname}/dist`, cache);
 
 FrontRouter(app);
-AdminRouter(app);
+//AdminRouter(app);
+
+const ApiKernel = require("./src/Shared/Infrastructure/Tamia/Kernel");
+
+const api = new ApiKernel(
+    app.container,
+    require("./config/api.json"),
+    require("./config/routes/admin").routes,
+    require("./config/resources/page")
+);
+
+api.handleApp(app);
 
 app.container.get('router').handleApp(app);
 
