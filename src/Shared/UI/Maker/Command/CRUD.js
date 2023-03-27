@@ -26,8 +26,6 @@ module.exports = class CRUDCommand extends Command {
         try {
             const basePath = `${__dirname}/../../../..`;
             const adminFolder = `${basePath}/Admin/${context}`;
-            const coreFolder = `${basePath}/Core/${context}`;
-            const uiFolder = `${basePath}/UI/Admin/${context}`;
             const templateFolder = `${basePath}/../templates/admin/${context.toLowerCase()}`;
             const configFolder = `${basePath}/../config`;
 
@@ -35,35 +33,29 @@ module.exports = class CRUDCommand extends Command {
                 fs.mkdirSync(adminFolder);
             }
 
-            if (!fs.existsSync(coreFolder)){
-                fs.mkdirSync(coreFolder);
-            }
-
-            if (!fs.existsSync(uiFolder)){
-                fs.mkdirSync(uiFolder);
-            }
-
             if (!fs.existsSync(templateFolder)){
                 fs.mkdirSync(templateFolder);
             }
 
             fs.cpSync(`${__dirname}/../Template/CRUD/Application`, `${adminFolder}/Application`, { recursive: true });
-            fs.cpSync(`${__dirname}/../Template/CRUD/Infrastructure`, `${coreFolder}/Infrastructure`, { recursive: true });
-            fs.cpSync(`${__dirname}/../Template/CRUD/UI`, uiFolder, { recursive: true });
+            fs.cpSync(`${__dirname}/../Template/CRUD/Infrastructure`, `${adminFolder}/Infrastructure`, { recursive: true });
+            fs.cpSync(`${__dirname}/../Template/CRUD/UI`, `${adminFolder}/UI`, { recursive: true });
             fs.cpSync(`${__dirname}/../Template/CRUD/templates`, templateFolder, { recursive: true });
-            fs.copyFileSync(`${__dirname}/../Template/CRUD/config/services.js`, `${configFolder}/services/admin/${context.toLowerCase()}.js`);
+            fs.copyFileSync(`${__dirname}/../Template/CRUD/config/services.js`, `${configFolder}/services/${context.toLowerCase()}.js`);
+            fs.copyFileSync(`${__dirname}/../Template/CRUD/config/routes.js`, `${configFolder}/routes/${context.toLowerCase()}.js`);
+            fs.copyFileSync(`${__dirname}/../Template/CRUD/config/translation.js`, `${configFolder}/translation/${context.toLowerCase()}.js`);
 
             exec(`for i in ${adminFolder}/Application/**/*.js; do
                 sed -i 's/ACME/${context}/g' $i
                 sed -i 's/acme/${context.toLowerCase()}/g' $i
             done`);
 
-            exec(`for i in ${coreFolder}/Infrastructure/**/*.js; do
+            exec(`for i in ${adminFolder}/Infrastructure/**/*.js; do
                 sed -i 's/ACME/${context}/g' $i
                 sed -i 's/acme/${context.toLowerCase()}/g' $i
             done`);
 
-            exec(`for i in ${uiFolder}/**/*.js; do
+            exec(`for i in ${adminFolder}/UI/**/*.js; do
                 sed -i 's/ACME/${context}/g' $i
                 sed -i 's/acme/${context.toLowerCase()}/g' $i
             done`);
@@ -73,14 +65,14 @@ module.exports = class CRUDCommand extends Command {
                 sed -i 's/acme/${context.toLowerCase()}/g' $i
             done`);
 
-            exec(`sed -i 's/ACME/${context}/g' ${uiFolder}/Routes.js`);
-            exec(`sed -i 's/acme/${context.toLowerCase()}/g' ${uiFolder}/Routes.js`);
+            exec(`sed -i 's/ACME/${context}/g' ${configFolder}/services/${context.toLowerCase()}.js`);
+            exec(`sed -i 's/acme/${context.toLowerCase()}/g' ${configFolder}/services/${context.toLowerCase()}.js`);
 
-            exec(`sed -i 's/ACME/${context}/g' ${configFolder}/services/admin/${context.toLowerCase()}.js`);
-            exec(`sed -i 's/acme/${context.toLowerCase()}/g' ${configFolder}/services/admin/${context.toLowerCase()}.js`);
+            exec(`sed -i 's/ACME/${context}/g' ${configFolder}/routes/${context.toLowerCase()}.js`);
+            exec(`sed -i 's/acme/${context.toLowerCase()}/g' ${configFolder}/routes/${context.toLowerCase()}.js`);
 
             console.log('DONE !');
-            console.log("Don't forget to add db config, include service and routes.");
+            console.log("Don't forget to add db config.");
         } catch (e) {
             console.error(e);
         }

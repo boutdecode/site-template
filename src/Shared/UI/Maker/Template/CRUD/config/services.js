@@ -1,15 +1,15 @@
-const BrowseACMEAction = require("../../../src/UI/Admin/ACME/Browse/Action");
-const CreateACMEAction = require("../../../src/UI/Admin/ACME/Create/Action");
-const DeleteACMEAction = require("../../../src/UI/Admin/ACME/Delete/Action");
-const EditACMEAction = require("../../../src/UI/Admin/ACME/Edit/Action");
-const ReadACMEAction = require("../../../src/UI/Admin/ACME/Read/Action");
-const ShowACMEAction = require("../../../src/UI/Admin/ACME/Show/Action");
-const BrowseACMEGateway = require("../../../src/Admin/ACME/Application/Browse/Gateway");
-const CreateACMEGateway = require("../../../src/Admin/ACME/Application/Create/Gateway");
-const DeleteACMEGateway = require("../../../src/Admin/ACME/Application/Delete/Gateway");
-const EditACMEGateway = require("../../../src/Admin/ACME/Application/Edit/Gateway");
-const ReadACMEGateway = require("../../../src/Admin/ACME/Application/Read/Gateway");
-const ACMERepository = require("../../../src/Core/ACME/Infrastructure/Persistence/Repository");
+const BrowseACMEAction = require("../../src/UI/Admin/ACME/Browse/Action");
+const CreateACMEAction = require("../../src/UI/Admin/ACME/Create/Action");
+const DeleteACMEAction = require("../../src/UI/Admin/ACME/Delete/Action");
+const EditACMEAction = require("../../src/UI/Admin/ACME/Edit/Action");
+const ReadACMEAction = require("../../src/UI/Admin/ACME/Read/Action");
+const ShowACMEAction = require("../../src/UI/Admin/ACME/Show/Action");
+const BrowseACMEGateway = require("../../src/Admin/ACME/Application/Browse/Gateway");
+const CreateACMEGateway = require("../../src/Admin/ACME/Application/Create/Gateway");
+const DeleteACMEGateway = require("../../src/Admin/ACME/Application/Delete/Gateway");
+const EditACMEGateway = require("../../src/Admin/ACME/Application/Edit/Gateway");
+const ReadACMEGateway = require("../../src/Admin/ACME/Application/Read/Gateway");
+const ACMERepository = require("../../src/Core/ACME/Infrastructure/Persistence/Repository");
 
 module.exports = (container) => {
     container.set(ACMERepository, () => {

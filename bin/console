@@ -1,15 +1,19 @@
 #!/usr/bin/env node
 
-const CreateAdminUserCommand = require('./../src/UI/Command/Admin/User/Create/Command');
-const UploadImageCommand = require('./../src/UI/Command/Image/Upload/Command');
-const FormatImageCommand = require('./../src/UI/Command/Image/Format/Command');
+const Kernel = require("../src/Shared/Infrastructure/Yion/Kernel");
+
+const CreateUserCommand = require("../src/Admin/User/UI/Command/Create/Command");
+const UploadImageCommand = require("../src/Admin/Image/UI/Command/Upload/Command");
+const FormatImageCommand = require("../src/Admin/Image/UI/Command/Format/Command");
 const CRUDCommand = require('./../src/Shared/UI/Maker/Command/CRUD');
 
-const container = require('../config/services')();
 const readline = require('readline');
 
+const kernel = new Kernel();
+const container = kernel.initServices();
+
 const services = [
-    container.get(CreateAdminUserCommand),
+    container.get(CreateUserCommand),
     container.get(UploadImageCommand),
     container.get(FormatImageCommand),
     container.get(CRUDCommand),

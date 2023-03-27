@@ -37,7 +37,6 @@ module.exports = {
     "translation": {
         "defaultLocale": process.env.LOCALE,
         "locales": ["fr", "en"],
-        "resources": "config/translation/translations.json"
     },
 
     "images": {

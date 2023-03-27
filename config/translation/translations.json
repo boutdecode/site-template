@@ -22,14 +22,10 @@
       "yes": "Yes",
       "searching": "Searching...",
       "do_you_really_perform": "Do you really perform this action ?",
-      "manage_pages": "Manage page",
-      "manage_news": "Manage news",
       "created_at": "Created at",
       "last_logged_at": "Last logged at",
       "slug": "Slug",
       "title": "Title",
-      "create_page": "Create page",
-      "create_news": "Create news",
       "locale_fr": "French",
       "locale_en": "English",
       "edit_page": "Edit page",
@@ -48,8 +44,6 @@
       "videos": "Videos",
       "languages": "Language",
       "social_network": "Social network",
-      "instagram_account": "Julien Henric Instagram profile.",
-      "facebook_account": "Julien Henric Facebook page.",
       "scroll_down": "Scroll down",
       "created_by": "Created by",
       "with": "with",
@@ -97,8 +91,6 @@
         "save": "Save",
         "create_new_user": "Create new user",
         "search": "Search",
-        "create_new_page": "Create new page",
-        "create_new_news": "Create new news",
         "go_website": "Go website",
         "go_homepage": "Go homepage",
         "go_back": "Go back",
@@ -154,12 +146,6 @@
           "user_created": "User created",
           "user_deleted": "User deleted",
           "user_updated": "User updated",
-          "page_created": "Page created",
-          "page_deleted": "Page deleted",
-          "page_updated": "Page updated",
-          "news_created": "News created",
-          "news_deleted": "News deleted",
-          "news_updated": "News updated",
           "settings_updated": "Settings updated"
         },
         "error": {
@@ -167,9 +153,7 @@
           "user_not_found": "User not found"
         },
         "danger": {
-          "user_not_found": "User not found",
-          "page_not_found": "Page not found",
-          "news_not_found": "News not found"
+          "user_not_found": "User not found"
         }
       },
 
@@ -203,14 +187,10 @@
       "yes": "Oui",
       "searching": "Recherche...",
       "do_you_really_perform": "Voulez vous vraiment faire cette action ?",
-      "manage_pages": "Gestion des pages",
-      "manage_news": "Gestion des actualités",
       "created_at": "Créer le",
       "last_logged_at": "Dernière connexion le",
       "slug": "Slug",
       "title": "Titre",
-      "create_page": "Création d'une page",
-      "create_news": "Création d'une actualité",
       "locale_fr": "Français",
       "locale_en": "Anglais",
       "edit_page": "Edition d'une page",
@@ -229,8 +209,6 @@
       "videos": "Vidéos",
       "languages": "Langues",
       "social_network": "Réseaux sociaux",
-      "instagram_account": "Profil Instagram de Julien Henric.",
-      "facebook_account": "Page Facebook de Julien Henric.",
       "scroll_down": "Défiler",
       "created_by": "Créé par",
       "with": "avec",
@@ -278,8 +256,6 @@
         "save": "Sauvegarder",
         "create_new_user": "Créer nouvel administrateur",
         "search": "Rechercher",
-        "create_new_page": "Créer nouvelle page",
-        "create_new_news": "Créer nouvelle actualité",
         "go_website": "Retourner sur le site",
         "go_homepage": "Retourner sur la page d'accueil",
         "go_back": "Retour",
@@ -335,12 +311,6 @@
           "user_created": "Administrateur créé",
           "user_deleted": "Administrateur supprimé",
           "user_updated": "Administrateur mise à jour",
-          "page_created": "Page créée",
-          "page_deleted": "Page supprimée",
-          "page_updated": "Page mise à jour",
-          "news_created": "Actualité créée",
-          "news_deleted": "Actualité supprimée",
-          "news_updated": "Actualité mise à jour",
           "settings_updated": "Paramètres mise à jour"
         },
         "error": {
@@ -348,9 +318,7 @@
           "user_not_found": "Administrateur non trouvé"
         },
         "danger": {
-          "user_not_found": "Administrateur non trouvé",
-          "page_not_found": "Page non trouvée",
-          "news_not_found": "Actualité non trouvée"
+          "user_not_found": "Administrateur non trouvé"
         }
       },
 

@@ -1,5 +1,6 @@
 const boxstore = require('boxstore');
 const { resolve } = require('path');
+const fs = require("fs");
 
 module.exports = class Container {
     constructor(config) {
@@ -22,6 +23,7 @@ module.exports = class Container {
     /**
      * Get service by name
      * @param {string} name
+     * @param {*} def - Default value
      * @returns {*|null}
      */
     get(name, def = null) {
@@ -67,5 +69,18 @@ module.exports = class Container {
         }
 
         return result;
+    }
+
+    resolveDirectoryFiles(path) {
+        const directory = this.resolvePath(path);
+
+        const files = [];
+        fs.readdirSync(directory).forEach(file => {
+            if (!fs.statSync(`${directory}/${file}`).isDirectory()) {
+                files.push(`${directory}/${file}`);
+            }
+        });
+
+        return files;
     }
 }

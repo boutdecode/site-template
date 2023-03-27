@@ -1,5 +1,5 @@
 const Gateway = require('../../../../Shared/Application/Gateway/Gateway');
-const { slugify } = require('../../../../Shared/Infrastructure/Services/String');
+const { slugify } = require('../../../../Shared/Infrastructure/Services/StringUtils');
 
 module.exports = class CreatePageGateway extends Gateway {
     repository;
