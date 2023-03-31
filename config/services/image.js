@@ -10,7 +10,7 @@ module.exports = (container) => {
     container.set(ImageUploader, (ct, { images }) => new ImageUploader(ct.resolvePath(images.uploadFolder)));
 
     container.set(UploadImageGateway, ct => new UploadImageGateway(ct.get(ImageUploader)));
-    container.set(FormatImageGateway, (ct, { images }) => new FormatImageGateway(ct.resolvePath(images.uploadFolder)));
+    container.set(FormatImageGateway, (ct, { images }) => new FormatImageGateway(ct.resolvePath(images.cacheFolder)));
 
     container.set(UploadImageCommand, ct => new UploadImageCommand(ct.get(UploadImageGateway)));
     container.set(FormatImageCommand, ct => new FormatImageCommand(ct.get(FormatImageGateway)));

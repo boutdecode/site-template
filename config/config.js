@@ -40,7 +40,8 @@ module.exports = {
     },
 
     "images": {
-        "uploadFolder": "public/uploads/"
+        "uploadFolder": "public/uploads/",
+        "cacheFolder": "public/cache/",
     },
 
     "assets": {

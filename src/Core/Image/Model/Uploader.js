@@ -23,8 +23,6 @@ module.exports = class Uploader {
             options.animated = true;
         }
 
-        await WebpFormater.format(newFilepath, `${this.imagesFolder}/${newFilename}.webp`, options, resize);
-
         return { webp: `${newFilename}.webp`, original: newFilename + ext };
     }
 }
