@@ -1,3 +1,18 @@
+# [1.1.0](https://github.com/boutdecode/site-template/compare/v1.0.2...v1.1.0) (2023-04-18)
+
+
+### Bug Fixes
+
+* Move uploaded image to cache folder ([b1745de](https://github.com/boutdecode/site-template/commit/b1745de327cad4ccdbb34698309cb3b0ab116e72))
+* Release workflow ([07549d7](https://github.com/boutdecode/site-template/commit/07549d7245dc88cb8bea45ed0a7cd3edeaedc6c7))
+* stuff ([36aa371](https://github.com/boutdecode/site-template/commit/36aa37175ec04af6fa1b80dc2abd9d55d1826858))
+
+
+### Features
+
+* Add code editor for WYSIWYG ([7157963](https://github.com/boutdecode/site-template/commit/7157963f704a79002d453d82b3d91b72eb7f8cdc))
+* Add pagination and about page ([c9673b7](https://github.com/boutdecode/site-template/commit/c9673b7441319f1dfed09fde5f13a94f0cf94135))
+
 ## [1.0.2](https://github.com/boutdecode/site-template/compare/v1.0.1...v1.0.2) (2023-01-04)
 
 
