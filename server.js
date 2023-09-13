@@ -1,29 +1,38 @@
-require('intl');
+const { createApi } = require('@tamia-web/tamia')
+const apiDocPlugin = require('@tamia-web/doc-plugin')
+const { createApp, createServer } = require('yion')
+const sessionPlugin = require('@boutdecode/session/yion/session-plugin')
+const i18nPlugin = require('@boutdecode/i18n/yion/i18n-plugin')
+const encodingPlugin = require('@boutdecode/encoding/yion/encoding-plugin')
 
-const { createApp, createServer } = require("yion");
-const bodyParser = require("yion-body-parser");
+const routerPlugin = require('./src/shared/yion/plugin/router')
+const renderPlugin = require('./src/shared/yion/plugin/render')
+const apiConfigGenerator = require('./src/shared/api/config-generator')
+const moduleLoader = require('./src/shared/configuration/module-loader')
 
-const EncodingPlugin = require('./src/Shared/Infrastructure/Yion/Plugin/Encoding');
-const TemplateRendererPlugin = require('./src/Shared/Infrastructure/Yion/Plugin/TemplateRenderer');
-const I18NPlugin = require('./src/Shared/Infrastructure/Yion/Plugin/I18N');
-const SessionPlugin = require('./src/Shared/Infrastructure/Yion/Plugin/Session');
-const RouterPlugin = require('./src/Shared/Infrastructure/Yion/Plugin/Router');
-const Kernel = require("./src/Shared/Infrastructure/Yion/Kernel");
+require('./config/config')
 
-const { NODE_PORT = 8080 } = process.env;
-const app = createApp();
-const httpServer = createServer(app, [
-    EncodingPlugin,
-    SessionPlugin,
-    TemplateRendererPlugin,
-    I18NPlugin,
-    RouterPlugin,
-    bodyParser
-]);
+moduleLoader.configure()
 
-const kernel = new Kernel(app);
-kernel.init();
+const app = createApp()
+const server = createServer(app, [renderPlugin, routerPlugin, sessionPlugin, i18nPlugin, encodingPlugin])
+app.api = createApi(apiConfigGenerator.config, { prefix: '/api', plugins: [apiDocPlugin()] })
 
-httpServer
-    .listen(NODE_PORT)
-    .on('listening', () => console.log(`🌏  Server start on port ${NODE_PORT}`));
+moduleLoader.load(app)
+
+app.group('/api')
+  .use((req, res, next) => {
+    res.set('Access-Control-Allow-Origin', process.env.CORS || '*' )
+    res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+    res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+
+    if (req.method === 'OPTIONS') {
+      return res.send()
+    }
+
+    next()
+  })
+  .use(app.api.middleware)
+
+server.listen(process.env.NODE_PORT)
+    .on('listening', () => console.log(`🤖 Server starting on port ${process.env.NODE_PORT}.`))

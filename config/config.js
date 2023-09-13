@@ -1,56 +1,41 @@
-require('dotenv').config();
-const { version, bugs } = require('../package.json');
+require('dotenv').config()
 
-module.exports = {
-    "application": {
-        "env": process.env.APP_ENV,
-        "websiteName": "Mon site",
-        "websiteContact": "kevinbalicot[alt]gmail.com",
-        "metaAuthor": "Kevin Balicot <kevinbalicot[alt]gmail.com>",
-        "metaTitle": "Mon site",
-        "metaDescription": "Mon site super cool, venez apprendre pleins de truc sur moi.",
-        "hostname": process.env.APP_HOSTNAME,
-        "securitySalt": process.env.SECURITY_SALT,
-        "securityCookie": process.env.SECURITY_COOKIE,
-        "changelog": 'CHANGELOG.md',
-        version,
-        bugs
-    },
+const path = require('node:path')
+const configurator = require('./../src/shared/configuration/configurator')
 
-    "cache": {
-        'Cache-Control': 'public, max-age=' + (86400 * 30),
-        'Content-Encoding': 'gzip',
-        'ETag': Date.now(),
-        'Vary': 'Accept-Encoding',
-    },
+configurator.set({
+  application: {
+    hostname: process.env.HOST || 'http://localhost',
+    metaTitle: 'Site example',
+    metaDescription: 'Site example description',
+    metaAuthor: 'Kevin Balicot'
+  },
+  cache: {
+    'Cache-Control': 'public, max-age=' + (86400 * 30),
+    'Content-Encoding': 'gzip',
+    ETag: Date.now(),
+    Vary: 'Accept-Encoding'
+  },
+  api: {
+    version: '1.0.0',
+    title: 'Site example API',
+    description: 'Site example API description',
+    tags: [
+      { name: 'Security', description: 'Managing security' }
+    ]
+  },
+  data: {
+    dataFolder: path.resolve(process.cwd(), 'data'),
+    stores: ['users']
+  },
+  pug: {
+    templateDirectory: path.resolve(process.cwd(), 'templates'),
+    globals: {}
+  },
+  translation: {
+    fallback: process.env.LOCALE,
+    locales: ['en']
+  }
+})
 
-    "pug": {
-        "globals": {}
-    },
-
-    "db": {
-        "user": "data/user.db",
-        "page": "data/page.db",
-        "settings": "data/settings.db"
-    },
-
-    "translation": {
-        "defaultLocale": process.env.LOCALE,
-        "locales": ["fr", "en"],
-    },
-
-    "images": {
-        "uploadFolder": "public/uploads/",
-        "cacheFolder": "public/cache/",
-    },
-
-    "assets": {
-        "front": "dist/front/entrypoints.json",
-        "admin": "dist/admin/entrypoints.json"
-    },
-
-    "umami": {
-        "url": "https://analytics.boutdecode.fr",
-        "websiteId": "182435af-2196-4cd4-9eda-bf28b2f5a51b",
-    }
-}
+module.exports = configurator

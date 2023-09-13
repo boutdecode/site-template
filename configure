@@ -37,10 +37,12 @@ if [ $clean = true ]; then
   echo "Clean old files"
 
   preserve=(
+    .env
     .env.dist
     .gitignore
     .mocharc.json
     .releaserc.json
+    .eslintrc.json
     configure
     index.html
     package.json
@@ -48,6 +50,8 @@ if [ $clean = true ]; then
     README.md
     server.js
     webpack.config.js
+    vite.config.mjs
+    vite.config.js
   )
 
   find . -maxdepth 1 -type f $(for i in ${preserve[*]}; do echo "-not -name ${i}"; done) -exec rm -f "{}" \;

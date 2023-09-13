@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 data/*
+public/*
 
 # Editor directories and files
 .vscode/*
@@ -27,9 +28,10 @@ data/*
 .env
 
 ###> dev environment ##
+.eslintrc.js
+.editorconfig
 /Makefile
 /Makefile.local
-/.editorconfig
 ###< dev environment ###
 
 ###> docker environment ##
