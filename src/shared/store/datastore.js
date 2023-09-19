@@ -17,7 +17,7 @@ const getCollection = (name) => {
   }
 
   if (!stores[name]) {
-    stores[name] = new Datastore({ filename: `${config.dataFolder}/${name}_${process.env.NODE_ENV}.db`, autoload: true })
+    stores[name] = new Datastore({ filename: `${config.dataFolder}/${name}_${process.env.APP_ENV}.db`, autoload: true })
   }
 
   return stores[name]

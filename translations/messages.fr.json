@@ -1,0 +1,36 @@
+{
+  "hello_world": "Bonjour le monde",
+  "admin": "Administration",
+
+  "actions": {
+    "sign_in": "Se connecter",
+    "logout": "Se déconnecter",
+    "create": "Créer",
+    "save": "Sauvegarder",
+    "search": "Rechercher",
+    "go_website": "Retourner sur le site",
+    "go_homepage": "Retourner sur la page d'accueil",
+    "go_back": "Retour",
+    "edit": "Editer",
+    "delete": "Supprimer",
+    "show": "Voir",
+    "up": "Monter",
+    "down": "Descendre"
+  },
+
+  "form": {
+    "label": {
+      "username": "Identifiant",
+      "password": "Mot de passe",
+      "remember_me": "Se souvenir de moi"
+    },
+
+    "help": {
+    },
+
+    "placeholder": {
+      "username": "Entrez votre identifiant",
+      "password": "Entrez votre mot de passe"
+    }
+  }
+}

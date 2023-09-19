@@ -3,17 +3,16 @@ const pug = require('pug')
 const Intl = require('intl')
 const { trans } = require('@boutdecode/i18n')
 
-const router = require('../../router/router')
 const config = require('../../../../config/config')
-const { asset } = require("../../asset/asset")
+const { asset } = require('../../asset/asset')
 
 module.exports = {
   type: 'renderer',
   handle (req, res, app, next) {
     const templateDirectory = config.get('pug.templateDirectory', path.resolve(process.cwd(), 'templates'))
     const templateFunctions = {
-      get canonical() {
-        return config.get('application.hostname', '') + res.routeMatched.route.replace(':locale', req.attributes.locale || config.get('translation.fallback', 'en'))
+      get canonical () {
+        return req.path(res.routeMatched.name, { ...req.params, locale: config.get('translation.fallback', 'en') }, req.query, true)
       },
 
       get locale () {
@@ -43,11 +42,11 @@ module.exports = {
         return req.query[key] ? req.query[key] : (def || req.query)
       },
 
-      is(name, params = {}) {
-        return req.uri === router.generatePath(name, { locale: req.attributes.locale, ...params }, {});
+      is (name) {
+        return name === res.routeMatched.name
       },
 
-      path(name, params = {}, queries = {}, absolute = false) {
+      path (name, params = {}, queries = {}, absolute = false) {
         const route = app.findRoute(name)
 
         if (route) {

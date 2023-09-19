@@ -1,26 +1,21 @@
 const config = require('../../configuration/configurator')
-const router = require('../../router/router')
 
-let init = false
 module.exports = {
   type: 'router',
   handle: (req, res, app, next) => {
-    if (!init) {
-      router.handleApp(app)
-      init = true
+    req.path = (name, params = {}, queries = {}, absolute = false) => {
+      const hostname = config.get('application.hostname' || '')
+      const route = app.findRoute(name)
+      if (!route) {
+        throw new Error(`Route ${name} not found`)
+      }
+
+      const locale = req.attributes.locale || config.get('translation.fallback', 'en')
+      const path = route.generatePath({ locale, ...params }, queries)
+
+      return absolute ? `${hostname}${path}` : path
     }
 
-    req.path = (name, params = {}, queries = {}) => {
-      return router.generatePath(name, { locale: req.attributes.locale, ...params }, queries);
-    };
-
-    req.absolutePath = (name, params = {}, queries = {}) => {
-      const hostname = config.get('application.hostname' || '');
-      const path = router.generatePath(name, { locale: req.attributes.locale, ...params }, queries);
-
-      return `${hostname}${path}`;
-    };
-
-    next();
+    next()
   }
-};
+}

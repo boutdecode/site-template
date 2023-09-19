@@ -14,7 +14,7 @@ module.exports = {
       info: {
         version: apiConfig.version,
         title: apiConfig.title,
-        description: apiConfig.description,
+        description: apiConfig.description
       },
       servers: [
         { url: `http://localhost:${process.env.NODE_PORT}/api` },

@@ -26,7 +26,7 @@ configurator.set({
   },
   data: {
     dataFolder: path.resolve(process.cwd(), 'data'),
-    stores: ['users']
+    stores: ['users', 'pages']
   },
   pug: {
     templateDirectory: path.resolve(process.cwd(), 'templates'),
@@ -34,7 +34,7 @@ configurator.set({
   },
   translation: {
     fallback: process.env.LOCALE,
-    locales: ['en']
+    locales: ['fr', 'en']
   }
 })
 

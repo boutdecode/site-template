@@ -16,6 +16,14 @@ module.exports = app => {
   app.link('/build', path.resolve(process.cwd(), 'public/build'), cache)
 
   app.get('/', (req, res) => {
+    res.redirect(req.path('homepage'))
+  }, 'homepage_redirect')
+
+  app.get('/:locale/', (req, res) => {
     res.render('homepage')
   }, 'homepage')
+
+  app.get('/:locale/404', (req, res) => {
+    res.render('error/404')
+  }, 'error:not_found')
 }

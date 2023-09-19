@@ -1,18 +1,40 @@
-import { defineConfig } from 'vite'
+import dotenv from 'dotenv'
+import { fileURLToPath, URL } from 'node:url'
+import { defineConfig, loadEnv } from 'vite'
+import vue from '@vitejs/plugin-vue'
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  root: './assets',
-  plugins: [],
-  publicDir: './statics',
-  build: {
-    rollupOptions: {
-      input: {
-        main: './assets/main.js',
+dotenv.config()
+
+export default ({ mode }) => {
+  const env = process.env.APP_ENV || mode
+
+  loadEnv(env, process.cwd())
+
+  return defineConfig({
+    root: './assets',
+    mode: env,
+    plugins: [vue()],
+    publicDir: './statics',
+    build: {
+      rollupOptions: {
+        input: {
+          main: './assets/main.js',
+          admin: './assets/admin/main.js',
+        },
+        output: env !== 'production' ? {
+          entryFileNames: `build/[name].js`,
+          chunkFileNames: `build/[name].js`,
+          assetFileNames: `build/[name].[ext]`
+        } : {},
       },
+      manifest: true,
+      outDir: './../public',
+      assetsDir: './build',
     },
-    manifest: true,
-    outDir: './../public',
-    assetsDir: './build',
-  },
-})
+    resolve: {
+      alias: {
+        '@admin': fileURLToPath(new URL('./assets/admin', import.meta.url))
+      }
+    }
+  })
+}
