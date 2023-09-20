@@ -1,6 +1,8 @@
 {
+  "home": "Accueil",
   "hello_world": "Bonjour le monde",
   "admin": "Administration",
+  "dashboard": "Tableau de bord",
 
   "actions": {
     "sign_in": "Se connecter",

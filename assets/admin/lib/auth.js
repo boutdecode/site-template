@@ -41,6 +41,8 @@ export default class Auth {
     this._refreshToken = null
     localStorage.removeItem(this.clientId + '-access-token')
     localStorage.removeItem(this.clientId + '-refresh-token')
+
+    window.location.reload()
   }
 
   getAuthHeader () {

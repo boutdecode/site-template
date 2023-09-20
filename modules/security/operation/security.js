@@ -4,7 +4,7 @@ const HttpError = require('../../../src/shared/http/http-error')
 
 module.exports = {
   async signIn({ username, password }) {
-    const user = await findOne('users', { username, password: hashPassword(password), api: true })
+    const user = await findOne('users', { username, password: hashPassword(password) })
     if (!user) {
       throw new HttpError('Unauthorized', 401)
     }
@@ -18,15 +18,6 @@ module.exports = {
       throw new HttpError(`User ${username} already exists`, 400)
     }
 
-    return insert('users', { username, email, password: hashPassword(password), api: true })
-  },
-
-  async signInAdmin({ username, password }) {
-    const user = await findOne('users', { username, password: hashPassword(password), admin: true })
-    if (!user) {
-      throw new HttpError('Unauthorized', 401)
-    }
-
-    return user
+    return insert('users', { username, email, password: hashPassword(password) })
   },
 }
