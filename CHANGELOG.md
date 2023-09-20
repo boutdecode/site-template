@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/boutdecode/site-template/compare/v1.2.0...v1.3.0) (2023-09-20)
+
+
+### Features
+
+* Add dashboard and connection ([c1c827d](https://github.com/boutdecode/site-template/commit/c1c827d759f7fb8db1ee8ee94c3b5c0d914a6500))
+
 # [1.2.0](https://github.com/boutdecode/site-template/compare/v1.1.0...v1.2.0) (2023-09-19)
 
 
