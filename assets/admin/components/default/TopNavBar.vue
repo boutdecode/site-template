@@ -15,7 +15,3 @@ NavBar
 
   slot
 </template>
-
-<style scoped>
-
-</style>

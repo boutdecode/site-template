@@ -1,14 +1,9 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import config from '../config/config'
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: () => import('../views/DashboardView.vue')
-    }
-  ]
+  routes: config.routes
 })
 
 export default router

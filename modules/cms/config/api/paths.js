@@ -29,21 +29,19 @@ apiConfigurator.addPath('/pages', {
   operationId: 'api:pages:browse',
   method: 'get',
   tags: ['CMS'],
-  requestBody: {
-    content: {
-      'application/json': {
-        schema: {
-          type: 'array',
-          items: {
-            $ref: '#/components/schemas/Page'
+  responses: {
+    200: {
+      description: 'OK',
+      content: {
+        'application/json': {
+          schema: {
+            type: 'array',
+            items: {
+              $ref: '#/components/schemas/Page'
+            }
           }
         }
       }
-    }
-  },
-  responses: {
-    200: {
-      description: 'OK'
     }
   }
 })

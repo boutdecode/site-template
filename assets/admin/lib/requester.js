@@ -102,7 +102,7 @@ export default class Requester {
     return fetch(uri, { method, body, headers })
       .then(res => {
         if (res.status === 401 && this.auth) {
-          //window.location = '/admin'
+          // window.location = '/admin'
         }
 
         if (!res.ok) {

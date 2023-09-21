@@ -45,6 +45,8 @@ apiConfigurator.addSchema('Page', {
     description: translatableContent,
     content: translatableContent,
     activated: { type: 'boolean', default: false },
-    isFactory: { type: 'boolean', default: false }
+    isFactory: { type: 'boolean', default: false },
+    createdAt: { type: 'string', format: 'datetime' },
+    editedAt: { type: 'string', format: 'datetime' }
   }
 })

@@ -3,6 +3,9 @@
   "hello_world": "Hello World",
   "admin": "Administration",
   "dashboard": "Dashboard",
+  "yes": "Yes",
+  "no": "No",
+  "delete_resource": "Delete resource",
 
   "actions": {
     "sign_in": "Sign in",
@@ -17,7 +20,7 @@
     "delete": "Delete",
     "show": "Show",
     "up": "Up",
-    "down": "Down"
+    "down": "Down",
   },
 
   "form": {

@@ -3,6 +3,9 @@
   "hello_world": "Bonjour le monde",
   "admin": "Administration",
   "dashboard": "Tableau de bord",
+  "yes": "Oui",
+  "no": "Non",
+  "delete_resource": "Supprimer la resource",
 
   "actions": {
     "sign_in": "Se connecter",
