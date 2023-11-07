@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/boutdecode/site-template/compare/v1.4.0...v1.5.0) (2023-11-07)
+
+
+### Features
+
+* Add Show and Edit actions for CRUD ([a189751](https://github.com/boutdecode/site-template/commit/a18975193691e550ded940bd611702b407c6916c))
+
 # [1.4.0](https://github.com/boutdecode/site-template/compare/v1.3.0...v1.4.0) (2023-09-21)
 
 
