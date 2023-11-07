@@ -27,6 +27,7 @@ export default ({ mode }) => {
           assetFileNames: `build/[name].[ext]`
         } : {},
       },
+      sourcemap: env !== 'production',
       manifest: true,
       outDir: './../public',
       assetsDir: './build',

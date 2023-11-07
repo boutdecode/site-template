@@ -29,8 +29,10 @@ table(v-if="!loading").table-content
       td {{ item.title }}
       td
         YesNo(:bool="item.activated")
-      td(v-date="{ hour: 'numeric', minute: 'numeric' }") {{ item.editedAt }}
-      td(v-date) {{ item.createdAt }}
+      td
+        span(v-date="{ hour: 'numeric', minute: 'numeric' }") {{ item.editedAt }}
+      td
+        span(v-date) {{ item.createdAt }}
       td
         component(:is="actions", :item="item")
 </template>

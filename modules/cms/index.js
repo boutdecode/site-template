@@ -7,7 +7,7 @@ module.exports = app => {
     try {
       res.send(await browse())
     } catch (error) {
-      res.send({ message: error.message }, error.code)
+      res.send({ message: error.message }, error.code || 500)
     }
   })
 
@@ -15,7 +15,7 @@ module.exports = app => {
     try {
       res.send(await get(req.params.id))
     } catch (error) {
-      res.send({ message: error.message }, error.code)
+      res.send({ message: error.message }, error.code || 500)
     }
   })
 
@@ -23,7 +23,7 @@ module.exports = app => {
     try {
       res.send(await create(req.body))
     } catch (error) {
-      res.send({ message: error.message }, error.code)
+      res.send({ message: error.message }, error.code || 500)
     }
   })
 
@@ -31,7 +31,7 @@ module.exports = app => {
     try {
       res.send(await edit(req.params.id, req.body))
     } catch (error) {
-      res.send({ message: error.message }, error.code)
+      res.send({ message: error.message }, error.code || 500)
     }
   })
 
@@ -39,7 +39,7 @@ module.exports = app => {
     try {
       res.send(await remove(req.params.id))
     } catch (error) {
-      res.send({ message: error.message }, error.code)
+      res.send({ message: error.message }, error.code || 500)
     }
   })
 

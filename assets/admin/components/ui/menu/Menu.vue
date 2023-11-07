@@ -4,7 +4,7 @@ import { Menu } from "lucide-vue-next"
 import { useResponsive } from "@admin/lib/responsive"
 import Dropdown from "@admin/components/ui/dropdown/Dropdown.vue"
 import Button from "@admin/components/ui/elements/Button.vue"
-import Modal from "@admin/components/modal/Modal.vue"
+import Modal from "@admin/components/ui/modal/Modal.vue"
 
 const menuId = 0
 const emitter = inject('emitter')

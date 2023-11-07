@@ -1,4 +1,5 @@
 {
+  "brand_name": "Acme",
   "home": "Accueil",
   "hello_world": "Bonjour le monde",
   "admin": "Administration",
@@ -6,6 +7,8 @@
   "yes": "Oui",
   "no": "Non",
   "delete_resource": "Supprimer la resource",
+  "preview_resource": "Prévisualiser la resource",
+  "edit_resource": "Editer la resource",
 
   "actions": {
     "sign_in": "Se connecter",
@@ -20,7 +23,9 @@
     "delete": "Supprimer",
     "show": "Voir",
     "up": "Monter",
-    "down": "Descendre"
+    "down": "Descendre",
+    "close": "Fermer",
+    "cancel": "Annuler"
   },
 
   "form": {

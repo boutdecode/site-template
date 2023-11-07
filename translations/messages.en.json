@@ -1,4 +1,5 @@
 {
+  "brand_name": "Brand name",
   "home": "Home",
   "hello_world": "Hello World",
   "admin": "Administration",
@@ -6,6 +7,8 @@
   "yes": "Yes",
   "no": "No",
   "delete_resource": "Delete resource",
+  "preview_resource": "Preview resource",
+  "edit_resource": "Edit resource",
 
   "actions": {
     "sign_in": "Sign in",
@@ -21,6 +24,8 @@
     "show": "Show",
     "up": "Up",
     "down": "Down",
+    "close": "Close",
+    "cancel": "Cancel"
   },
 
   "form": {

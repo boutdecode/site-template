@@ -14,8 +14,9 @@ const { item } = defineProps({
 <template lang="pug">
 Menu
   DropdownHeader {{ $t('actions') }}
-  DropdownAction(@click="emitter.emit('modal:show-item:show', item)") {{ $t('actions.show') }}
-  DropdownAction(@click="emitter.emit('modal:edit-item:show', item)") {{ $t('actions.edit') }}
-  DropdownAction(@click="emitter.emit('modal:delete-item:show', item)")
+  DropdownAction(@click="emitter.emit('action:show-item', item)") {{ $t('actions.show') }}
+  DropdownAction(@click="emitter.emit('action:edit-item', item)") {{ $t('actions.edit') }}
+  DropdownAction(@click="emitter.emit('action:delete-item', item)")
     span.text-danger {{ $t('actions.delete') }}
+  slot
 </template>

@@ -1,6 +1,6 @@
 <script setup>
 import { defineProps } from "lucide-vue-next"
-import Modal from "@admin/components/modal/Modal.vue"
+import Modal from "@admin/components/ui/modal/Modal.vue"
 import Button from "@admin/components/ui/elements/Button.vue"
 
 const { level } = defineProps({

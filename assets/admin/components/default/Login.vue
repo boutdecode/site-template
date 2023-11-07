@@ -1,7 +1,7 @@
 <script setup>
 import { ref, inject } from "vue"
 
-import Input from "@admin/components/elements/form/Input.vue"
+import Input from "@admin/components/ui/form/Input.vue"
 
 const requester = inject('requester')
 const auth = inject('auth')

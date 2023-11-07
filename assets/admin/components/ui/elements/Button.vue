@@ -32,7 +32,7 @@ const { type, level, size, form, loading, position, outline, title } = definePro
   },
   position: {
     type: String,
-    default: 'left',
+    default: 'right',
 
     validator(value) {
       return ['left', 'right'].includes(value)
@@ -43,22 +43,6 @@ const { type, level, size, form, loading, position, outline, title } = definePro
     default: false,
   },
   title: String,
-})
-
-const hasLeftIconLoading = computed(() => {
-  return position === 'left' && loading
-})
-
-const hasRightIconLoading = computed(() => {
-  return position === 'right' && loading
-})
-
-const hasLeftIcon = computed(() => {
-  return position === 'left' && !loading
-})
-
-const hasRightIcon = computed(() => {
-  return position === 'right' && !loading
 })
 
 const className = computed(() => {
@@ -78,9 +62,9 @@ const getButtonSize = () => {
 
 <template lang="pug">
 button(:type="type", :form="form", :disabled="loading", :class="className", v-tooltip:500="title")
-  slot(v-if="hasLeftIcon", name="icon")
-  Loader(v-if="hasLeftIconLoading").me-lg-2.me-1
+  slot(v-if="position === 'left' && !loading", name="icon")
+  Loader(v-if="position === 'left' && loading").me-lg-2.me-1
   slot
-  slot(v-if="hasRightIcon", name="icon")
-  Loader(v-if="hasRightIconLoading").ms-lg-2.ms-1
+  slot(v-if="position === 'right' && !loading", name="icon")
+  Loader(v-if="position === 'right' && loading").ms-lg-2.ms-1
 </template>

@@ -7,14 +7,32 @@ export default defineStore('pages', () => {
 
   async function find () {
     const pages = await requester.get('/pages')
-    items.value = pages
+    items.value = pages.map(page => {
+      return {
+        ...page,
+        createdAt: new Date(page.createdAt),
+        editedAt: new Date(page.editedAt)
+      }
+    })
 
-    return pages
+    return items.value
+  }
+
+  async function get (id) {
+    return await requester.get(`/pages/${id}`)
+  }
+
+  async function create (item) {
+    return await requester.post('/pages', item, { 'Content-Type': 'application/json' })
+  }
+
+  async function edit (item) {
+    return await requester.patch(`/pages/${item._id}`, item, { 'Content-Type': 'application/json' })
   }
 
   async function remove (item) {
     return await requester.delete(`/pages/${item._id}`)
   }
 
-  return { items, find, remove }
+  return { items, get, find, remove, create, edit }
 })
