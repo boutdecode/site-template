@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/boutdecode/site-template/compare/v1.5.0...v1.6.0) (2023-11-08)
+
+
+### Features
+
+* Add Create for CRUD ([bcccd49](https://github.com/boutdecode/site-template/commit/bcccd49657be28d5cdaa91b68887184737da78b7))
+
 # [1.5.0](https://github.com/boutdecode/site-template/compare/v1.4.0...v1.5.0) (2023-11-07)
 
 
