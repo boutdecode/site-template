@@ -2,6 +2,7 @@ import { version, name } from '../../../package.json'
 import { Files } from 'lucide-vue-next'
 import usePagesStore from '../stores/pages'
 import PageBrowse from '../components/cms/Browse.vue'
+import CreateForm from "@admin/components/cms/CreateForm.vue"
 
 export default {
   application: {
@@ -22,7 +23,10 @@ export default {
       props: {
         store: usePagesStore,
         template: PageBrowse,
-        title: 'Pages'
+        title: 'Pages',
+        actions: {
+          create: { form: CreateForm }
+        }
       }
     }
   ],

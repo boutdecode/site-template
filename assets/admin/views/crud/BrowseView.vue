@@ -8,10 +8,11 @@ import TopNavBar from "@admin/components/default/TopNavBar.vue"
 import Breadcrumb from "@admin/components/ui/breadcrumb/Breadcrumb.vue"
 import BreadcrumbItem from "@admin/components/ui/breadcrumb/BreadcrumbItem.vue"
 import Actions from "@admin/components/crud/Actions.vue"
-import Delete from "@admin/components/crud/Delete.vue";
-import Show from "@admin/components/crud/Show.vue";
-import Edit from "@admin/components/crud/Edit.vue";
-import Notification from "@admin/components/ui/notification/Notification.vue";
+import Delete from "@admin/components/crud/Delete.vue"
+import Show from "@admin/components/crud/Show.vue"
+import Edit from "@admin/components/crud/Edit.vue"
+import Notification from "@admin/components/ui/notification/Notification.vue"
+import Create from "@admin/components/crud/Create.vue";
 
 const router = useRouter()
 const emitter = inject('emitter')
@@ -28,10 +29,18 @@ const loading = ref(true)
 
 const fetch = () => {
   find()
-      .then((data) => {
-        items.value = data
-        loading.value = false
-      })
+    .then((data) => {
+      items.value = data
+      loading.value = false
+    })
+}
+
+const showCreateModal = () => {
+  if (actions.create && actions.create.route) {
+    router.push({ name: actions.create.route })
+  } else {
+    emitter.emit('modal:create-item:show')
+  }
 }
 
 const showDeleteModal = item => {
@@ -64,8 +73,12 @@ const deleteItem = item => {
 }
 
 const editItem = item => {
-  //edit(item)
   emitter.emit('notification:edited-item:show')
+}
+
+const createItem = item => {
+  emitter.emit('notification:created-item:show')
+  fetch()
 }
 
 emitter.on('action:edit-item', showEditModal)
@@ -83,6 +96,7 @@ TopNavBar
 Card.shadow-sm.m-4
   CardHeader
     h5.mb-0 {{ $t(title) }}
+    button(@click="showCreateModal()").btn.btn-success {{ $t('actions.create') }}
   div.table-responsive
     component(:is="template", :items="items", :loading="loading", :actions="Actions")
   CardFooter
@@ -90,8 +104,13 @@ Card.shadow-sm.m-4
 Delete(v-if="!actions.delete", @success="deleteItem")
 Edit(v-if="!actions.edit", @success="editItem", :store="store")
 Show(v-if="!actions.show")
+Create(v-if="actions.create", :form="actions.create.form" :store="store", @success="createItem")
 
 div.toast-container.position-fixed.top-0.end-0.p-3
   Notification(type="success")#edited-item
     span Item edited successfully
+
+div.toast-container.position-fixed.top-0.end-0.p-3
+  Notification(type="success")#created-item
+    span Item created successfully
 </template>

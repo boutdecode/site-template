@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps } from "lucide-vue-next"
+import { defineProps } from "vue"
 import Modal from "@admin/components/ui/modal/Modal.vue"
 import Button from "@admin/components/ui/elements/Button.vue"
 
