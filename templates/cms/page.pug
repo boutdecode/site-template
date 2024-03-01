@@ -1,15 +1,15 @@
 extends ../layout
 
 block title
-    title=`${page.title[locale]} - ${settings('metaTitle')}`
+  title=`${page.title[locale]} - ${setting('metaTitle')}`
 
 block description
-    meta(name="description", content=page.description[locale])
+  meta(name="description", content=page.description[locale])
 
 block metadata
-    meta(property="og:title", content=page.title[locale])
-    meta(property="og:description", content=page.description[locale])
-    meta(property="og:url", content=url)
+  meta(property="og:title", content=page.title[locale])
+  meta(property="og:description", content=page.description[locale])
+  meta(property="og:url", content=url)
 
 block content
-    main !{page.content[locale]}
+  main !{page.content[locale]}

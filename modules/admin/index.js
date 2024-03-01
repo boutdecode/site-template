@@ -1,5 +1,6 @@
-module.exports = app => {
-  app.get('/admin', (req, res) => {
-    res.render('admin/dashboard')
-  }, 'admin')
+module.exports = ({ app }) => {
+  app.get('/admin', ({ view }) => {
+    console.log('LOL')
+    view.render('admin/dashboard')
+  })
 }

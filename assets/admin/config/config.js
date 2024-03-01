@@ -2,7 +2,7 @@ import { version, name } from '../../../package.json'
 import { Files } from 'lucide-vue-next'
 import usePagesStore from '../stores/pages'
 import PageBrowse from '../components/cms/Browse.vue'
-import CreateForm from "@admin/components/cms/CreateForm.vue"
+import CreateForm from '@admin/components/cms/CreateForm.vue'
 
 export default {
   application: {

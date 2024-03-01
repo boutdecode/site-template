@@ -1,9 +1,8 @@
 require('dotenv').config()
 
 const path = require('node:path')
-const configurator = require('./../src/shared/configuration/configurator')
 
-configurator.set({
+module.exports = {
   application: {
     hostname: process.env.HOST || 'http://localhost',
     metaTitle: 'Site example',
@@ -17,25 +16,34 @@ configurator.set({
     Vary: 'Accept-Encoding'
   },
   api: {
-    version: '1.0.0',
-    title: 'Site example API',
-    description: 'Site example API description',
+    info: {
+      version: '1.0.0',
+      title: 'Site example API',
+      description: 'Site example API description',
+    },
     tags: [
       { name: 'Security', description: 'Managing security' }
     ]
   },
-  data: {
-    dataFolder: path.resolve(process.cwd(), 'data'),
+  modules: {
+    modules: ['security', 'admin', 'website', 'cms'],
+    folder: 'modules'
+  },
+  store: {
+    provider: require('../providers/nedb'),
+    folder: 'data',
     stores: ['users', 'pages']
   },
-  pug: {
-    templateDirectory: path.resolve(process.cwd(), 'templates'),
+  view: {
+    folder: path.resolve(process.cwd(), 'templates'),
     globals: {}
   },
   translation: {
-    fallback: process.env.LOCALE,
+    locale: process.env.LOCALE,
+    folder: 'translations',
     locales: ['fr', 'en']
+  },
+  assets: {
+    folder: 'public'
   }
-})
-
-module.exports = configurator
+}

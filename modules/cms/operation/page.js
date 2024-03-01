@@ -1,46 +1,51 @@
-const { insert, find, findOne, update, remove } = require('../../../src/shared/store/datastore')
-const { slugify } = require("../services/utils");
-const HttpError = require("../../../src/shared/http/http-error");
+const { slugify } = require('../services/utils')
+
+class HttpError extends Error {
+  constructor (message, code) {
+    super(message)
+    this.code = code
+  }
+}
 
 module.exports = {
-  async create({ slug, title, description, content, isFactory, activated }) {
-    const slugResult = slugify(slug);
-    const alreadyPage = await findOne('pages', { slug: slugResult });
+  async create (store, { slug, title, description, content, isFactory, activated }) {
+    const slugResult = slugify(slug)
+    const alreadyPage = await store.findOne('pages', { slug: slugResult })
     if (alreadyPage) {
-      throw new HttpError(`Page with slug ${slugResult} already exists.`, 422);
+      throw new HttpError(`Page with slug ${slugResult} already exists.`, 422)
     }
 
-    return insert('pages', { slug: slugResult, title, description, content, isFactory, activated });
+    return store.insert('pages', { slug: slugResult, title, description, content, isFactory, activated })
   },
 
-  async edit(id, { slug, title, description, content, activated }) {
-    const slugResult = slugify(slug);
-    const alreadyPage = await findOne('pages', { slug: slugResult });
+  async edit (store, id, { slug, title, description, content, activated }) {
+    const slugResult = slugify(slug)
+    const alreadyPage = await store.findOne('pages', { slug: slugResult })
     if (alreadyPage && alreadyPage._id !== id) {
-      throw new HttpError(`Page with slug ${slugResult} already exists.`, 422);
+      throw new HttpError(`Page with slug ${slugResult} already exists.`, 422)
     }
 
-    return update('pages', { _id: id }, { $set: { slug: slugResult, title, description, content, activated } });
+    return store.update('pages', { _id: id }, { $set: { slug: slugResult, title, description, content, activated } })
   },
 
-  async remove(id) {
-    return remove('pages', { _id: id });
+  async remove (store, id) {
+    return store.remove('pages', { _id: id })
   },
 
-  async get(id) {
-    const page = await findOne('pages', { _id: id });
+  async get (store, id) {
+    const page = await store.findOne('pages', { _id: id })
     if (!page) {
-      throw new Error('Page not found.');
+      throw new Error('Page not found.')
     }
 
-    return page;
+    return page
   },
 
-  async findBySlug(slug) {
-    return findOne('pages', { slug });
+  async findBySlug (store, slug) {
+    return store.findOne('pages', { slug })
   },
 
-  async browse() {
-    return find('pages');
-  },
+  async browse (store) {
+    return store.find('pages')
+  }
 }

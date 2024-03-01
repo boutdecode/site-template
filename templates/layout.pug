@@ -1,30 +1,30 @@
 doctype html
 html(lang=locale)
-    head
-        meta(charset="utf-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
 
-        block description
-            meta(name="description", content=settings('metaDescription'))
+    block description
+      meta(name="description", content=setting('metaDescription'))
 
-        meta(name="author", content=settings('metaAuthor'))
+    meta(name="author", content=setting('metaAuthor'))
 
-        block metadata
-            meta(property="og:title", content=settings('metaTitle'))
-            meta(property="og:description", content=settings('metaDescription'))
-            meta(property="og:url", content=url)
+    block metadata
+      meta(property="og:title", content=setting('metaTitle'))
+      meta(property="og:description", content=setting('metaDescription'))
+      meta(property="og:url", content=url)
 
-        meta(property="og:type", content="website")
+    meta(property="og:type", content="website")
 
-        block title
-            title=settings('metaTitle')
+    block title
+      title=setting('metaTitle')
 
-        link(rel="icon", type="image/png", href="/assets/favicon.ico")
-        link(rel="canonical" href=canonical)
+    link(rel="icon", type="image/png", href="/assets/favicon.ico")
+    link(rel="canonical" href=canonical)
 
-        block style
-        block script
-            script(src=asset('main.js'))
+    block style
+    block script
+      script(src=asset('main.js'))
 
-    body
-      block content
+  body
+    block content

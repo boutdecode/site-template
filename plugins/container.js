@@ -1,16 +1,17 @@
-module.exports = {
+const container = {
+  _init: false,
   _items: null,
-  immutable: true,
+  _immutable: true,
 
   /**
    * Set box content
-   * @param {object} items
-   * @param {object} [options={}]
+   * @param {Object} items
+   * @param {Object} [options={}]
    * @param {boolean} [options.immutable=true] Set content immutable
    */
-  set (items, { immutable } = {}) {
-    if (this.immutable && this._items !== null) {
-      throw new Error('Content can\'t change because box is immutable.')
+  set (items, { immutable = true } = {}) {
+    if (this._init) {
+      return
     }
 
     if (typeof items !== 'object' || Array.isArray(items) || items === null) {
@@ -18,10 +19,8 @@ module.exports = {
     }
 
     this._items = items
-
-    if (!!immutable && !this.immutable) {
-      this.immutable = immutable
-    }
+    this._init = true
+    this._immutable = immutable
   },
 
   /**
@@ -30,7 +29,7 @@ module.exports = {
    * @param {*} value
    */
   add (name, value) {
-    if (this.immutable && !!this._items[name]) {
+    if (this._immutable && !!this._items[name]) {
       throw new Error('Can\'t add item because it already exists and box is immutable.')
     }
 
@@ -108,4 +107,14 @@ module.exports = {
     this._items = null
     this.immutable = false
   }
+}
+
+module.exports = (state = {}, { immutable = true } = {}) => (context, next) => {
+  if (!container._init) {
+    container.set(state, { immutable })
+  }
+
+  context.set('container', container)
+
+  next()
 }

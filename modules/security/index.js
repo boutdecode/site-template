@@ -1,32 +1,81 @@
-const { verifyToken } = require("../../src/shared/security/crypto")
-const { signIn, signUp } = require("./operation/security")
+const { verifyToken } = require('./services/crypto')
+const { signIn, signUp } = require('./operation/security')
 
 module.exports = ({ api }) => {
-  api.on('authentication:jwt', (req, res, next, config, scopes, token) => {
-    try {
-      req.attributes.user = verifyToken(token)
-
-      return true
-    } catch (error) {
-      return false
-    }
+  api.use(({ req }, next) => {
+    const token = req.headers.authorization.split(' ')[1]
+    req.attributes.user = verifyToken(token)
+    next()
   })
 
-  api.on('api:security:sign-in', async (req, res) => {
-    try {
-      res.send(await signIn(req.body))
-    } catch (error) {
-      res.send({ message: error.message }, error.code)
-    }
-  })
+  api.post(
+    '/security/sign-in',
+    {
+      tags: ['Security'],
+      requestBody: {
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/components/schemas/SignIn'
+            }
+          }
+        }
+      },
+      responses: {
+        200: {
+          description: 'Authenticated',
+          content: {
+            'application/json': {
+              schema: {
+                $ref: '#/components/schemas/Token'
+              }
+            }
+          }
+        },
 
-  api.on('api:security:sign-up', async (req, res) => {
-    try {
-      await signUp(req.body)
+        401: {
+          description: 'Unauthorized'
+        }
+      }
+    },
+    async ({ req, res, store }) => {
+      try {
+        res.send(await signIn(store, req.body))
+      } catch (error) {
+        res.send({ message: error.message }, error.code)
+      }
+    })
 
-      return res.send(null, 201)
-    } catch (error) {
-      res.send({ message: error.message }, error.code)
-    }
-  })
+  api.post(
+    '/security/sign-up',
+    {
+      tags: ['Security'],
+      requestBody: {
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/components/schemas/SignUp'
+            }
+          }
+        }
+      },
+      responses: {
+        201: {
+          description: 'Registered'
+        },
+
+        400: {
+          description: 'Bad request'
+        }
+      }
+    },
+    async ({ req, res, store }) => {
+      try {
+        await signUp(store, req.body)
+
+        return res.send(null, 201)
+      } catch (error) {
+        res.send({ message: error.message }, error.code)
+      }
+    })
 }
