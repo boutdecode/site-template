@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/boutdecode/site-template/compare/v1.6.0...v2.0.0) (2024-03-01)
+
+
+### Features
+
+* Release 2.0.0 ([ba88269](https://github.com/boutdecode/site-template/commit/ba882698f5cc6680c74afeb8c747a3e21d2c1d87))
+
+
+### BREAKING CHANGES
+
+* Use Yion 3.0.0
+
 # [1.6.0](https://github.com/boutdecode/site-template/compare/v1.5.0...v1.6.0) (2023-11-08)
 
 
