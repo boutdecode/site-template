@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/boutdecode/site-template/compare/v2.1.0...v2.2.0) (2024-03-08)
+
+
+### Features
+
+* Add Editor ([e011273](https://github.com/boutdecode/site-template/commit/e01127356488846961d7503d1a0fb1137c47aa04))
+
 # [2.1.0](https://github.com/boutdecode/site-template/compare/v2.0.0...v2.1.0) (2024-03-08)
 
 
