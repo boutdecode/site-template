@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/boutdecode/site-template/compare/v2.0.0...v2.1.0) (2024-03-08)
+
+
+### Features
+
+* Add CRUD for admin ([fc2497d](https://github.com/boutdecode/site-template/commit/fc2497d75220753d87c9a67f0023c3eaa6ddd371))
+
 # [2.0.0](https://github.com/boutdecode/site-template/compare/v1.6.0...v2.0.0) (2024-03-01)
 
 
