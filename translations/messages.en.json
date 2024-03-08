@@ -24,6 +24,7 @@
   "published": "Published",
   "created_at": "Created at",
   "edited_at": "Updated at",
+  "factory": "Factory",
 
   "actions": {
     "actions": "Actions",

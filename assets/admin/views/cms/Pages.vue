@@ -100,6 +100,7 @@ table.table.table-hover.align-middle.border.rounded
       th {{ $t('title') }}
       th {{ $t('description') }}
       th {{ $t('published') }}
+      th {{ $t('factory') }}
       th {{ $t('created_at') }}
       th {{ $t('edited_at') }}
       th {{ $t('actions.actions') }}
@@ -118,6 +119,8 @@ table.table.table-hover.align-middle.border.rounded
           br
       td
         YesNo(:bool="item.published")
+      td
+        YesNo(:bool="item.factory")
       td
         span(v-date) {{ item.createdAt }}
       td

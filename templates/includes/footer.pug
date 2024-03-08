@@ -1,0 +1,14 @@
+footer.footer-main.bg-body-tertiary.fixed-bottom
+  .container.p-3
+    .row
+      .col-md-6
+        h5 #{setting('metaTitle')}
+      .col-md-6.text-end
+        p
+          a(href="#") Twitter
+          |  |
+          a(href="#") Mastodon
+          |  |
+          a(href="#") Bluesky
+
+    div &copy; #{new Date().getFullYear()} #{setting('metaTitle')}. All rights reserved.

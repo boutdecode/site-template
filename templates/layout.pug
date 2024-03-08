@@ -22,9 +22,20 @@ html(lang=locale)
     link(rel="icon", type="image/png", href="/assets/favicon.ico")
     link(rel="canonical" href=canonical)
 
+    block script
+      link(href=asset('front/main.css'), rel="stylesheet", type="text/css")
+
     block style
     block script
       script(src=asset('main.js'))
+      script(src=asset('front/main.js'), type="module", defer)
 
   body
-    block content
+    block header
+      include includes/header.pug
+
+    main.container
+      block content
+
+    block footer
+      include includes/footer.pug

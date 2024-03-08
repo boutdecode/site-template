@@ -20,6 +20,7 @@ export default ({ mode }) => {
         input: {
           main: './assets/main.js',
           admin: './assets/admin/main.js',
+          front: './assets/front/main.js',
         },
         output: env !== 'production' ? {
           entryFileNames: `build/[name].js`,

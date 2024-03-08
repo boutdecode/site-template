@@ -29,13 +29,22 @@ module.exports = {
   },
 
   async remove (store, id) {
-    return store.remove('pages', { _id: id })
+    const page = await store.findOne('pages', { _id: id })
+    if (!page) {
+      throw new Error('Page not found.', 404)
+    }
+
+    if (page.factory) {
+      throw new Error('Cannot delete factory page.', 422)
+    }
+
+    return store.remove('pages', { _id: page._id })
   },
 
   async get (store, id) {
     const page = await store.findOne('pages', { _id: id })
     if (!page) {
-      throw new Error('Page not found.')
+      throw new Error('Page not found.', 404)
     }
 
     return page

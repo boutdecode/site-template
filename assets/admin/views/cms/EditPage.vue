@@ -1,4 +1,5 @@
 <script setup>
+import Editor from '@tinymce/tinymce-vue'
 import {useRoute, useRouter} from 'vue-router'
 import {Save, ArrowLeft} from 'lucide-vue-next'
 import {ref, inject, onMounted, computed} from 'vue'
@@ -76,8 +77,8 @@ form(@submit.prevent="handleSubmit")
           textarea#description.form-control(name="description" v-model="item.description[locale]" required)
 
         div.mb-3
-          label(for="content") {{ $t('form.label.content') }}
-          textarea#content.form-control(name="content" v-model="item.content[locale]" required)
+          label {{ $t('form.label.content') }}
+          Editor.form-control(:api-key="config.editor.apiKey" :init="config.editor.config" v-model="item.content[locale]")
 
   div.mb-4.form-check.form-switch
     input#published.form-check-input(type="checkbox" name="published" v-model="item.published")

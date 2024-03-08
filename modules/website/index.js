@@ -19,8 +19,13 @@ module.exports = ({ app, config }) => {
     res.redirect(`/${req.get('locale')}/`, 301)
   })
 
-  app.get('/:locale/', ({ view }) => {
-    view.render('homepage')
+  app.get('/:locale/', async ({ view, store }) => {
+    const home = await store.findOne('pages', {slug: 'home', published: true})
+    if (home) {
+      view.render('cms/page', { page: home })
+    } else {
+      view.render('homepage')
+    }
   })
 
   app.get('/:locale/404', ({ req, res, view }) => {

@@ -22,10 +22,6 @@ nav.main-nav
   hr
 
   div.nav-list
-    a.nav-list-item(href="/admin/logout") {{ $t('actions.go_website') }}
+    a.nav-list-item(href="/") {{ $t('actions.go_website') }}
     a.nav-list-item.danger(href="/admin/logout") {{ $t('actions.logout') }}
 </template>
-
-<style scoped>
-
-</style>

@@ -5,8 +5,8 @@ const path = require('node:path')
 module.exports = {
   application: {
     hostname: process.env.HOST || 'http://localhost',
-    metaTitle: 'Site example',
-    metaDescription: 'Site example description',
+    metaTitle: 'Site exemple',
+    metaDescription: 'Site exemple description',
     metaAuthor: 'Kevin Balicot'
   },
   cache: {
