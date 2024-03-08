@@ -1,7 +1,10 @@
 {
   "brand_name": "Brand name",
   "home": "Home",
+  "about": "About",
+  "contact": "Contact",
   "hello_world": "Hello World",
+  "all_rights_reserved": "All rights reserved.",
   "admin": "Administration",
   "dashboard": "Dashboard",
   "yes": "Yes",

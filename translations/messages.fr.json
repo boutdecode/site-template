@@ -1,7 +1,10 @@
 {
   "brand_name": "Acme",
   "home": "Accueil",
+  "about": "A propos",
+  "contact": "Contact",
   "hello_world": "Bonjour le monde",
+  "all_rights_reserved": "Tous droits réservés.",
   "admin": "Administration",
   "dashboard": "Tableau de bord",
   "yes": "Oui",
