@@ -105,11 +105,14 @@ module.exports = ({ stores = [], folder = 'data' } = {}) => ({
    * Find document from collection
    * @param {string} collection
    * @param {object} query
+   * @param {number} page
+   * @param {number} limit
+   * @param {object} sort
    * @returns {Promise<*>}
    */
-  find (collection, query = {}) {
+  find (collection, query = {}, page = 1, limit = 100, sort = {editedAt: -1, createdAt: -1}) {
     return new Promise((resolve, reject) => {
-      this.getCollection(collection).find(query, (err, result) => {
+      this.getCollection(collection).find(query).skip((page - 1) * limit).limit(limit).sort(sort).exec((err, result) => {
         if (err) {
           return reject(err)
         }
@@ -117,5 +120,43 @@ module.exports = ({ stores = [], folder = 'data' } = {}) => ({
         return resolve(result)
       })
     })
+  },
+
+  /**
+   * Find document from collection
+   * @param {string} collection
+   * @param {object} query
+   * @returns {Promise<*>}
+   */
+  count (collection, query = {}) {
+    return new Promise((resolve, reject) => {
+      this.getCollection(collection).count(query, (err, result) => {
+        if (err) {
+          return reject(err)
+        }
+
+        return resolve(result)
+      })
+    })
+  },
+
+  /**
+   * Find document from collection
+   * @param {string} collection
+   * @param {object} query
+   * @param {number} page
+   * @param {number} limit
+   * @param {object} sort
+   * @returns {Promise<*>}
+   */
+  async paginated (collection, query = {}, page = 1, limit = 10, sort = {editedAt: -1, createdAt: -1}) {
+    return {
+      data: await this.find(collection, query, page, limit, sort),
+      pagination: {
+        page,
+        limit,
+        total: await this.count(collection, query)
+      }
+    }
   }
 })

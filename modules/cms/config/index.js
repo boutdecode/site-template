@@ -17,8 +17,8 @@ module.exports = ({ api, config }) => {
       title: translatableContent,
       description: translatableContent,
       content: translatableContent,
-      activated: { type: 'boolean', default: false },
-      isFactory: { type: 'boolean', default: false }
+      published: { type: 'boolean', default: false },
+      factory: { type: 'boolean', default: false }
     }
   })
 
@@ -29,7 +29,7 @@ module.exports = ({ api, config }) => {
       title: translatableContent,
       description: translatableContent,
       content: translatableContent,
-      activated: { type: 'boolean', default: false }
+      published: { type: 'boolean', default: false }
     }
   })
 
@@ -42,10 +42,28 @@ module.exports = ({ api, config }) => {
       title: translatableContent,
       description: translatableContent,
       content: translatableContent,
-      activated: { type: 'boolean', default: false },
-      isFactory: { type: 'boolean', default: false },
+      published: { type: 'boolean', default: false },
+      factory: { type: 'boolean', default: false },
       createdAt: { type: 'string', format: 'datetime' },
       editedAt: { type: 'string', format: 'datetime' }
+    }
+  })
+
+  api.addSchemas('PageList', {
+    type: 'object',
+    properties: {
+      pagination: {
+        type: 'object',
+        properties: {
+          page: { type: 'number' },
+          limit: { type: 'number' },
+          total: { type: 'number' }
+        }
+      },
+      data: {
+        type: 'array',
+        items: { $ref: '#/components/schemas/Page' }
+      }
     }
   })
 }

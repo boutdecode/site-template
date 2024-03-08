@@ -1,9 +1,6 @@
 <script setup>
-import { defineProps, computed } from "vue"
-import { Loader } from "lucide-vue-next"
-import { useResponsive } from "@admin/lib/responsive";
-
-const { xs, sm, md } = useResponsive()
+import {defineProps, computed} from 'vue'
+import {Loader} from 'lucide-vue-next'
 
 const { type, level, size, form, loading, position, outline, title } = defineProps({
   type: {
@@ -52,8 +49,6 @@ const className = computed(() => {
 const getButtonSize = () => {
   if (size) {
     return `btn-${size}`;
-  } else if (xs() || sm() || md()) {
-    return 'btn-sm';
   }
 
   return '';
@@ -61,7 +56,7 @@ const getButtonSize = () => {
 </script>
 
 <template lang="pug">
-button(:type="type", :form="form", :disabled="loading", :class="className", v-tooltip:500="title")
+button.d-flex.align-items-center(:type="type", :form="form", :disabled="loading", :class="className", v-tooltip:500="title")
   slot(v-if="position === 'left' && !loading", name="icon")
   Loader(v-if="position === 'left' && loading").me-lg-2.me-1
   slot

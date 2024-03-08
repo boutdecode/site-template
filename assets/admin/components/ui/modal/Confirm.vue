@@ -1,7 +1,7 @@
 <script setup>
-import { defineProps } from "vue"
-import Modal from "@admin/components/ui/modal/Modal.vue"
-import Button from "@admin/components/ui/elements/Button.vue"
+import {defineProps} from 'vue'
+import Modal from './Modal.vue'
+import Button from '../elements/Button.vue'
 
 const { level } = defineProps({
   level: {

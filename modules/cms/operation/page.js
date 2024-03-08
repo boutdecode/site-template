@@ -8,24 +8,24 @@ class HttpError extends Error {
 }
 
 module.exports = {
-  async create (store, { slug, title, description, content, isFactory, activated }) {
+  async create (store, { slug, title, description, content, factory, published }) {
     const slugResult = slugify(slug)
     const alreadyPage = await store.findOne('pages', { slug: slugResult })
     if (alreadyPage) {
       throw new HttpError(`Page with slug ${slugResult} already exists.`, 422)
     }
 
-    return store.insert('pages', { slug: slugResult, title, description, content, isFactory, activated })
+    return store.insert('pages', { slug: slugResult, title, description, content, factory, published })
   },
 
-  async edit (store, id, { slug, title, description, content, activated }) {
+  async edit (store, id, { slug, title, description, content, published }) {
     const slugResult = slugify(slug)
     const alreadyPage = await store.findOne('pages', { slug: slugResult })
     if (alreadyPage && alreadyPage._id !== id) {
       throw new HttpError(`Page with slug ${slugResult} already exists.`, 422)
     }
 
-    return store.update('pages', { _id: id }, { $set: { slug: slugResult, title, description, content, activated } })
+    return store.update('pages', { _id: id }, { $set: { slug: slugResult, title, description, content, published } })
   },
 
   async remove (store, id) {
@@ -45,7 +45,18 @@ module.exports = {
     return store.findOne('pages', { slug })
   },
 
-  async browse (store) {
-    return store.find('pages')
+  async browse (store, { search, locale = 'en' }, page = 1, limit = 100) {
+    let query = {}
+    if (search) {
+      query = {
+        $or: [
+          {[`title.${locale}`]: {$regex: new RegExp(search, 'i')}},
+          {[`description.${locale}`]: {$regex: new RegExp(search, 'i')}},
+          {slug: {$regex: new RegExp(search, 'i')}}
+        ]
+      }
+    }
+
+    return store.paginated('pages', query, page, limit)
   }
 }

@@ -1,27 +1,49 @@
 const { browse, get, create, edit, remove, findBySlug } = require('./operation/page')
+const {Regex} = require("lucide-vue-next");
 
 module.exports = ({ app, api }) => {
   api.get(
     '/api/pages',
     {
       tags: ['CMS'],
+      parameters: [
+        {
+          name: 'page',
+          in: 'query',
+          schema: {type: 'number', default: 1}
+        },
+        {
+          name: 'limit',
+          in: 'query',
+          schema: {type: 'number', default: 10}
+        },
+        {
+          name: 'search',
+          in: 'query',
+          schema: {type: 'string'}
+        },
+        {
+          name: 'locale',
+          in: 'query',
+          schema: {type: 'string', default: 'fr'}
+        }
+      ],
       responses: {
         200: {
           description: 'OK',
           content: {
             'application/json': {
-              schema: {
-                type: 'array',
-                items: { $ref: '#/components/schemas/Page' }
-              }
+              schema: { $ref: '#/components/schemas/PageList' }
             }
           }
         }
       }
     },
-    async ({ res, store }) => {
+    async ({ req, res, store }) => {
+      const { search, locale, page, limit } = req.query
+
       try {
-        res.send(await browse(store))
+        res.send(await browse(store, { search, locale }, page, limit))
       } catch (error) {
         res.send({ message: error.message }, error.code || 500)
       }
@@ -35,9 +57,7 @@ module.exports = ({ app, api }) => {
         {
           name: 'id',
           in: 'path',
-          schema: {
-            type: 'string'
-          },
+          schema: {type: 'string'},
           required: true
         }
       ],
@@ -61,9 +81,7 @@ module.exports = ({ app, api }) => {
       requestBody: {
         content: {
           'application/json': {
-            schema: {
-              $ref: '#/components/schemas/CreatePage'
-            }
+            schema: { $ref: '#/components/schemas/CreatePage' }
           }
         }
       }
@@ -84,9 +102,7 @@ module.exports = ({ app, api }) => {
         {
           name: 'id',
           in: 'path',
-          schema: {
-            type: 'string'
-          },
+          schema: {type: 'string'},
           required: true
         }
       ],
@@ -114,9 +130,7 @@ module.exports = ({ app, api }) => {
         {
           name: 'id',
           in: 'path',
-          schema: {
-            type: 'string'
-          },
+          schema: {type: 'string'},
           required: true
         }
       ]

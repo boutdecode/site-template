@@ -9,8 +9,24 @@
   "delete_resource": "Delete resource",
   "preview_resource": "Preview resource",
   "edit_resource": "Edit resource",
+  "create_resource": "Create resource",
+  "cms": "CMS",
+  "pages": "Pages",
+  "locale": "Locale",
+  "en": "\uD83C\uDDEC\uD83C\uDDE7 English",
+  "fr": "\uD83C\uDDEB\uD83C\uDDF7 French",
+  "limit": "Limit",
+  "slug": "Slug",
+  "title": "Title",
+  "description": "Description",
+  "content": "Content",
+  "activated": "Activated",
+  "published": "Published",
+  "created_at": "Created at",
+  "edited_at": "Updated at",
 
   "actions": {
+    "actions": "Actions",
     "sign_in": "Sign in",
     "logout": "Logout",
     "create": "Create",
@@ -25,22 +41,39 @@
     "up": "Up",
     "down": "Down",
     "close": "Close",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "previous": "Previous",
+    "next": "Next"
   },
 
   "form": {
     "label": {
       "username": "Username",
       "password": "Password",
-      "remember_me": "Remember me"
+      "remember_me": "Remember me",
+      "slug": "Slug",
+      "title": "Title",
+      "description": "Description",
+      "content": "Content",
+      "activated": "Activated"
     },
 
     "help": {
+      "slug": "The slug is used to generate the URL of the page.",
+      "published": "If the page is published, it will be visible on the website.",
+      "factory": "The factory page can not be deleted."
     },
 
     "placeholder": {
       "username": "Type your username",
       "password": "Type your password"
     }
+  },
+
+  "notifications": {
+    "resource_created": "Item created!",
+    "resource_saved": "Item updated!",
+    "resource_deleted": "Item deleted!",
+    "error_occurred": "⚠\uFE0F An error occurred!"
   }
 }

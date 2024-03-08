@@ -2,11 +2,11 @@ const { verifyToken } = require('./services/crypto')
 const { signIn, signUp } = require('./operation/security')
 
 module.exports = ({ api }) => {
-  api.use(({ req }, next) => {
+  /*api.use(({ req }, next) => {
     const token = req.headers.authorization.split(' ')[1]
     req.attributes.user = verifyToken(token)
     next()
-  })
+  })*/
 
   api.post(
     '/security/sign-in',

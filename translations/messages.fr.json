@@ -9,8 +9,24 @@
   "delete_resource": "Supprimer la resource",
   "preview_resource": "Prévisualiser la resource",
   "edit_resource": "Editer la resource",
+  "create_resource": "Créer une resource",
+  "cms": "CMS",
+  "pages": "Pages",
+  "locale": "Langue",
+  "fr": "\uD83C\uDDEB\uD83C\uDDF7 Français",
+  "en": "\uD83C\uDDEC\uD83C\uDDE7 Anglais",
+  "limit": "Limite",
+  "slug": "Slug",
+  "title": "Titre",
+  "description": "Description",
+  "content": "Contenu",
+  "activated": "Actif",
+  "published": "Publié",
+  "created_at": "Créé le",
+  "edited_at": "Mis à jour le",
 
   "actions": {
+    "actions": "Actions",
     "sign_in": "Se connecter",
     "logout": "Se déconnecter",
     "create": "Créer",
@@ -25,22 +41,40 @@
     "up": "Monter",
     "down": "Descendre",
     "close": "Fermer",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "previous": "Précédent",
+    "next": "Suivant"
   },
 
   "form": {
     "label": {
       "username": "Identifiant",
       "password": "Mot de passe",
-      "remember_me": "Se souvenir de moi"
+      "remember_me": "Se souvenir de moi",
+      "slug": "Slug",
+      "title": "Titre",
+      "description": "Description",
+      "content": "Contenu",
+      "published": "Publié",
+      "factory": "Est une resource usine"
     },
 
     "help": {
+      "slug": "Le slug est un identifiant unique au format URL, ex: \"en-savoir-plus\".",
+      "published": "La ressource est disponible sur le site.",
+      "factory": "Une resource usine ne peut pas être supprimée, cette option est irreversible."
     },
 
     "placeholder": {
       "username": "Entrez votre identifiant",
       "password": "Entrez votre mot de passe"
     }
+  },
+
+  "notifications": {
+    "resource_saved": "La resource a été sauvegardée avec succès",
+    "resource_deleted": "La resource a été supprimée avec succès",
+    "resource_created": "La resource a été créée avec succès",
+    "error_occurred": "⚠\uFE0F Une erreur est survenue"
   }
 }

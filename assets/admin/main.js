@@ -5,10 +5,10 @@ import { createPinia } from 'pinia'
 import mitt from 'mitt'
 
 import App from './App.vue'
-import router from './router'
-import i18n from './lib/i18n'
-import responsive from './lib/responsive'
 import config from './config/config'
+import router from './lib/router'
+import i18n from './lib/i18n'
+//import responsive from './lib/responsive'
 import Requester from './lib/requester'
 import Auth from './lib/auth'
 
@@ -20,7 +20,7 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 app.use(i18n)
-app.use(responsive)
+//app.use(responsive)
 app.provide('emitter', mitt())
 
 app.directive('date', dateDirective)

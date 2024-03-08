@@ -1,6 +1,6 @@
 <script setup>
-import { Check, X } from "lucide-vue-next"
-import { defineProps } from "vue"
+import {Check, X} from 'lucide-vue-next'
+import {defineProps} from 'vue'
 
 const { bool } = defineProps({
   bool: Boolean
@@ -9,10 +9,10 @@ const { bool } = defineProps({
 
 <template lang="pug">
 span(v-if="bool").d-flex-inline.align-items-center.badge.rounded-pill.text-bg-success
-  Check(size="16px")
+  Check(:size=16)
   span.ms-1 {{ $t('yes') }}
 
 span(v-if="!bool").d-flex-inline.align-items-center.badge.rounded-pill.text-bg-danger
-  X(size="16px")
+  X(:size=16)
   span.ms-1 {{ $t('no') }}
 </template>
