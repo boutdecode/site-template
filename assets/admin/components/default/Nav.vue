@@ -1,8 +1,14 @@
 <script setup>
-import { inject } from 'vue'
-import { Home } from 'lucide-vue-next'
+import {inject} from 'vue'
+import {Home} from 'lucide-vue-next'
 
 const config = inject('config')
+const auth = inject('auth')
+
+const handleLogout = () => {
+  auth.logout()
+  window.location.reload()
+}
 </script>
 
 <template lang="pug">
@@ -23,5 +29,5 @@ nav.main-nav
 
   div.nav-list
     a.nav-list-item(href="/") {{ $t('actions.go_website') }}
-    a.nav-list-item.danger(href="/admin/logout") {{ $t('actions.logout') }}
+    button.nav-list-item.danger(@click="handleLogout") {{ $t('actions.logout') }}
 </template>

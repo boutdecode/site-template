@@ -1,18 +1,18 @@
-import {plugin} from './wysiwyg/code-editor'
+import { plugin } from './wysiwyg/code-editor'
 
 const conf = {
   plugins: ['image', 'link', 'lists', 'fullscreen', 'code', 'preview', 'template', 'importcss'],
   toolbar: [
-    {name: 'history', items: ['undo', 'redo']},
-    {name: 'styles', items: ['styles']},
-    {name: 'formatting', items: ['bold', 'italic']},
-    {name: 'lists', items: ['numlist', 'bullist']},
-    {name: 'alignment', items: ['alignleft', 'aligncenter', 'alignright', 'alignjustify']},
-    {name: 'indentation', items: ['outdent', 'indent']},
-    {name: 'insert', items: ['link', 'image']},
-    {name: 'tools', items: ['template', 'fullscreen', 'code', 'preview']}
+    { name: 'history', items: ['undo', 'redo'] },
+    { name: 'styles', items: ['styles'] },
+    { name: 'formatting', items: ['bold', 'italic'] },
+    { name: 'lists', items: ['numlist', 'bullist'] },
+    { name: 'alignment', items: ['alignleft', 'aligncenter', 'alignright', 'alignjustify'] },
+    { name: 'indentation', items: ['outdent', 'indent'] },
+    { name: 'insert', items: ['link', 'image'] },
+    { name: 'tools', items: ['template', 'fullscreen', 'code', 'preview'] }
   ],
-  setup(editor, other) {
+  setup (editor, other) {
     plugin()
   },
   content_css: '/build/main2.css',
@@ -125,7 +125,7 @@ const conf = {
             <div class="col-lg-3"><p>Contenu 4</p></div>
         </div>
         `
-    },
+    }
   ]
 }
 

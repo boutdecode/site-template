@@ -1,5 +1,5 @@
-import {ref, inject} from 'vue'
-import {defineStore} from 'pinia'
+import { ref, inject } from 'vue'
+import { defineStore } from 'pinia'
 
 export default defineStore('pages', () => {
   const requester = inject('requester')

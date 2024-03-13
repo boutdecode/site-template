@@ -17,7 +17,7 @@ module.exports = ({ api, config }) => {
       title: translatableContent,
       description: translatableContent,
       content: translatableContent,
-      published: { type: 'boolean', default: false },
+      enabled: { type: 'boolean', default: false },
       factory: { type: 'boolean', default: false }
     }
   })
@@ -29,7 +29,7 @@ module.exports = ({ api, config }) => {
       title: translatableContent,
       description: translatableContent,
       content: translatableContent,
-      published: { type: 'boolean', default: false }
+      enabled: { type: 'boolean', default: false }
     }
   })
 
@@ -42,7 +42,7 @@ module.exports = ({ api, config }) => {
       title: translatableContent,
       description: translatableContent,
       content: translatableContent,
-      published: { type: 'boolean', default: false },
+      enabled: { type: 'boolean', default: false },
       factory: { type: 'boolean', default: false },
       createdAt: { type: 'string', format: 'datetime' },
       editedAt: { type: 'string', format: 'datetime' }

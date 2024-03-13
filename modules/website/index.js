@@ -20,7 +20,7 @@ module.exports = ({ app, config }) => {
   })
 
   app.get('/:locale/', async ({ view, store }) => {
-    const home = await store.findOne('pages', {slug: 'home', published: true})
+    const home = await store.findOne('pages', { slug: 'home', enabled: true })
     if (home) {
       view.render('cms/page', { page: home })
     } else {

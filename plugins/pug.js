@@ -31,11 +31,11 @@ module.exports = ({ folder = 'templates', globals = {} } = {}) => {
         return req.query
       },
 
-      t(name, options = {}) {
+      t (name, options = {}) {
         return i18n.t(name, { lng: templateFunctions.locale, ...options })
       },
 
-      setting(name, defaultValue) {
+      setting (name, defaultValue) {
         return i18n.t(container.get(`application.${name}`, defaultValue), { lng: templateFunctions.locale })
       },
 

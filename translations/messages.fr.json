@@ -24,10 +24,14 @@
   "description": "Description",
   "content": "Contenu",
   "activated": "Actif",
-  "published": "Publié",
+  "enabled": "Activé",
   "created_at": "Créé le",
   "edited_at": "Mis à jour le",
   "factory": "Usine",
+  "admins": "Administrateurs",
+  "username": "Identifiant",
+  "password": "Mot de passe",
+  "email": "Email",
 
   "actions": {
     "actions": "Actions",
@@ -54,18 +58,19 @@
     "label": {
       "username": "Identifiant",
       "password": "Mot de passe",
+      "email": "Email",
       "remember_me": "Se souvenir de moi",
       "slug": "Slug",
       "title": "Titre",
       "description": "Description",
       "content": "Contenu",
-      "published": "Publié",
+      "enabled": "Activé",
       "factory": "Est une resource usine"
     },
 
     "help": {
       "slug": "Le slug est un identifiant unique au format URL, ex: \"en-savoir-plus\".",
-      "published": "La ressource est disponible sur le site.",
+      "enabled": "La ressource est disponible sur le site.",
       "factory": "Une resource usine ne peut pas être supprimée, cette option est irreversible."
     },
 

@@ -1,15 +1,8 @@
-const { verifyToken } = require('./services/crypto')
-const { signIn, signUp } = require('./operation/security')
+const { signIn, signUp } = require('./operations')
 
 module.exports = ({ api }) => {
-  /*api.use(({ req }, next) => {
-    const token = req.headers.authorization.split(' ')[1]
-    req.attributes.user = verifyToken(token)
-    next()
-  })*/
-
   api.post(
-    '/security/sign-in',
+    '/api/security/sign-in',
     {
       tags: ['Security'],
       requestBody: {
@@ -40,14 +33,14 @@ module.exports = ({ api }) => {
     },
     async ({ req, res, store }) => {
       try {
-        res.send(await signIn(store, req.body))
+        res.send(await signIn(store)(req.body))
       } catch (error) {
         res.send({ message: error.message }, error.code)
       }
     })
 
   api.post(
-    '/security/sign-up',
+    '/api/security/sign-up',
     {
       tags: ['Security'],
       requestBody: {
@@ -71,7 +64,7 @@ module.exports = ({ api }) => {
     },
     async ({ req, res, store }) => {
       try {
-        await signUp(store, req.body)
+        await signUp(store)(req.body)
 
         return res.send(null, 201)
       } catch (error) {

@@ -53,7 +53,7 @@ export default class Auth {
   }
 
   get token () {
-    if (this._accessToken !== null && this._refreshToken !== null) {
+    if (this._accessToken !== null) {
       return new Token(this._accessToken, this._refreshToken)
     }
 

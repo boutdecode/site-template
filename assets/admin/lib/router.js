@@ -22,6 +22,21 @@ const router = createRouter({
       path: '/cms/pages/create',
       name: 'cms.pages.create',
       component: () => import('../views/cms/EditPage.vue')
+    },
+    {
+      path: '/administration/users',
+      name: 'admin.users.index',
+      component: () => import('../views/admin/Users.vue')
+    },
+    {
+      path: '/administration/users/:id/edit',
+      name: 'admin.users.edit',
+      component: () => import('../views/admin/EditUser.vue')
+    },
+    {
+      path: '/administration/users/create',
+      name: 'admin.users.create',
+      component: () => import('../views/admin/EditUser.vue')
     }
   ]
 })

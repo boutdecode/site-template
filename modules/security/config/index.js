@@ -1,9 +1,23 @@
+const { verifyToken } = require('../services/crypto')
+
 module.exports = ({ api }) => {
-  /* apiConfigGenerator.addSecurity('jwt', {
-    type: 'http',
-    scheme: 'bearer',
-    bearerFormat: 'JWT'
-  }) */
+  api.addSecurity(
+    'jwt',
+    {
+      type: 'http',
+      scheme: 'bearer',
+      bearerFormat: 'JWT'
+    },
+    (context) => {
+      const { session, security } = context
+      try {
+        session.user = verifyToken(security.token)
+
+        return true
+      } catch (error) {
+        throw new Error('Invalid token')
+      }
+    })
 
   api.addSchemas('SignIn', {
     required: ['name', 'password'],

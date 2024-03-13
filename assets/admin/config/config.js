@@ -1,5 +1,5 @@
 import { version, name } from '../../../package.json'
-import { Files } from 'lucide-vue-next'
+import { Files, Users } from 'lucide-vue-next'
 import config from './../lib/wysiwyg'
 
 export default {
@@ -22,10 +22,20 @@ export default {
           to: { name: 'cms.pages.index' }
         }
       ]
+    },
+    {
+      name: 'admin',
+      links: [
+        {
+          name: 'admins',
+          icon: Users,
+          to: { name: 'admin.users.index' }
+        }
+      ]
     }
   ],
   editor: {
     apiKey: '9kur7zji49oj6z1o7agb4vq8vqv3m0tnvb7vdaoqgsa3cdag',
-    config: config
+    config
   }
 }

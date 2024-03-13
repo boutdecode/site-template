@@ -1,31 +1,33 @@
-const { browse, get, create, edit, remove, findBySlug } = require('./operation/page')
-const {Regex} = require("lucide-vue-next");
+const fs = require('node:fs')
+const path = require('node:path')
+const { browse, get, create, edit, remove, findBySlug } = require('./operations')
 
 module.exports = ({ app, api }) => {
   api.get(
     '/api/pages',
     {
       tags: ['CMS'],
+      security: [{ jwt: [] }],
       parameters: [
         {
           name: 'page',
           in: 'query',
-          schema: {type: 'number', default: 1}
+          schema: { type: 'number', default: 1 }
         },
         {
           name: 'limit',
           in: 'query',
-          schema: {type: 'number', default: 10}
+          schema: { type: 'number', default: 10 }
         },
         {
           name: 'search',
           in: 'query',
-          schema: {type: 'string'}
+          schema: { type: 'string' }
         },
         {
           name: 'locale',
           in: 'query',
-          schema: {type: 'string', default: 'fr'}
+          schema: { type: 'string', default: 'fr' }
         }
       ],
       responses: {
@@ -41,9 +43,8 @@ module.exports = ({ app, api }) => {
     },
     async ({ req, res, store }) => {
       const { search, locale, page, limit } = req.query
-
       try {
-        res.send(await browse(store, { search, locale }, page, limit))
+        res.send(await browse(store)({ search, locale }, page, limit))
       } catch (error) {
         res.send({ message: error.message }, error.code || 500)
       }
@@ -53,11 +54,12 @@ module.exports = ({ app, api }) => {
     '/api/pages/{id}',
     {
       tags: ['CMS'],
+      security: [{ jwt: [] }],
       parameters: [
         {
           name: 'id',
           in: 'path',
-          schema: {type: 'string'},
+          schema: { type: 'string' },
           required: true
         }
       ],
@@ -68,7 +70,7 @@ module.exports = ({ app, api }) => {
     },
     async ({ req, res, store }) => {
       try {
-        res.send(await get(store, req.params.id))
+        res.send(await get(store)(req.params.id))
       } catch (error) {
         res.send({ message: error.message }, error.code || 500)
       }
@@ -78,6 +80,7 @@ module.exports = ({ app, api }) => {
     '/api/pages',
     {
       tags: ['CMS'],
+      security: [{ jwt: [] }],
       requestBody: {
         content: {
           'application/json': {
@@ -88,7 +91,7 @@ module.exports = ({ app, api }) => {
     },
     async ({ req, res, store }) => {
       try {
-        res.send(await create(store, req.body))
+        res.send(await create(store)(req.body))
       } catch (error) {
         res.send({ message: error.message }, error.code || 500)
       }
@@ -98,11 +101,12 @@ module.exports = ({ app, api }) => {
     '/api/pages/{id}',
     {
       tags: ['CMS'],
+      security: [{ jwt: [] }],
       parameters: [
         {
           name: 'id',
           in: 'path',
-          schema: {type: 'string'},
+          schema: { type: 'string' },
           required: true
         }
       ],
@@ -116,7 +120,7 @@ module.exports = ({ app, api }) => {
     },
     async ({ req, res, store }) => {
       try {
-        res.send(await edit(store, req.params.id, req.body))
+        res.send(await edit(store)(req.params.id, req.body))
       } catch (error) {
         res.send({ message: error.message }, error.code || 500)
       }
@@ -126,29 +130,36 @@ module.exports = ({ app, api }) => {
     '/api/pages/{id}',
     {
       tags: ['CMS'],
+      security: [{ jwt: [] }],
       parameters: [
         {
           name: 'id',
           in: 'path',
-          schema: {type: 'string'},
+          schema: { type: 'string' },
           required: true
         }
       ]
     },
     async ({ req, res, store }) => {
       try {
-        res.send(await remove(store, req.params.id))
+        res.send(await remove(store)(req.params.id))
       } catch (error) {
         res.send({ message: error.message }, error.code || 500)
       }
     })
 
-  app.get('/:locale/page/:slug', async ({ req, res, store, view }) => {
-    const page = await findBySlug(store, req.params.slug)
-    if (!page) {
-      return res.redirect('/fr/404')
+  app.get('/:locale([a-z]{2})/:slug', async ({ req, res, store, view, container }) => {
+    const slug = req.params.slug
+    const page = await findBySlug(store)(slug)
+    if (page) {
+      return view.render('cms/page', { page })
     }
 
-    view.render('cms/page', { page })
+    const viewFolder = container.get('view.folder', path.resolve(process.cwd(), 'templates'))
+    if (fs.existsSync(`${viewFolder}/${slug}.pug`)) {
+      return view.render(slug, { page })
+    }
+
+    return res.redirect(`/${req.get('locale') || 'en'}/404`)
   })
 }

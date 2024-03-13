@@ -35,7 +35,8 @@ export default ({ mode }) => {
     },
     resolve: {
       alias: {
-        '@admin': fileURLToPath(new URL('./assets/admin', import.meta.url))
+        '@admin': fileURLToPath(new URL('./assets/admin', import.meta.url)),
+        '@front': fileURLToPath(new URL('./assets/front', import.meta.url))
       }
     }
   })

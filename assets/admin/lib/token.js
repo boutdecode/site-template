@@ -29,6 +29,10 @@ export default class Token {
     Object.freeze(this)
   }
 
+  get sub () {
+    return this.payload.sub
+  }
+
   isGranted (scope) {
     return this.payload.scopes.indexOf(scope) > -1
   }

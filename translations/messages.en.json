@@ -24,10 +24,14 @@
   "description": "Description",
   "content": "Content",
   "activated": "Activated",
-  "published": "Published",
+  "enabled": "Enabled",
   "created_at": "Created at",
   "edited_at": "Updated at",
   "factory": "Factory",
+  "admins": "Administrators",
+  "username": "Username",
+  "password": "Password",
+  "email": "Email",
 
   "actions": {
     "actions": "Actions",
@@ -54,17 +58,18 @@
     "label": {
       "username": "Username",
       "password": "Password",
+      "email": "Email",
       "remember_me": "Remember me",
       "slug": "Slug",
       "title": "Title",
       "description": "Description",
       "content": "Content",
-      "activated": "Activated"
+      "enabled": "Enabled"
     },
 
     "help": {
       "slug": "The slug is used to generate the URL of the page.",
-      "published": "If the page is published, it will be visible on the website.",
+      "enabled": "If the page is enabled, it will be visible on the website.",
       "factory": "The factory page can not be deleted."
     },
 

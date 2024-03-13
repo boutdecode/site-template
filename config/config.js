@@ -15,6 +15,11 @@ module.exports = {
     ETag: Date.now(),
     Vary: 'Accept-Encoding'
   },
+  cors: {
+    origin: process.env.CORS || '*',
+    headers: 'X-Requested-With, Content-Type, Accept, Origin, Authorization',
+    methods: 'GET, POST, PUT, DELETE, OPTIONS'
+  },
   api: {
     info: {
       version: '1.0.0',
@@ -22,7 +27,9 @@ module.exports = {
       description: 'Site example API description',
     },
     tags: [
-      { name: 'Security', description: 'Managing security' }
+      { name: 'CMS', description: 'Managing CMS' },
+      { name: 'Admin', description: 'Managing admins' },
+      { name: 'Security', description: 'Managing security' },
     ]
   },
   modules: {
@@ -32,7 +39,7 @@ module.exports = {
   store: {
     provider: require('../providers/nedb'),
     folder: 'data',
-    stores: ['users', 'pages']
+    stores: ['admins', 'pages']
   },
   view: {
     folder: path.resolve(process.cwd(), 'templates'),

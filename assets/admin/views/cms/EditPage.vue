@@ -9,7 +9,7 @@ import BreadcrumbItem from '@admin/components/ui/breadcrumb/BreadcrumbItem.vue'
 import Button from '@admin/components/ui/elements/Button.vue'
 import ButtonLink from '@admin/components/ui/elements/ButtonLink.vue'
 
-const {edit, create} = useStore()
+const {edit, get, create} = useStore()
 const config = inject('config')
 const emitter = inject('emitter')
 const item = ref({
@@ -17,7 +17,7 @@ const item = ref({
   title: {},
   description: {},
   content: {},
-  published: false,
+  enabled: false,
   factory: false
 })
 const route = useRoute()
@@ -30,8 +30,7 @@ onMounted(async () => {
 })
 
 const fetchItem = async (id) => {
-  const response = await fetch(`/api/pages/${id}`)
-  item.value = await response.json()
+  item.value = await get(id)
 }
 
 const handleSubmit = async () => {
@@ -81,9 +80,9 @@ form(@submit.prevent="handleSubmit")
           Editor.form-control(:api-key="config.editor.apiKey" :init="config.editor.config" v-model="item.content[locale]")
 
   div.mb-4.form-check.form-switch
-    input#published.form-check-input(type="checkbox" name="published" v-model="item.published")
-    label.form-check-label(for="published") {{ $t('form.label.published') }}
-    div.form-text {{ $t('form.help.published') }}
+    input#enabled.form-check-input(type="checkbox" name="enabled" v-model="item.enabled")
+    label.form-check-label(for="enabled") {{ $t('form.label.enabled') }}
+    div.form-text {{ $t('form.help.enabled') }}
 
   div.mb-4.form-check.form-switch(v-if="mode === 'create'")
     input#isFactory.form-check-input(type="checkbox" name="factory" v-model="item.factory")

@@ -110,7 +110,7 @@ module.exports = ({ stores = [], folder = 'data' } = {}) => ({
    * @param {object} sort
    * @returns {Promise<*>}
    */
-  find (collection, query = {}, page = 1, limit = 100, sort = {editedAt: -1, createdAt: -1}) {
+  find (collection, query = {}, page = 1, limit = 100, sort = { editedAt: -1, createdAt: -1 }) {
     return new Promise((resolve, reject) => {
       this.getCollection(collection).find(query).skip((page - 1) * limit).limit(limit).sort(sort).exec((err, result) => {
         if (err) {
@@ -149,7 +149,7 @@ module.exports = ({ stores = [], folder = 'data' } = {}) => ({
    * @param {object} sort
    * @returns {Promise<*>}
    */
-  async paginated (collection, query = {}, page = 1, limit = 10, sort = {editedAt: -1, createdAt: -1}) {
+  async paginated (collection, query = {}, page = 1, limit = 10, sort = { editedAt: -1, createdAt: -1 }) {
     return {
       data: await this.find(collection, query, page, limit, sort),
       pagination: {
