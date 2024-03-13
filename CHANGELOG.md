@@ -1,3 +1,15 @@
+# [2.3.0](https://github.com/boutdecode/site-template/compare/v2.2.0...v2.3.0) (2024-03-13)
+
+
+### Bug Fixes
+
+* i18n ([f3df255](https://github.com/boutdecode/site-template/commit/f3df255d849fc67f176c03afb20ac4ceb90da975))
+
+
+### Features
+
+* Add security and admin crud ([9fb9758](https://github.com/boutdecode/site-template/commit/9fb975831a3c4f30cc845dd7a82cfad6a0a001a5))
+
 # [2.2.0](https://github.com/boutdecode/site-template/compare/v2.1.0...v2.2.0) (2024-03-08)
 
 
