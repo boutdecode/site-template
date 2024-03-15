@@ -1,3 +1,11 @@
+# [2.5.0](https://github.com/boutdecode/site-template/compare/v2.4.0...v2.5.0) (2024-03-15)
+
+
+### Features
+
+* Add About page ([e973f6b](https://github.com/boutdecode/site-template/commit/e973f6bac58201b3a2e0dae74dc303b5bec8e738))
+* Add dashboard content ([fd05cb3](https://github.com/boutdecode/site-template/commit/fd05cb3d5a5a64382fcdbabc2a8ae6be3384af72))
+
 # [2.4.0](https://github.com/boutdecode/site-template/compare/v2.3.0...v2.4.0) (2024-03-15)
 
 
