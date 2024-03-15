@@ -1,12 +1,13 @@
-import { version, name } from '../../../package.json'
-import { Files, Users, Settings } from 'lucide-vue-next'
+import {version, name, bugs} from '../../../package.json'
+import {Files, Users, Settings, HelpCircle} from 'lucide-vue-next'
 import config from './../lib/wysiwyg'
 
 export default {
   application: {
     version,
     name,
-    env: import.meta.env.MODE
+    env: import.meta.env.MODE,
+    issue: bugs ? bugs.url : null,
   },
   translation: {
     locales: ['fr', 'en'],
@@ -35,6 +36,11 @@ export default {
           name: 'settings',
           icon: Settings,
           to: { name: 'admin.settings.index' }
+        },
+        {
+          name: 'about',
+          icon: HelpCircle,
+          to: { name: 'admin.about' }
         }
       ]
     }

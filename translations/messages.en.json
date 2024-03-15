@@ -35,6 +35,9 @@
   "settings": "Settings",
   "application": "Application",
   "social_network": "Social network",
+  "actual_version": "Actual version",
+  "create_issue": "Create issue",
+  "changelog": "Changelog",
 
   "actions": {
     "actions": "Actions",

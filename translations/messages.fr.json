@@ -35,6 +35,9 @@
   "settings": "Paramètres",
   "application": "Application",
   "social_network": "Réseaux sociaux",
+  "actual_version": "Version actuelle",
+  "create_issue": "Reporter un bug",
+  "changelog": "Journal des modifications",
 
   "actions": {
     "actions": "Actions",

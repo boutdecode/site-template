@@ -1,3 +1,4 @@
+const path = require('node:path')
 const { get, create, edit, remove, browse } = require('./operations')
 
 module.exports = ({ api, app }) => {
@@ -144,5 +145,9 @@ module.exports = ({ api, app }) => {
 
   app.get('/admin', ({ view }) => {
     view.render('admin/dashboard')
+  })
+
+  app.get('/admin/changelog', ({ res }) => {
+    res.sendFile(path.resolve(process.cwd(), 'CHANGELOG.md'), 'CHANGELOG.md', 'text/markdown', false)
   })
 }
