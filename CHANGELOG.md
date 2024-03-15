@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/boutdecode/site-template/compare/v2.3.0...v2.4.0) (2024-03-15)
+
+
+### Features
+
+* Add settings ([3ef9c91](https://github.com/boutdecode/site-template/commit/3ef9c91370888551b1227d71889c9e6b580948df))
+
 # [2.3.0](https://github.com/boutdecode/site-template/compare/v2.2.0...v2.3.0) (2024-03-13)
 
 

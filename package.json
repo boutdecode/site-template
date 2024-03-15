@@ -1,6 +1,6 @@
 {
   "name": "site-example",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Site example",
   "main": "index.js",
   "scripts": {
