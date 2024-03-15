@@ -31,7 +31,7 @@ export default defineStore('settings', () => {
 
   async function edit (item) {
     try {
-      return await requester.post(`/settings`, item, { 'Content-Type': 'application/json' })
+      return await requester.post('/settings', item, { 'Content-Type': 'application/json' })
     } catch (e) {
       emitter.emit('notification:error-occurred:show', e)
 

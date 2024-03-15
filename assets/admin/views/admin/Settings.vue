@@ -2,7 +2,8 @@
 import {Save} from 'lucide-vue-next'
 import {useRoute} from 'vue-router'
 import {ref, inject} from 'vue'
-import useStore from '../../stores/settings'
+
+import useStore from '@admin/stores/settings'
 
 import Button from '@admin/components/ui/elements/Button.vue'
 import Breadcrumb from '@admin/components/ui/breadcrumb/Breadcrumb.vue'

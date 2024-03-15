@@ -1,7 +1,8 @@
 <script setup>
-import {inject, defineProps, defineEmits, ref, computed, onMounted, onUnmounted} from "vue"
-import Button from '../elements/Button.vue'
-import {Modal} from "bootstrap"
+import {Modal} from 'bootstrap'
+import {inject, defineProps, defineEmits, ref, computed, onMounted, onUnmounted} from 'vue'
+
+import Button from '@admin/components/ui/elements/Button.vue'
 
 const emitter = inject('emitter')
 const emit = defineEmits(['close', 'success'])

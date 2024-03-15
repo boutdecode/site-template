@@ -2,7 +2,9 @@
 import {useRoute, useRouter} from 'vue-router'
 import {Save, ArrowLeft} from 'lucide-vue-next'
 import {ref, inject, onMounted, computed} from 'vue'
-import useStore from './../../stores/admins'
+
+import useStore from '@admin/stores/admins'
+
 import Breadcrumb from '@admin/components/ui/breadcrumb/Breadcrumb.vue'
 import BreadcrumbItem from '@admin/components/ui/breadcrumb/BreadcrumbItem.vue'
 import Button from '@admin/components/ui/elements/Button.vue'

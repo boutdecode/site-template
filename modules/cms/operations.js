@@ -7,29 +7,30 @@ class HttpError extends Error {
   }
 }
 
+const collection = 'pages'
 module.exports = {
   create: (store) => async ({ slug, title, description, content, factory, enabled }) => {
     const slugResult = slugify(slug)
-    const alreadyPage = await store.findOne('pages', { slug: slugResult })
+    const alreadyPage = await store.findOne(collection, { slug: slugResult })
     if (alreadyPage) {
       throw new HttpError(`Page with slug ${slugResult} already exists.`, 422)
     }
 
-    return store.insert('pages', { slug: slugResult, title, description, content, factory, enabled })
+    return store.insert(collection, { slug: slugResult, title, description, content, factory, enabled })
   },
 
   edit: (store) => async (id, { slug, title, description, content, enabled }) => {
     const slugResult = slugify(slug)
-    const alreadyPage = await store.findOne('pages', { slug: slugResult })
+    const alreadyPage = await store.findOne(collection, { slug: slugResult })
     if (alreadyPage && alreadyPage._id !== id) {
       throw new HttpError(`Page with slug ${slugResult} already exists.`, 422)
     }
 
-    return store.update('pages', { _id: id }, { $set: { slug: slugResult, title, description, content, enabled } })
+    return store.update(collection, { _id: id }, { $set: { slug: slugResult, title, description, content, enabled } })
   },
 
   remove: (store) => async (id) => {
-    const page = await store.findOne('pages', { _id: id })
+    const page = await store.findOne(collection, { _id: id })
     if (!page) {
       throw new HttpError('Page not found.', 404)
     }
@@ -38,11 +39,11 @@ module.exports = {
       throw new HttpError('Cannot delete factory page.', 422)
     }
 
-    return store.remove('pages', { _id: page._id })
+    return store.remove(collection, { _id: page._id })
   },
 
   get: (store) => async (id) => {
-    const page = await store.findOne('pages', { _id: id })
+    const page = await store.findOne(collection, { _id: id })
     if (!page) {
       throw new HttpError('Page not found.', 404)
     }
@@ -51,7 +52,7 @@ module.exports = {
   },
 
   findBySlug: (store) => async (slug, data = { enabled: true }) => {
-    return store.findOne('pages', { slug, ...data })
+    return store.findOne(collection, { slug, ...data })
   },
 
   browse: (store) => async ({ search, locale = 'en' }, page = 1, limit = 100) => {
@@ -66,6 +67,6 @@ module.exports = {
       }
     }
 
-    return store.paginated('pages', query, page, limit)
+    return store.paginated(collection, query, page, limit)
   }
 }

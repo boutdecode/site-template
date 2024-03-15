@@ -15,7 +15,7 @@ module.exports = ({ api }) => {
     properties: {
       _id: { type: 'string' },
       key: { type: 'string' },
-      value: { type: 'string' },
+      value: { type: 'string' }
     }
   })
 

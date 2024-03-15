@@ -1,6 +1,6 @@
 <script setup>
-import {ref, inject, onMounted, defineProps, computed} from 'vue'
 import {Toast} from 'bootstrap'
+import {ref, inject, onMounted, defineProps, computed} from 'vue'
 
 const emitter = inject('emitter')
 const toast = ref()

@@ -1,5 +1,6 @@
 <script setup>
 import {inject, defineEmits, ref, onMounted} from 'vue'
+
 import Confirm from '@admin/components/ui/modal/Confirm.vue'
 
 const emit = defineEmits(['success'])

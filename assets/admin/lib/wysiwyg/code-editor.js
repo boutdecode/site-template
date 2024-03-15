@@ -1,5 +1,5 @@
-import { EditorState } from '@codemirror/state'
 import { EditorView, basicSetup } from 'codemirror'
+import { EditorState } from '@codemirror/state'
 import { indentWithTab } from '@codemirror/commands'
 import { keymap } from '@codemirror/view'
 import { html } from '@codemirror/lang-html'

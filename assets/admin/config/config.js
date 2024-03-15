@@ -1,5 +1,5 @@
-import {version, name, bugs} from '../../../package.json'
-import {Files, Users, Settings, HelpCircle} from 'lucide-vue-next'
+import { version, name, bugs } from '../../../package.json'
+import { Files, Users, Settings, HelpCircle } from 'lucide-vue-next'
 import config from './../lib/wysiwyg'
 
 export default {
@@ -7,7 +7,7 @@ export default {
     version,
     name,
     env: import.meta.env.MODE,
-    issue: bugs ? bugs.url : null,
+    issue: bugs ? bugs.url : null
   },
   translation: {
     locales: ['fr', 'en'],
@@ -46,7 +46,7 @@ export default {
     }
   ],
   editor: {
-    apiKey: '9kur7zji49oj6z1o7agb4vq8vqv3m0tnvb7vdaoqgsa3cdag',
+    apiKey: import.meta.env.VITE_TINYMCE_KEY,
     config
   }
 }

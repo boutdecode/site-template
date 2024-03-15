@@ -1,7 +1,8 @@
 <script setup>
 import {useRoute} from 'vue-router'
 import {ref, inject} from 'vue'
-import useStore from '../../stores/pages'
+
+import useStore from '@admin/stores/pages'
 
 import {Trash, Pencil, Search, Plus} from 'lucide-vue-next'
 import YesNo from '@admin/components/ui/badge/YesNo.vue'
@@ -24,7 +25,6 @@ const pagination = ref({
   limit: parseInt(route?.query?.limit || 10),
   total: 0
 })
-const form = ref()
 
 const fetchItems = (search = {}) => {
   find({ page: pagination.value.page, limit: pagination.value.limit, ...search })
