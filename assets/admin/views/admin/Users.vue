@@ -20,8 +20,8 @@ const {find, remove} = useStore()
 const items = ref([])
 const loading = ref(true)
 const pagination = ref({
-  page: parseInt(route.query.page || 1),
-  limit: parseInt(route.query.limit || 10),
+  page: parseInt(route?.query?.page || 1),
+  limit: parseInt(route?.query?.limit || 10),
   total: 0
 })
 const form = ref()
