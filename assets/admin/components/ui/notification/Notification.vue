@@ -19,8 +19,8 @@ const { title, type } = defineProps({
 
 onMounted(() => {
   const notification = new Toast(toast.value)
-  emitter.on(`notification:${toast.value.id}:show`, ({ message: newMessage } = {}) => {
-    message.value = newMessage || ''
+  emitter.on(`notification:${toast.value.id}:show`, ({ message: newMessage, error } = {}) => {
+    message.value = newMessage || error || ''
     notification.show()
   })
 })

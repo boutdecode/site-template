@@ -29,17 +29,18 @@ module.exports = {
     tags: [
       { name: 'CMS', description: 'Managing CMS' },
       { name: 'Admin', description: 'Managing admins' },
+      { name: 'Settings', description: 'Managing settings' },
       { name: 'Security', description: 'Managing security' },
     ]
   },
   modules: {
-    modules: ['security', 'admin', 'website', 'cms'],
+    modules: ['security', 'admin', 'settings', 'website', 'cms'],
     folder: 'modules'
   },
   store: {
     provider: require('../providers/nedb'),
     folder: 'data',
-    stores: ['admins', 'pages']
+    stores: ['admins', 'pages', 'settings']
   },
   view: {
     folder: path.resolve(process.cwd(), 'templates'),

@@ -32,6 +32,9 @@
   "username": "Identifiant",
   "password": "Mot de passe",
   "email": "Email",
+  "settings": "Paramètres",
+  "application": "Application",
+  "social_network": "Réseaux sociaux",
 
   "actions": {
     "actions": "Actions",
@@ -65,7 +68,11 @@
       "description": "Description",
       "content": "Contenu",
       "enabled": "Activé",
-      "factory": "Est une resource usine"
+      "factory": "Est une resource usine",
+      "site_contact": "Contact du site web",
+      "site_name": "Nom du site web",
+      "site_description": "Description du site web",
+      "instagram_url": "URL compte Instagram"
     },
 
     "help": {

@@ -1,5 +1,5 @@
 import { version, name } from '../../../package.json'
-import { Files, Users } from 'lucide-vue-next'
+import { Files, Users, Settings } from 'lucide-vue-next'
 import config from './../lib/wysiwyg'
 
 export default {
@@ -30,6 +30,11 @@ export default {
           name: 'admins',
           icon: Users,
           to: { name: 'admin.users.index' }
+        },
+        {
+          name: 'settings',
+          icon: Settings,
+          to: { name: 'admin.settings.index' }
         }
       ]
     }

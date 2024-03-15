@@ -8,6 +8,7 @@ import Notification from '@admin/components/ui/notification/Notification.vue'
 import Login from '@admin/components/default/Login.vue'
 
 const router = useRouter()
+const config = inject('config')
 const auth = inject('auth')
 </script>
 
@@ -21,6 +22,8 @@ div.wrapper-body(v-if="auth.isAuthenticated()")
     div.wrapper-main
       main
         RouterView
+
+      small.d-block.p-1.text-end.fst-italic.text-secondary {{ config.application.name }} v{{ config.application.version }}
 
   div.toast-container.position-fixed.top-0.end-0.p-3
     Notification(type="success")#edited-item

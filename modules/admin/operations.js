@@ -29,7 +29,7 @@ module.exports = {
   remove: (store) => async (id) => {
     const item = await store.findOne(collection, { _id: id })
     if (!item) {
-      throw new Error('Admin not found.', 404)
+      throw new HttpError('Admin not found.', 404)
     }
 
     return store.remove('admins', { _id: item._id })
@@ -38,7 +38,7 @@ module.exports = {
   get: (store) => async (id) => {
     const item = await store.findOne(collection, { _id: id })
     if (!item) {
-      throw new Error('Admin not found.', 404)
+      throw new HttpError('Admin not found.', 404)
     }
 
     return item

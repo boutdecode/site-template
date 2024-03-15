@@ -32,6 +32,9 @@
   "username": "Username",
   "password": "Password",
   "email": "Email",
+  "settings": "Settings",
+  "application": "Application",
+  "social_network": "Social network",
 
   "actions": {
     "actions": "Actions",
@@ -64,7 +67,11 @@
       "title": "Title",
       "description": "Description",
       "content": "Content",
-      "enabled": "Enabled"
+      "enabled": "Enabled",
+      "site_contact": "Site contact",
+      "site_name": "Site name",
+      "site_description": "Site description",
+      "instagram_url": "Instagram URL"
     },
 
     "help": {

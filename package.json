@@ -17,8 +17,8 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@apidevtools/swagger-parser": "^10.1.0",
-    "@boutdecode/open-api": "^2.0.0",
-    "@boutdecode/yion": "^1.1.0",
+    "@boutdecode/open-api": "^1.1",
+    "@boutdecode/yion": "^1.1",
     "@codemirror/lang-html": "^6.4.8",
     "@tinymce/tinymce-vue": "^5.1.1",
     "codemirror": "^6.0.1",
